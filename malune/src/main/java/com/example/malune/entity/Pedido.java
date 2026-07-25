@@ -1,6 +1,8 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Pedido")
@@ -22,5 +24,5 @@ public class Pedido {
     private LocalDate dataPedido = LocalDate.now();
 
     @Column(nullable = false)
-    private float valorTotal;
+    private BigDecimal valorTotal;
 }

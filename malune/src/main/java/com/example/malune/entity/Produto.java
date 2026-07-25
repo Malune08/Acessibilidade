@@ -1,6 +1,7 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "Produto")
@@ -21,7 +22,7 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false)
-    private float valorUnitario;
+    private BigDecimal valorUnitario;
 
     @Column(nullable = false)
     private Integer qtdEstoque;

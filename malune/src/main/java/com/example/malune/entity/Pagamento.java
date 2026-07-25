@@ -1,6 +1,7 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "Pagamento")
