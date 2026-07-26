@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malune - Endereço</title>
-    <link rel="stylesheet" href="../css/cadastro-2.css">
+    <title>Malune - Criar Conta</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="icon" type="image/png" href="images/icone.png">
 </head>
 <body>
-
-    <!-- Cabeçalho Fixo -->
     <header class="header-topo">
         <div class="header-esq">
+            <!-- LINK PARA A IMAGEM DA LOGO NO TOPO -->
             <a href="#" class="logo-link">
-                <img src="../imgs/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
             </a>
         </div>
         
@@ -22,65 +22,81 @@
         
         <div class="header-dir">
             <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
-                <img src="../imgs/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+                <!-- Imagem do ícone de acessibilidade -->
+                <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
             </button>
         </div>
     </header>
-    
+
     <div class="decor circle-yellow"></div>
-    <div class="decor circle-blue-top"></div>
+    <div class="decor circle-blue"></div>
     <div class="decor circle-green"></div>
 
     <main class="main-container">
         <section class="card-cadastro">
             <div class="card-header">
+                <!-- LINK PARA A IMAGEM DA LOGO NO CARD -->
                 <a href="#" class="logo-link-card">
-                    <img src="../imgs/logomalune.png" alt="Logo Malune" class="img-logo-card">
+                    <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
                 </a>
                 <p>Criar sua conta</p>
                 <span class="subtitle">Vamos brincar juntos</span>
             </div>
 
-            <form id="form-endereco" action="#" method="POST">
+            <button class="btn-google" type="button">
+                <img src="https://img.icons8.com/color/24/000000/google-logo.png" alt="" aria-hidden="true">
+                Continuar com o Google
+            </button>
+
+            <div class="divisor">
+                <span>OU</span>
+            </div>
+
+            <form id="form-cadastro" action="#" method="POST">
                 
+                <div class="input-group">
+                    <label for="nome">Nome completo</label>
+                    <input type="text" id="nome" name="nome" placeholder="Anna Silva" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="nome_usuario">Nome de usuário</label>
+                    <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Aninha123" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="annasilva@gmail.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="cpf">Cpf</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="993.338.800-20" required>
+                </div>
+
                 <div class="input-row">
                     <div class="input-group">
-                        <label for="cep">Cep</label>
-                        <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="11 99999-7777" required>
                     </div>
                     <div class="input-group">
-                        <label for="estado">Estado</label>
-                        <input type="text" id="estado" name="estado" placeholder="São Paulo" required>
+                        <label for="data_nascimento">Data de nascimento</label>
+                        <input type="date" id="data_nascimento" name="data_nascimento" required>
                     </div>
                 </div>
 
                 <div class="input-row">
                     <div class="input-group">
-                        <label for="rua">Rua</label>
-                        <input type="text" id="rua" name="rua" placeholder="Rua fifa easports" required>
+                        <label for="senha">Senha</label>
+                        <input type="password" id="senha" name="senha" placeholder="regex" required>
                     </div>
                     <div class="input-group">
-                        <label for="bairro">Bairro</label>
-                        <input type="text" id="bairro" name="bairro" placeholder="Pirituba" required>
+                        <label for="confirmar_senha">Confirmar senha</label>
+                        <input type="password" id="confirmar_senha" name="confirmar_senha" placeholder="regex" required>
                     </div>
                 </div>
 
-                <div class="input-row">
-                    <div class="input-group">
-                        <label for="numero">Número</label>
-                        <input type="text" id="numero" name="numero" placeholder="19" required>
-                    </div>
-                    <div class="input-group">
-                        <label for="complemento">Complemento (opcional)</label>
-                        <input type="text" id="complemento" name="complemento" placeholder="Casa do portão branco">
-                    </div>
-                </div>
-
-                <!-- Botões de Ação lado a lado -->
-                <div class="botoes-acao">
-                    <button type="button" class="btn-depois">Cadastrar depois</button>
-                    <button type="submit" class="btn-continuar-etapa2">Criar conta</button>
-                </div>
+                <button type="submit" class="btn-continuar">Continuar</button>
             </form>
         </section>
     </main>
@@ -139,9 +155,12 @@
         </div>
         
         <div class="modal-footer">
-            <button id="btn-restaurar" class="btn-restaurar">Restaurar padrão</button>
+            <button id="btn-restaurar" class="btn-restaurar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                Restaurar padrão
+            </button>
         </div>
     </dialog>
-    <script src="../js/cadastro-2.js"></script>
+    <script src="js/cadastro-1.js"></script>
 </body>
 </html>
