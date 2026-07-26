@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Endereço</title>
+    <link rel="stylesheet" href="../css/cadastro-2.css">
+</head>
+<body>
+
+    <!-- Cabeçalho Fixo -->
+    <header class="header-topo">
+        <div class="header-esq">
+            <a href="#" class="logo-link">
+                <img src="../imgs/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+            </a>
+        </div>
+        
+        <div class="header-centro">
+            <h2>Criar conta</h2>
+        </div>
+        
+        <div class="header-dir">
+            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+                <img src="../imgs/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+            </button>
+        </div>
+    </header>
+    
+    <div class="decor circle-yellow"></div>
+    <div class="decor circle-blue-top"></div>
+    <div class="decor circle-green"></div>
+
+    <main class="main-container">
+        <section class="card-cadastro">
+            <div class="card-header">
+                <a href="#" class="logo-link-card">
+                    <img src="../imgs/logomalune.png" alt="Logo Malune" class="img-logo-card">
+                </a>
+                <p>Criar sua conta</p>
+                <span class="subtitle">Vamos brincar juntos</span>
+            </div>
+
+            <form id="form-endereco" action="#" method="POST">
+                
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="cep">Cep</label>
+                        <input type="text" id="cep" name="cep" placeholder="00000-000" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="estado">Estado</label>
+                        <input type="text" id="estado" name="estado" placeholder="São Paulo" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="rua">Rua</label>
+                        <input type="text" id="rua" name="rua" placeholder="Rua fifa easports" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" name="bairro" placeholder="Pirituba" required>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label for="numero">Número</label>
+                        <input type="text" id="numero" name="numero" placeholder="19" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="complemento">Complemento (opcional)</label>
+                        <input type="text" id="complemento" name="complemento" placeholder="Casa do portão branco">
+                    </div>
+                </div>
+
+                <!-- Botões de Ação lado a lado -->
+                <div class="botoes-acao">
+                    <button type="button" class="btn-depois">Cadastrar depois</button>
+                    <button type="submit" class="btn-continuar-etapa2">Criar conta</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <!-- Pop-up de Acessibilidade -->
+    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
+        <div class="modal-header">
+            <h3 id="modal-a11y-title">Acessibilidade</h3>
+            <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Alto contraste</strong>
+                    <span>Cores fortes para melhor leitura</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-contraste">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Texto grande</strong>
+                    <span>Aumenta o tamanho da fonte</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-texto">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Fonte para dislexia</strong>
+                    <span>Mais fácil de ler</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-dislexia">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Sublinhar links</strong>
+                    <span>Destaca todos os links</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-links">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button id="btn-restaurar" class="btn-restaurar">Restaurar padrão</button>
+        </div>
+    </dialog>
+    <script src="../js/cadastro-2.js"></script>
+</body>
+</html>
