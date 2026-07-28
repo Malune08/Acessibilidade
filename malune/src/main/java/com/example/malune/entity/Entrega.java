@@ -2,14 +2,19 @@ package com.example.malune.entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import lombok.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Entrega")
 public class Entrega {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "id_pedido", nullable = false, unique = true)

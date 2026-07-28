@@ -1,4 +1,4 @@
-package com.example.malune.application;
+package com.example.malune;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

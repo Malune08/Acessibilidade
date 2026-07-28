@@ -103,4 +103,43 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleLinks.checked = true;
         document.body.classList.add('modo-sublinhar');
     }
+
+    // ===== LOGIN =====
+    const formLogin = document.getElementById('form-login');
+
+    if (formLogin) {
+        formLogin.addEventListener('submit', async (event) => {
+            event.preventDefault(); // impede o form de recarregar a página sozinho
+
+            const email = document.getElementById('email').value;
+            const senha = document.getElementById('senha').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, senha })
+                });
+
+                if (response.status === 400) {
+                    // erro de validação (@Valid no backend), ex: email/senha em formato inválido
+                    alert('Verifique os dados digitados: email ou senha em formato inválido.');
+                    return;
+                }
+
+                const resultado = await response.text();
+
+                if (resultado === 'USUARIO') {
+                    window.location.href = '/home.html';
+                } else if (resultado === 'ADMINISTRADOR') {
+                    window.location.href = '/area-restrita.html';
+                } else {
+                    alert('Email ou senha incorretos.');
+                }
+            } catch (erro) {
+                console.error('Erro ao tentar fazer login:', erro);
+                alert('Não foi possível conectar ao servidor. Tente novamente.');
+            }
+        });
+    }
 });

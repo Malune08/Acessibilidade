@@ -1,14 +1,19 @@
 package com.example.malune.entity;
 
+import lombok.*;
 import jakarta.persistence.*;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Adm")
-public class Adm {
+public class Administrador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @Column(length = 30, unique = true, nullable = false)
     private String nomeUsuario;
