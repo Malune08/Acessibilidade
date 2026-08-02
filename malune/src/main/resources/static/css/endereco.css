@@ -1,0 +1,98 @@
+.endereco-card {
+    padding: 35px 40px;
+    background-color: white;
+    border: 2px solid var(--cor-azul-claro);
+}
+
+.logo-endereco {
+    display: block;
+    justify-self: center;
+    width: 190px;
+    margin-bottom: 8px;
+}
+
+.endereco-card h1 {
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+.descricao-endereco {
+    font-size: 0.95rem;
+    color: #666;
+    text-align: center;
+    margin-block: 15px 30px;
+}
+
+.endereco-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.endereco-campo label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.endereco-campo select:focus {
+    border-color: var(--cor-rosa);
+}
+
+.endereco-campo select, .endereco-campo input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    background-color: white;
+    outline: none;
+    color: var(--cor-texto);
+}
+
+.endereco-campo select option{
+    color: var(--cor-texto);
+}
+
+.endereco-campo select:invalid, .endereco-campo input::placeholder {
+    color: #b3b3b3;
+}
+
+.endereco-campo input:focus {
+    border-color: var(--cor-rosa);
+}
+
+.endereco-campo input.campo-invalido {
+    border-color: #d93025;
+}
+
+.mensagem-endereco {
+    min-height: 18px;
+    margin-top: 12px;
+    color: #d93025;
+    text-align: center;
+    font-size: 0.75rem;
+}
+
+
+/* CSS para acessibilidade */
+body.modo-alto-contraste select {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-borda);
+}
+
+body.modo-alto-contraste select:valid {
+    color: white;
+}
+
+body.modo-alto-contraste .mensagem-endereco {
+    color: #d93025;
+}
+
+body.modo-alto-contraste .endereco-campo input {
+    color: white;
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-borda);
+}

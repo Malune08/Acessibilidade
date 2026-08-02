@@ -1,0 +1,324 @@
+/* --- Opções de Pagamento --- */
+.opcao-pagamento {
+    margin-bottom: 12px;
+}
+
+.label-opcao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 18px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: white;
+}
+
+.opcao-pagamento input[type="radio"]:checked + .label-opcao {
+    border-color: var(--cor-rosa);
+    background-color: #ffe8f0;
+}
+
+.icon-radio, .radio-custom-cartao {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 50%;
+}
+
+.opcao-pagamento input[type="radio"]:checked + .label-opcao .icon-radio {
+    border-color: var(--cor-rosa);
+    box-shadow: inset 0 0 0 3px var(--cor-rosa);
+}
+
+.icon-pagamento {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.texto-pagamento {
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+
+/* --- Campos Adicionais --- */
+.campos-adicionais {
+    padding: 15px;
+    background-color: white;
+    border-radius: 12px;
+    border: 2px solid var(--cor-azul-claro);
+    margin-top: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+.campo-label, .input-group label {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.input-group input {
+    padding: 10px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    color: var(--cor-texto);
+}
+
+.input-group input::placeholder {
+    color: #b3b3b3;
+}
+
+.input-group input:focus {
+    border-color: var(--cor-rosa);
+}
+
+.input-row {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.input-row .input-group {
+    width: 100%;
+}
+
+
+/* --- PIX --- */
+.pix-qrcode-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.pix-qrcode {
+    background: white;
+    border-radius: 8px;
+    border: 2px solid var(--cor-azul-claro);
+}
+
+.qrcode-img {
+    width: 140px;
+    height: 140px;
+}
+
+.pix-instrucao {
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+}
+
+.pix-copiar-area {
+    display: flex;
+    gap: 8px;
+}
+
+.pix-codigo-input {
+    flex: 1;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-family: monospace;
+    color: #666;
+    background: #f9f9f9;
+}
+
+.pix-codigo-input:focus {
+    border-color: var(--cor-rosa);
+}
+
+.btn-copiar {
+    padding: 10px 16px;
+    background-color: var(--cor-rosa);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.btn-copiar:hover {
+    background-color: var(--cor-rosa-hover);
+}
+
+.btn-copiar.copiado {
+    background-color: var(--cor-verde);
+}
+
+
+/* --- Boleto --- */
+.boleto-info {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.boleto-linha {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.boleto-label {
+    color: #888;
+}
+
+.boleto-valor {
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+.boleto-aviso {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fff8e1;
+    border-left: 3px solid #f7c94a;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* --- Cartões --- */
+.container-cartoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.cartao-item {
+    margin-top: 5px;
+}
+
+.radio-cartao:hover {
+    border-color: var(--cor-rosa);
+    background-color: #ffe8f0;
+}
+
+.radio-cartao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 15px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: white;
+}
+
+.radio-cartao input[type="radio"]:checked + .radio-custom-cartao {
+    border-color: var(--cor-rosa);
+    box-shadow: inset 0 0 0 3px var(--cor-rosa);
+}
+
+.cartao-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.cartao-numero {
+    font-weight: bold;
+    font-family: monospace;
+    font-size: 1rem;
+    color: var(--cor-texto);
+}
+
+.cartao-detalhes {
+    display: flex;
+    gap: 15px;
+    font-size: 0.8rem;
+}
+
+.cartao-titular {
+    color: #666;
+}
+
+.cartao-tipo {
+    color: #999;
+    font-style: italic;
+}
+
+.sem-cartoes {
+    text-align: center;
+    color: #999;
+    padding: 15px;
+    font-size: 0.9rem;
+}
+
+.btn-adicionar-cartao, .btn-cancelar-novo-cartao {
+    width: 100%;
+    padding: 10px;
+    background-color: transparent;
+    color: var(--cor-rosa);
+    border: 2px dashed var(--cor-rosa);
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 0.95rem;
+}
+
+.btn-adicionar-cartao:hover, .btn-cancelar-novo-cartao:hover {
+    background-color: #ffe8f0;
+    border-style: solid;
+}
+
+
+/* --- Total --- */
+.total-section {
+    background-color: white;
+    padding: 12px 15px;
+    border-radius: 12px;
+    margin: 15px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 2px solid var(--cor-verde);
+}
+
+.total-label {
+    font-weight: bold;
+}
+
+.total-valor {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--cor-rosa);
+}
+
+
+/* --- CLASSES DE ACESSIBILIDADE VIA JS --- */
+body.modo-alto-contraste input {
+    background-color: var(--cor-fundo);
+    color: white;
+}
+
+body.modo-alto-contraste .label-opcao, body.modo-alto-contraste .radio-cartao, 
+body.modo-alto-contraste .total-section {
+    background-color: var(--cor-fundo);
+}
+
+body.modo-alto-contraste .opcao-pagamento input[type="radio"]:checked + .label-opcao .texto-pagamento, 
+body.modo-alto-contraste .boleto-aviso {
+    color: black;
+}
+
+body.modo-alto-contraste .campos-adicionais {
+    background-color: var(--cor-fundo);
+}
