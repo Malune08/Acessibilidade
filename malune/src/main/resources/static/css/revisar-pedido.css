@@ -1,0 +1,76 @@
+/* --- Container Revisão --- */
+.revisao-container {
+    background-color: white;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.revisao-campo {
+    display: flex;
+    align-items: left;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.revisao-label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--cor-texto);
+}
+
+.revisao-input {
+    padding: 8px 12px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    color: var(--cor-texto);
+    background-color: white;
+    outline: none;
+    min-width: 0;
+    cursor:auto;
+}
+
+.revisao-pagamento {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 2px solid var(--cor-azul-claro);
+    border-radius: 8px;
+    background-color: white;
+}
+
+.revisao-pagamento-icon {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+}
+
+#revisao-pagamento-texto {
+    font-weight: bold;
+}
+
+#revisao-total {
+    color: var(--cor-rosa);
+    font-size: 1.2rem;
+    font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* --- CLASSES DE ACESSIBILIDADE VIA JS --- */
+body.modo-alto-contraste input, body.modo-alto-contraste #revisao-total {
+    background-color: var(--cor-fundo);
+    color: white;
+}
+
+body.modo-alto-contraste .revisao-container, body.modo-alto-contraste .revisao-pagamento {
+    background-color: var(--cor-fundo);
+}
+
+body.modo-alto-contraste #revisao-pagamento-texto {
+    color: white;
+}

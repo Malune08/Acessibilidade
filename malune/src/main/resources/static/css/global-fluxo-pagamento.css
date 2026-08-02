@@ -1,0 +1,230 @@
+/* --- Variáveis de cores --- */
+:root {
+    --cor-fundo: #faf5e6;
+    --cor-azul-claro: #9ac2f4;
+    --cor-texto: #4a4a4a;
+    --cor-rosa: #ff5eb5;
+    --cor-rosa-hover: #e84c9e;
+    --cor-verde: #8bc34a;
+    --fonte-padrao: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--fonte-padrao);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+}
+
+/* --- Header Fixo --- */
+.header-topo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 0 25px;
+    background-color: white;
+    border-bottom: 2px solid #8bc34a !important;
+    z-index: 1000;
+}
+
+.header-esq { display: flex; justify-content: flex-start; align-items: center; }
+.header-centro { display: flex; justify-content: center; align-items: center; }
+.header-dir { display: flex; justify-content: flex-end; align-items: center; }
+
+.img-logo-topo { height: 40px; }
+.img-a11y { width: 24px; height: 24px; }
+
+.header-centro h2 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--cor-texto);
+}
+
+.btn-a11y {
+    background-color: var(--cor-rosa);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+.btn-a11y:hover { transform: scale(1.1); }
+
+/* --- Bolas Decorativas nos 4 Cantos --- */
+.decor { position: fixed; border-radius: 50%; z-index: 0; }
+.circle-yellow {
+    width: 350px; height: 350px; background-color: #f7c94a;
+    top: -50px; left: -100px;
+}
+.circle-blue-top {
+    width: 320px; height: 320px; background-color: var(--cor-azul-claro);
+    top: -60px; right: -60px;
+}
+.circle-blue-bottom {
+    width: 300px; height: 300px; background-color: var(--cor-azul-claro);
+    bottom: -80px; left: -60px;
+}
+.circle-green {
+    width: 400px; height: 400px; background-color: #a4e54e;
+    bottom: -100px; right: -100px;
+}
+
+/* --- Container Principal --- */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 100px;
+    padding-bottom: 40px;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+}
+
+.form-title {
+    font-size: 1.2rem;
+    color: var(--cor-texto);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+section {
+    max-width: 600px;
+    width: 100%;
+    border-radius: 12px;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+.btn-prosseguir {
+    width: 100%;
+    background-color: var(--cor-rosa);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 10px;
+}
+
+.btn-prosseguir:hover {
+    background-color: var(--cor-rosa-hover);
+}
+
+/* --- Progress Bar --- */
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.progress-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progress-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #ccc;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+.progress-circle.active {
+    background-color: var(--cor-rosa);
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    font-weight: bold;
+    max-width: 60px;
+    color: var(--cor-texto);
+}
+
+.progress-line {
+    width: 30px;
+    height: 2px;
+    background-color: var(--cor-azul-claro);
+}
+
+/* --- CLASSES DE ACESSIBILIDADE VIA JS --- */
+body.modo-alto-contraste {
+    --cor-fundo: black;
+    --cor-texto: #FFFF00;
+    --cor-borda: #FFFF00;
+    --cor-azul-claro: #FFFF00;
+    --cor-verde: #FFFF00;
+}
+
+body.modo-alto-contraste .decor {
+    display: none;
+}
+
+body.modo-alto-contraste section {
+    background-color: var(--cor-fundo);
+}
+
+body.modo-alto-contraste header {
+    background-color: var(--cor-fundo);
+    border-color: var(--cor-borda);
+    color: var(--cor-texto);
+}
+
+body.modo-alto-contraste p, body.modo-alto-contraste label, 
+body.modo-alto-contraste .progress-label, body.modo-alto-contraste .progress-circle.active {
+    color: white;
+}
+
+body.modo-texto-grande, body.modo-texto-grande input, body.modo-texto-grande p, 
+body.modo-texto-grande label, body.modo-texto-grande span, body.modo-texto-grande button, 
+body.modo-texto-grande select {
+    font-size: 1.2rem;
+}
+
+body.modo-alto-contraste .progress-circle {
+    color: var(--cor-fundo);
+}
+
+body.modo-texto-grande h2, body.modo-texto-grande h3 {
+    font-size: 2rem;
+}
+
+body.modo-dislexia {
+    font-family: 'Comic Sans MS', 'OpenDyslexic', cursive, sans-serif !important;
+}
+
+body.modo-sublinhar a {
+    text-decoration: underline !important;
+    font-weight: bold;
+}
