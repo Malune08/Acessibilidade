@@ -3,86 +3,129 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background-color: #f4f4f9;
-        }
-
-        .container {
-            text-align: center;
-            background: #ffffff;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        p {
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .botoes {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
-
-        .btn-login {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .btn-login:hover {
-            background-color: #0056b3;
-        }
-
-        .btn-cadastro {
-            background-color: #28a745;
-            color: white;
-        }
-
-        .btn-cadastro:hover {
-            background-color: #1e7e34;
-        }
-    </style>
+    <title>Malune - Diversão que colore a infância</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<div class="container">
-    <h1>Bem-vindo!</h1>
-    <p>Escolha uma opção para continuar:</p>
+    <!-- CABEÇALHO FIXO -->
+    <header class="header-topo">
+        <div class="header-esq">
+            <a href="index.html" class="logo-link">
+                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+            </a>
+        </div>
+        
+        <div class="header-centro"></div>
+        
+        <div class="header-dir">
+            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+                <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+            </button>
+            <a href="login.html" class="btn-entrar">Entrar</a>
+        </div>
+    </header>
 
-    <div class="botoes">
-        <a href="login.html" class="btn btn-login">Login</a>
-        <a href="cadastro.html" class="btn btn-cadastro">Cadastro</a>
-    </div>
-</div>
+    <!-- FORMAS DECORATIVAS DE FUNDO -->
+    <div class="decor circle-yellow"></div>
+    <div class="decor circle-blue"></div>
+    <div class="decor circle-green"></div>
 
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-container">
+        
+        <!-- SEÇÃO DE DESTAQUE (HERO) - Sem o retângulo branco -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>Diversão que <span class="highlight-pink">colore</span> a infância</h1>
+                <p>Brinquedos selecionados para crianças curiosas, corajosas e criativas. Entrega para todo o Brasil.</p>
+                <div class="hero-buttons">
+                    <a href="cadastro.html" class="btn-outline-green">Criar conta</a>
+                </div>
+            </div>
+            
+            <div class="hero-image-container">
+                <div class="hero-image-placeholder">
+                    <span>Foto de brinquedo</span>
+                </div>
+                <div class="badge-novo">Novo</div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO DE PRODUTOS -->
+        <section id="produtos-container" class="products-section">
+            <!-- Os cards serão injetados dinamicamente aqui -->
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <p>Malune - Brinquedos com carinho<br>&copy;2026 Malune. Todos os direitos reservados</p>
+    </footer>
+
+    <!-- POP-UP DE ACESSIBILIDADE -->
+    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
+        <div class="modal-header">
+            <h3 id="modal-a11y-title">Acessibilidade</h3>
+            <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+        </div>
+        
+        <div class="modal-body">
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Alto contraste</strong>
+                    <span>Cores fortes para melhor leitura</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-contraste">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Texto grande</strong>
+                    <span>Aumenta o tamanho da fonte</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-texto">
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Fonte para dislexia</strong>
+                    <span>Mais fácil de ler</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-dislexia">
+                    <span class="slider"></span>
+                </label>
+            </div>
+            
+            <div class="a11y-item">
+                <div class="a11y-info">
+                    <strong>Sublinhar links</strong>
+                    <span>Destaca todos os links</span>
+                </div>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-links">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button id="btn-restaurar" class="btn-restaurar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                Restaurar padrão
+            </button>
+        </div>
+    </dialog>
+
+    <script src="js/index.js"></script>
 </body>
 </html>
