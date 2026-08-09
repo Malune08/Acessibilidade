@@ -20,8 +20,8 @@ public class Cartao {
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_cartao", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_cartao", nullable = false, length = 10)
     private TipoCartao tipoCartao;
 
     @Column(length = 30, nullable = false)

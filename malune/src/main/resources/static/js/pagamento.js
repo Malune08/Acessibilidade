@@ -14,6 +14,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAdicionarCartao = document.getElementById('btn-adicionar-cartao');
     const btnCancelarNovoCartao = document.getElementById('btn-cancelar-novo-cartao');
 
+    // Usuário logado
+    const idUsuario = localStorage.getItem('id_usuario');
+
     // Dados globais
     let cartoesDisponiveis = [];
     let cartaoSelecionado = null;
@@ -48,49 +51,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== CARTÕES CADASTRADOS =====
-    // Buscar cartões do banco (quando houver integração com backend)
+    // Busca os cartões salvos do usuário logado, direto do backend
     async function buscarCartoes() {
+        if (!idUsuario) {
+            cartoesDisponiveis = [];
+            renderizarCartoes();
+            return;
+        }
+
         try {
-            // TODO: Substituir pela rota real do backend
-            // const response = await fetch(`/api/cartoes?id_usuario=${idUsuario}`);
-            // const data = await response.json();
-            // cartoesDisponiveis = data;
+            const resposta = await fetch(`/cartao/${idUsuario}`);
 
-            // MOCKADO PARA TESTES (remover quando integrar com backend)
-            cartoesDisponiveis = [
-                {
-                    id: 1,
-                    nome: 'João Silva',
-                    numero_cartao: '1234567890123456',
-                    tipo_cartao: 'Crédito',
-                    data_validade: '2028-12-31'
-                },
-                {
-                    id: 2,
-                    nome: 'João Silva',
-                    numero_cartao: '9876543210987654',
-                    tipo_cartao: 'Débito',
-                    data_validade: '2026-06-30'
-                }
-            ];
+            if (!resposta.ok) {
+                throw new Error('Não foi possível carregar os cartões.');
+            }
 
+            cartoesDisponiveis = await resposta.json();
             renderizarCartoes();
         } catch (error) {
             console.error('Erro ao buscar cartões:', error);
+            cartoesDisponiveis = [];
+            renderizarCartoes();
         }
     }
 
     // Renderizar lista de cartões
     function renderizarCartoes() {
         containerCartoes.innerHTML = '';
-        
+
         if (cartoesDisponiveis.length === 0) {
             containerCartoes.innerHTML = '<p class="sem-cartoes">Nenhum cartão cadastrado</p>';
             return;
         }
 
         cartoesDisponiveis.forEach(cartao => {
-            const ultimosDigitos = cartao.numero_cartao.slice(-4);
+            const ultimosDigitos = cartao.numeroCartao.slice(-4);
+            const tipoTexto = cartao.tipoCartao === 'DEBITO' ? 'Débito' : 'Crédito';
+
             const divCartao = document.createElement('div');
             divCartao.className = 'cartao-item';
             divCartao.innerHTML = `
@@ -101,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="cartao-numero">••••••••••••${ultimosDigitos}</div>
                         <div class="cartao-detalhes">
                             <span class="cartao-titular">${cartao.nome}</span>
-                            <span class="cartao-tipo">${cartao.tipo_cartao}</span>
+                            <span class="cartao-tipo">${tipoTexto}</span>
                         </div>
                     </div>
                 </label>
@@ -137,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             esconderCampos();
             esconderFormularioNovoCartao();
             cartaoSelecionado = null;
-            
+
             if (document.getElementById('cartao').checked) {
                 camposCartao.style.display = 'block';
             } else if (document.getElementById('pix').checked) {
@@ -252,7 +249,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     numero: document.getElementById('numero-cartao').value,
                     nome: document.getElementById('nome-titular').value,
                     validade: document.getElementById('validade').value,
-                    cvv: document.getElementById('cvv').value
+                    cvv: document.getElementById('cvv').value,
+                    tipo: document.querySelector('input[name="tipo-cartao-novo"]:checked').value
                 };
                 dadosPagamento.tipo_cartao = 'novo';
             }
