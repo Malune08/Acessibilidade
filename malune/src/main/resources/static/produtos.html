@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Malune - Produtos</title>
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/icone.png"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/produtos.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/modal-acessibilidade.css"
+    >
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+
+        <a
+            href="produtos.html"
+            class="logo-link"
+            aria-label="Ir para a página de produtos da Malune"
+        >
+            <img
+                src="images/logomalune.png"
+                alt="Malune"
+                class="logo"
+            >
+        </a>
+
+        <nav
+            class="navegacao"
+            aria-label="Navegação principal"
+        >
+            <a
+                href="produtos.html"
+                class="nav-link ativo"
+                aria-current="page"
+            >
+                Produtos
+            </a>
+
+            <button
+                type="button"
+                class="nav-link nav-button"
+                id="btn-meus-pedidos"
+            >
+                Meus Pedidos
+            </button>
+        </nav>
+
+        <div class="acoes-cabecalho">
+
+            <!-- ACESSIBILIDADE -->
+            <button
+                type="button"
+                id="btn-abrir-a11y"
+                class="botao-icone botao-acessibilidade"
+                aria-label="Abrir menu de acessibilidade"
+                title="Acessibilidade"
+            >
+                <img
+                    src="images/iconacessibilidade.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+            </button>
+
+            <!-- CARRINHO -->
+            <button
+                type="button"
+                class="botao-icone"
+                id="btn-carrinho"
+                aria-label="Abrir carrinho"
+                title="Carrinho"
+            >
+                <img
+                    src="images/icone-carrinho.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+            </button>
+
+            <!-- CONFIGURAÇÕES -->
+            <button
+                type="button"
+                class="botao-icone"
+                id="btn-configuracoes"
+                aria-label="Abrir configurações"
+                title="Configurações"
+            >
+                <img
+                    src="images/icone-configuracoes.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+            </button>
+
+            <!-- SAIR -->
+            <a
+                href="login.html"
+                class="botao-icone"
+                aria-label="Sair da conta"
+                title="Sair"
+            >
+                <img
+                    src="images/icone-sair.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+            </a>
+
+        </div>
+    </header>
+
+    <!-- FORMAS DECORATIVAS -->
+    <div
+        class="decoracao circulo-amarelo"
+        aria-hidden="true"
+    ></div>
+
+    <div
+        class="decoracao circulo-azul"
+        aria-hidden="true"
+    ></div>
+
+    <div
+        class="decoracao circulo-verde"
+        aria-hidden="true"
+    ></div>
+
+    <!-- CONTEÚDO -->
+    <main class="pagina-produtos">
+
+        <h1 class="somente-leitor">
+            Catálogo de produtos
+        </h1>
+
+        <!-- FILTROS -->
+        <aside
+            class="filtros"
+            aria-labelledby="titulo-filtros"
+        >
+            <h2 id="titulo-filtros">
+                Filtros
+            </h2>
+
+            <!-- BUSCA -->
+            <div class="grupo-filtro">
+
+                <label for="busca-produto">
+                    Buscar
+                </label>
+
+                <input
+                    type="search"
+                    id="busca-produto"
+                    placeholder="Digite sua busca..."
+                    autocomplete="off"
+                >
+
+            </div>
+
+            <!-- CATEGORIAS -->
+            <div class="grupo-filtro">
+
+                <span class="titulo-grupo">
+                    Categoria
+                </span>
+
+                <div
+                    id="lista-categorias"
+                    class="lista-categorias"
+                    role="group"
+                    aria-label="Filtrar por categoria"
+                >
+
+                    <button
+                        type="button"
+                        class="categoria ativa"
+                        data-categoria="Todos"
+                        aria-pressed="true"
+                    >
+                        Todos
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria"
+                        data-categoria="Ação e aventura"
+                        aria-pressed="false"
+                    >
+                        Ação e Aventura
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria"
+                        data-categoria="Educativos"
+                        aria-pressed="false"
+                    >
+                        Educativos
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria"
+                        data-categoria="Pelúcias"
+                        aria-pressed="false"
+                    >
+                        Pelúcias
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria"
+                        data-categoria="Higiene"
+                        aria-pressed="false"
+                    >
+                        Higiene
+                    </button>
+
+                    <button
+                        type="button"
+                        class="categoria"
+                        data-categoria="Roupas e acessórios"
+                        aria-pressed="false"
+                    >
+                        Roupas e acessórios
+                    </button>
+
+                </div>
+            </div>
+
+            <!-- PREÇO -->
+            <div class="grupo-filtro grupo-preco">
+
+                <label for="filtro-preco">
+                    Preço até
+
+                    <output
+                        id="valor-preco"
+                        for="filtro-preco"
+                    >
+                        R$ 300,00
+                    </output>
+                </label>
+
+                <input
+                    type="range"
+                    id="filtro-preco"
+                    min="20"
+                    max="300"
+                    step="10"
+                    value="300"
+                >
+
+            </div>
+        </aside>
+
+        <!-- LISTAGEM -->
+        <section
+            class="catalogo"
+            aria-labelledby="titulo-catalogo"
+        >
+
+            <div class="cabecalho-catalogo">
+
+                <h2
+                    id="titulo-catalogo"
+                    class="somente-leitor"
+                >
+                    Produtos disponíveis
+                </h2>
+
+                <p
+                    id="resultado-filtros"
+                    class="somente-leitor"
+                    aria-live="polite"
+                ></p>
+
+            </div>
+
+            <div
+                id="grade-produtos"
+                class="grade-produtos"
+            >
+                <!-- Produtos criados pelo JavaScript -->
+            </div>
+
+        </section>
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer class="rodape">
+
+        <p>
+            Malune - Brinquedos com carinho
+        </p>
+
+        <p>
+            &copy;2026 Malune. Todos os direitos reservados
+        </p>
+
+    </footer>
+
+    <script src="js/modal-acessibilidade.js"></script>
+
+    <script src="js/produtos.js"></script>
+
+</body>
+</html>
