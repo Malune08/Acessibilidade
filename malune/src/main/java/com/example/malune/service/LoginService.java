@@ -53,4 +53,5 @@ public class LoginService {
 
         return administrador.get().getSenha().equals(loginDTO.getSenha());
     }
+    
 }

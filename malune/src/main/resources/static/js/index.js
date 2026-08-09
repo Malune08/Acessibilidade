@@ -174,100 +174,103 @@ document.addEventListener('DOMContentLoaded', () => {
     const containerProdutos =
         document.getElementById('produtos-container');
 
-    async function carregarProdutos() {
-        try {
-            const produtosMock = [
-                {
-                    id: 1,
-                    nome: 'Urso fofinho',
-                    descricao:
-                        'Um urso de pelúcia super macio, ideal para abraços',
-                    valor_unitario: 79.90
-                },
-                {
-                    id: 2,
-                    nome: 'Coelho Amoroso',
-                    descricao:
-                        'Coelhinha de pelúcia com laço colorido',
-                    valor_unitario: 59.90
-                },
-                {
-                    id: 3,
-                    nome: 'Quebra-cabeça 100 peças',
-                    descricao:
-                        'Estimula raciocínio e coordenação',
-                    valor_unitario: 39.90
-                },
-                {
-                    id: 4,
-                    nome: 'Bloco de montar',
-                    descricao:
-                        'Kit com 120 blocos coloridos',
-                    valor_unitario: 129.90
-                }
-            ];
+    async function carregarProdutoDestaque() {
+    try {
+        const resposta = await fetch('http://localhost:8080/api/produtos/2');
 
-            renderizarCards(produtosMock);
-        } catch (error) {
-            console.error(
-                'Erro na comunicação com a API de produtos:',
-                error
+        if (!resposta.ok) {
+            throw new Error('Erro ao buscar produto em destaque');
+        }
+
+        const produto = await resposta.json();
+        const heroDestaque = document.getElementById('hero-produto-destaque');
+
+        if (heroDestaque && produto.imagem) {
+            heroDestaque.innerHTML = `<img src="${produto.imagem}" alt="${produto.nome}">`;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar produto em destaque:', error);
+    }
+}
+
+    async function carregarProdutos() {
+    try {
+        const resposta = await fetch('http://localhost:8080/api/produtos');
+
+        if (!resposta.ok) {
+            throw new Error('Erro ao buscar produtos');
+        }
+
+        const produtos = await resposta.json();
+
+        const idsDestaque = [3, 4, 5, 6];
+        const produtosDestaque = produtos.filter((produto) =>
+            idsDestaque.includes(produto.id)
+        );
+
+        renderizarCards(produtosDestaque);
+    } catch (error) {
+        console.error(
+            'Erro na comunicação com a API de produtos:',
+            error
+        );
+
+        if (containerProdutos) {
+            containerProdutos.innerHTML =
+                '<p>Não foi possível carregar os produtos no momento.</p>';
+        }
+    }
+}
+
+function renderizarCards(produtos) {
+    if (!containerProdutos) {
+        return;
+    }
+
+    containerProdutos.innerHTML = '';
+
+    produtos.forEach((produto) => {
+        const card = document.createElement('div');
+        card.classList.add('product-card');
+
+        const precoFormatado =
+            Number(produto.valorUnitario).toLocaleString(
+                'pt-BR',
+                {
+                    style: 'currency',
+                    currency: 'BRL'
+                }
             );
 
-            if (containerProdutos) {
-                containerProdutos.innerHTML =
-                    '<p>Não foi possível carregar os produtos no momento.</p>';
-            }
-        }
-    }
+        card.innerHTML = `
+            <div class="product-image">
+                ${produto.imagem
+                    ? `<img src="${produto.imagem}" alt="${produto.nome}">` 
+                    : 'Foto de brinquedo'}
+            </div>
 
-    function renderizarCards(produtos) {
-        if (!containerProdutos) {
-            return;
-        }
+            <div class="product-info">
+                <h3>${produto.nome}</h3>
+                <p>${produto.descricao}</p>
 
-        containerProdutos.innerHTML = '';
+                <div class="product-price-row">
+                    <span class="price">
+                        ${precoFormatado}
+                    </span>
 
-        produtos.forEach((produto) => {
-            const card = document.createElement('div');
-            card.classList.add('product-card');
-
-            const precoFormatado =
-                Number(produto.valor_unitario).toLocaleString(
-                    'pt-BR',
-                    {
-                        style: 'currency',
-                        currency: 'BRL'
-                    }
-                );
-
-            card.innerHTML = `
-                <div class="product-image">
-                    Foto de brinquedo
+                    <a href="login.html?produto=${produto.id}"
+                        class="btn-ver"
+                    >
+                        Ver
+                    </a>
                 </div>
+            </div>
+        `;
 
-                <div class="product-info">
-                    <h3>${produto.nome}</h3>
-                    <p>${produto.descricao}</p>
-
-                    <div class="product-price-row">
-                        <span class="price">
-                            ${precoFormatado}
-                        </span>
-
-                        <a
-                            href="login.html?produto=${produto.id}"
-                            class="btn-ver"
-                        >
-                            Ver
-                        </a>
-                    </div>
-                </div>
-            `;
-
-            containerProdutos.appendChild(card);
-        });
-    }
+        containerProdutos.appendChild(card);
+    });
+}
 
     carregarProdutos();
+    carregarProdutoDestaque();
 });

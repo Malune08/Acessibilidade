@@ -297,6 +297,14 @@ body {
 
     font-size: 14px;
     font-weight: 500;
+    overflow: hidden;
+}
+
+.hero-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .badge-novo {
@@ -340,7 +348,7 @@ body {
 
 .product-card {
     width: 220px;
-    min-height: 315px;
+    height: 340px;
     padding: 10px;
 
     background-color: #ffffff;
@@ -362,11 +370,12 @@ body {
 
 .product-image {
     width: 100%;
-    height: 180px;
+    height: 160px;
+    flex-shrink: 0;
     margin-bottom: 15px;
 
-    background-color: #888888;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #888888;
 
     border-radius: 8px;
 
@@ -375,6 +384,14 @@ body {
     justify-content: center;
 
     font-size: 13px;
+    overflow: hidden;
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
 }
 
 .product-info {
@@ -879,10 +896,7 @@ body.modo-sublinhar a {
         font-size: 12px;
     }
 
-    .product-card {
-        width: 100%;
-        max-width: 280px;
-    }
+    
 
     dialog {
         width: calc(100% - 30px);

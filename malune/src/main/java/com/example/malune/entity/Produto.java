@@ -1,8 +1,19 @@
 package com.example.malune.entity;
 
-import jakarta.persistence.*;
 import java.math.BigDecimal;
-import lombok.*;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -31,4 +42,7 @@ public class Produto {
 
     @Column(nullable = false)
     private Integer qtdEstoque;
+
+    @Column(name = "imagem_url", length = 255)
+    private String imagem;
 }
