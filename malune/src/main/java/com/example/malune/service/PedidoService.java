@@ -86,7 +86,7 @@ public class PedidoService {
         }
 
         // 6. Cria o Pagamento (simulação: sorteia aprovado ou recusado, 90% de chance de aprovar)
-        boolean aprovado = new Random().nextBoolean();
+        boolean aprovado = new Random().nextInt(10) < 9;
 
         Pagamento pagamento = new Pagamento();
         pagamento.setPedido(pedido);

@@ -7,9 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const revisaoPagamentoTexto = document.getElementById('revisao-pagamento-texto');
     const revisaoTotal = document.getElementById('revisao-total');
 
+    const idUsuario = localStorage.getItem('id_usuario');
+
     // Recuperar dados do localStorage
     const dadosEndereco = JSON.parse(localStorage.getItem('endereco_dados')) || {};
     const dadosPagamento = JSON.parse(localStorage.getItem('pagamento_dados')) || {};
+    const itensPedido = JSON.parse(localStorage.getItem('itens_pedido')) || [];
     const totalPedido = localStorage.getItem('total_pedido') || '0';
 
     // Preencher campos de endereço
@@ -44,25 +47,75 @@ document.addEventListener('DOMContentLoaded', () => {
         revisaoTotal.value = `R$ ${totalFloat.toFixed(2).replace('.', ',')}`;
     }
 
+    // Converte o value do radio ('1'/'2'/'3') pro enum que o backend espera
+    function converterFormaPagamento(formaId) {
+        if (formaId === '1') return 'PIX';
+        if (formaId === '2') return 'CARTAO';
+        if (formaId === '3') return 'BOLETO';
+        return null;
+    }
+
     definirFormasPagamento();
     formatarTotal();
 
     // Enviar formulário (confirmar pedido)
-    formRevisao.addEventListener('submit', (e) => {
+    formRevisao.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Preparar dados finais do pedido
-        const dadosPedido = {
-            endereco: dadosEndereco,
-            pagamento: dadosPagamento,
-            total: totalPedido,
-            data_pedido: new Date().toISOString()
+        if (!idUsuario) {
+            alert('Usuário não identificado. Faça login novamente.');
+            return;
+        }
+
+        if (itensPedido.length === 0) {
+            alert('Nenhum item encontrado no pedido. Volte ao carrinho.');
+            return;
+        }
+
+        // Monta o corpo esperado pelo backend
+        const corpo = {
+            itens: itensPedido,
+            formaPagamento: converterFormaPagamento(dadosPagamento.forma_pagamento)
         };
 
-        // Armazenar no localStorage (temporário)
-        localStorage.setItem('pedido_confirmado', JSON.stringify(dadosPedido));
+        if (dadosPagamento.tipo_cartao === 'existente') {
+            corpo.cartaoId = dadosPagamento.cartao_id;
+        } else if (dadosPagamento.tipo_cartao === 'novo') {
+            corpo.cartaoNovo = {
+                numero: dadosPagamento.cartao_novo.numero,
+                nome: dadosPagamento.cartao_novo.nome,
+                validade: dadosPagamento.cartao_novo.validade,
+                cvv: dadosPagamento.cartao_novo.cvv,
+                tipo: dadosPagamento.cartao_novo.tipo
+            };
+        }
 
-        // Redirecionar para página de confirmação
-        window.location.href = 'compra-confirmada.html';
+        try {
+            const resposta = await fetch(`/pedido/${idUsuario}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(corpo)
+            });
+
+            if (!resposta.ok) {
+                throw new Error('Não foi possível processar o pedido.');
+            }
+
+            const resultado = await resposta.json();
+
+            // Se o pagamento foi recusado, avisa e mantém o usuário nessa tela
+            if (resultado.statusPagamento === 'RECUSADO') {
+                alert('Seu pagamento foi recusado. Tente novamente ou escolha outra forma de pagamento.');
+                return;
+            }
+
+            // Guarda pra próxima tela usar
+            localStorage.setItem('id_pagamento', resultado.idPagamento);
+            localStorage.setItem('status_pagamento', resultado.statusPagamento);
+
+            window.location.href = 'compra-confirmada.html';
+        } catch (erro) {
+            alert('Erro ao confirmar o pedido: ' + erro.message);
+        }
     });
 });

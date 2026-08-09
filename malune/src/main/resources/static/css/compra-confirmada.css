@@ -89,6 +89,7 @@
     font-weight: bold;
     text-decoration: none;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 .btn-ver-pedido {
