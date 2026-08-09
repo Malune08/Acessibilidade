@@ -258,7 +258,7 @@ function renderizarCards(produtos) {
                         ${precoFormatado}
                     </span>
 
-                    <a href="login.html?produto=${produto.id}"
+                    <a href="produto.html?id=${produto.id}"
                         class="btn-ver"
                     >
                         Ver

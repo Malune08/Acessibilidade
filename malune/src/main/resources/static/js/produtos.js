@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Caso o ProdutoController utilize outra rota,
      * altere somente esta constante.
      */
-    const ENDPOINT_PRODUTOS = '/produtos';
+    const ENDPOINT_PRODUTOS = '/api/produtos';
 
     const gradeProdutos =
         document.getElementById('grade-produtos');
@@ -364,6 +364,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 'produto_selecionado',
                 String(produto.id)
             );
+
+            window.location.href =
+                `produto.html?id=${encodeURIComponent(produto.id)}`;
         });
 
         if (produto.qtdEstoque <= 0) {

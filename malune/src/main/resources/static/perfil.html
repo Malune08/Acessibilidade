@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Malune - Perfil
+        </title>
+        <link rel="icon" type="image/png" href="images/icone.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/area-cliente.css">
+        <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    </head>
+    <body>
+        <header class="cabecalho">
+            <a href="produtos.html" class="logo-link" aria-label="Ir para produtos">
+                <img src="images/logomalune.png" alt="Malune" class="logo">
+            </a>
+            <nav class="navegacao" aria-label="Navegação principal">
+                <a href="produtos.html" class="nav-link">
+                    Produtos
+                </a>
+                <a href="pedidos.html" class="nav-link">
+                    Meus Pedidos
+                </a>
+            </nav>
+            <div class="acoes-cabecalho">
+                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade">
+                    <img src="images/iconacessibilidade.png" alt="">
+                </button>
+                <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho">
+                    <img src="images/icone-carrinho.png" alt="">
+                </a>
+                <a class="botao-icone" href="configuracoes.html" aria-label="Abrir configurações">
+                    <img src="images/icone-configuracoes.png" alt="">
+                </a>
+                <a href="login.html" class="botao-icone" aria-label="Sair da conta">
+                    <img src="images/icone-sair.png" alt="">
+                </a>
+            </div>
+        </header>
+        <div class="decoracao circulo-verde" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-amarelo" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-azul" aria-hidden="true">
+        </div>
+        <main class="pagina-cliente">
+            <section class="painel" aria-labelledby="titulo-perfil">
+                <h1 id="titulo-perfil">
+                    Meu perfil
+                </h1>
+                <p class="painel-subtitulo">
+                    Atualize seus dados pessoais.
+                </p>
+                <form id="form-perfil" class="form-perfil">
+                    <div class="campo-perfil">
+                        <label for="nome">
+                            Nome completo
+                        </label>
+                        <input id="nome" name="nome" autocomplete="name" required>
+                    </div>
+                    <div class="campo-perfil">
+                        <label for="email">
+                            E-mail
+                        </label>
+                        <input id="email" name="email" type="email" autocomplete="email" required>
+                    </div>
+                    <div class="campo-perfil">
+                        <label for="cpf">
+                            CPF
+                        </label>
+                        <input id="cpf" name="cpf" inputmode="numeric">
+                    </div>
+                    <div class="campo-perfil">
+                        <label for="telefone">
+                            Telefone
+                        </label>
+                        <input id="telefone" name="telefone" type="tel" autocomplete="tel">
+                    </div>
+                    <div class="acoes-formulario">
+                        <button class="botao-primario" type="submit">
+                            Salvar
+                        </button>
+                        <a class="botao-secundario" href="configuracoes.html">
+                            Configurações
+                        </a>
+                    </div>
+                    <p id="mensagem-perfil" class="mensagem-formulario" role="status">
+                    </p>
+                </form>
+            </section>
+        </main>
+        <script src="js/modal-acessibilidade.js">
+        </script>
+        <script src="js/perfil.js">
+        </script>
+    </body>
+</html>

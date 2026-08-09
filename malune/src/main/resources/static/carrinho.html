@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Malune - Carrinho
+        </title>
+        <link rel="icon" type="image/png" href="images/icone.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/area-cliente.css">
+        <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    </head>
+    <body>
+        <header class="cabecalho">
+            <a href="produtos.html" class="logo-link" aria-label="Ir para produtos">
+                <img src="images/logomalune.png" alt="Malune" class="logo">
+            </a>
+            <nav class="navegacao" aria-label="Navegação principal">
+                <a href="produtos.html" class="nav-link">
+                    Produtos
+                </a>
+                <a href="pedidos.html" class="nav-link">
+                    Meus Pedidos
+                </a>
+            </nav>
+            <div class="acoes-cabecalho">
+                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade">
+                    <img src="images/iconacessibilidade.png" alt="">
+                </button>
+                <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho">
+                    <img src="images/icone-carrinho.png" alt="">
+                </a>
+                <a class="botao-icone" href="configuracoes.html" aria-label="Abrir configurações">
+                    <img src="images/icone-configuracoes.png" alt="">
+                </a>
+                <a href="login.html" class="botao-icone" aria-label="Sair da conta">
+                    <img src="images/icone-sair.png" alt="">
+                </a>
+            </div>
+        </header>
+        <div class="decoracao circulo-verde" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-amarelo" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-azul" aria-hidden="true">
+        </div>
+        <main class="pagina-cliente">
+            <div class="layout-carrinho">
+                <section aria-labelledby="titulo-carrinho">
+                    <h1 id="titulo-carrinho">
+                        Seu carrinho
+                    </h1>
+                    <div id="lista-carrinho" class="lista-carrinho">
+                        <p class="estado-vazio">
+                            Seu carrinho está vazio.
+                        </p>
+                    </div>
+                </section>
+                <aside class="resumo-carrinho" aria-labelledby="titulo-resumo">
+                    <h2 id="titulo-resumo">
+                        Resumo
+                    </h2>
+                    <div class="linha-resumo">
+                        <span>
+                            Subtotal
+                        </span>
+                        <strong id="subtotal-carrinho">
+                            R$ 0,00
+                        </strong>
+                    </div>
+                    <div class="linha-resumo">
+                        <span>
+                            Entrega
+                        </span>
+                        <span>
+                            A calcular
+                        </span>
+                    </div>
+                    <div class="linha-resumo total">
+                        <span>
+                            Total
+                        </span>
+                        <strong id="total-carrinho">
+                            R$ 0,00
+                        </strong>
+                    </div>
+                    <button id="prosseguir-compra" type="button" class="botao-primario" disabled>
+                        Prosseguir compra
+                    </button>
+                </aside>
+            </div>
+        </main>
+        <script src="js/modal-acessibilidade.js">
+        </script>
+        <script src="js/carrinho.js">
+        </script>
+    </body>
+</html>

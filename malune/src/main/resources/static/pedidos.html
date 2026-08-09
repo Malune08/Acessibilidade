@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Malune - Meus pedidos
+        </title>
+        <link rel="icon" type="image/png" href="images/icone.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/area-cliente.css">
+        <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    </head>
+    <body>
+        <header class="cabecalho">
+            <a href="produtos.html" class="logo-link" aria-label="Ir para produtos">
+                <img src="images/logomalune.png" alt="Malune" class="logo">
+            </a>
+            <nav class="navegacao" aria-label="Navegação principal">
+                <a href="produtos.html" class="nav-link">
+                    Produtos
+                </a>
+                <a href="pedidos.html" class="nav-link ativo" aria-current="page">
+                    Meus Pedidos
+                </a>
+            </nav>
+            <div class="acoes-cabecalho">
+                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade">
+                    <img src="images/iconacessibilidade.png" alt="">
+                </button>
+                <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho">
+                    <img src="images/icone-carrinho.png" alt="">
+                </a>
+                <a class="botao-icone" href="configuracoes.html" aria-label="Abrir configurações">
+                    <img src="images/icone-configuracoes.png" alt="">
+                </a>
+                <a href="login.html" class="botao-icone" aria-label="Sair da conta">
+                    <img src="images/icone-sair.png" alt="">
+                </a>
+            </div>
+        </header>
+        <div class="decoracao circulo-verde" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-amarelo" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-azul" aria-hidden="true">
+        </div>
+        <main class="pagina-cliente">
+            <section class="painel" aria-labelledby="titulo-pedidos">
+                <h1 id="titulo-pedidos">
+                    Meus pedidos
+                </h1>
+                <div id="lista-pedidos" class="lista-pedidos">
+                    <p class="estado-vazio">
+                        Você ainda não tem pedidos.
+                    </p>
+                </div>
+            </section>
+        </main>
+        <script src="js/modal-acessibilidade.js">
+        </script>
+        <script src="js/pedidos.js">
+        </script>
+    </body>
+</html>
