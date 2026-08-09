@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            Malune - Erro 500
+        </title>
+        <link rel="icon" type="image/png" href="images/icone.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/erro.css">
+        <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    </head>
+    <body>
+        <header class="cabecalho-erro">
+            <a href="index.html" aria-label="Ir para a página inicial">
+                <img src="images/logomalune.png" alt="Malune" class="logo">
+            </a>
+            <button type="button" id="btn-abrir-a11y" class="botao-acessibilidade" aria-label="Abrir menu de acessibilidade" title="Acessibilidade">
+                <img src="images/iconacessibilidade.png" alt="">
+            </button>
+        </header>
+        <div class="decoracao circulo-amarelo" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-azul" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-azul-inferior" aria-hidden="true">
+        </div>
+        <div class="decoracao circulo-verde" aria-hidden="true">
+        </div>
+        <main class="pagina-erro">
+            <section class="cartao-erro" aria-labelledby="titulo-erro">
+                <img src="images/logomalune.png" alt="Malune" class="logo-cartao">
+                <h1 id="titulo-erro">
+                    Erro 500
+                </h1>
+                <p>
+                    Erro interno do servidor.
+                </p>
+                <img src="images/erro500.png" alt="Mascote triste" class="mascote-erro">
+                <a href="index.html" class="botao-voltar">
+                    Voltar
+                </a>
+            </section>
+        </main>
+        <script src="js/modal-acessibilidade.js">
+        </script>
+    </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Configurações</title>
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/area-cliente.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <a href="produtos.html" class="logo-link" aria-label="Ir para produtos">
+            <img src="images/logomalune.png" alt="Malune" class="logo">
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+            <a href="produtos.html" class="nav-link">Produtos</a>
+            <a href="pedidos.html" class="nav-link">Meus Pedidos</a>
+        </nav>
+        <div class="acoes-cabecalho">
+            <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade"><img src="images/iconacessibilidade.png" alt=""></button>
+            <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho"><img src="images/icone-carrinho.png" alt=""></a>
+            <a class="botao-icone" href="configuracoes.html" aria-label="Abrir configurações"><img src="images/icone-configuracoes.png" alt=""></a>
+            <a href="login.html" class="botao-icone" aria-label="Sair da conta"><img src="images/icone-sair.png" alt=""></a>
+        </div>
+    </header>
+
+    <div class="decoracao circulo-verde" aria-hidden="true"></div>
+    <div class="decoracao circulo-amarelo" aria-hidden="true"></div>
+    <div class="decoracao circulo-azul" aria-hidden="true"></div>
+
+    <main class="pagina-cliente">
+        <section class="painel" aria-labelledby="titulo-configuracoes">
+            <h1 id="titulo-configuracoes">Configurações</h1>
+            <nav class="lista-configuracoes" aria-label="Opções da conta">
+                <a class="opcao-configuracao" href="perfil.html"><img class="icone-opcao" src="images/perfil.png" alt="">Editar perfil</a>
+                <a class="opcao-configuracao" href="cadastro-endereco.html"><img class="icone-opcao" src="images/endereco.png" alt="">Cadastrar/Editar endereço</a>
+                <a class="opcao-configuracao" href="nova-senha.html"><img class="icone-opcao" src="images/senha.png" alt="">Alterar a senha</a>
+                <a class="opcao-configuracao" href="pedidos.html"><img class="icone-opcao" src="images/pedidos.png" alt="">Meus pedidos</a>
+                <a class="opcao-configuracao sair" href="login.html"><img class="icone-opcao" src="images/sair.png" alt="">Sair da conta</a>
+            </nav>
+        </section>
+    </main>
+
+    <script src="js/modal-acessibilidade.js"></script>
+</body>
+</html>

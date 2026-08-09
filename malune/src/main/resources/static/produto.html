@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Produto</title>
+
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/produto.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <a href="produtos.html" class="logo-link" aria-label="Ir para a página de produtos da Malune">
+            <img src="images/logomalune.png" alt="Malune" class="logo">
+        </a>
+
+        <nav class="navegacao" aria-label="Navegação principal">
+            <a href="produtos.html" class="nav-link">Produtos</a>
+            <a href="pedidos.html" class="nav-link nav-button">Meus Pedidos</a>
+        </nav>
+
+        <div class="acoes-cabecalho">
+            <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade" title="Acessibilidade">
+                <img src="images/iconacessibilidade.png" alt="" aria-hidden="true">
+            </button>
+            <a href="carrinho.html" class="botao-icone" aria-label="Abrir carrinho" title="Carrinho">
+                <img src="images/icone-carrinho.png" alt="" aria-hidden="true">
+            </a>
+            <a href="configuracoes.html" class="botao-icone" aria-label="Abrir configurações" title="Configurações">
+                <img src="images/icone-configuracoes.png" alt="" aria-hidden="true">
+            </a>
+            <a href="login.html" class="botao-icone" aria-label="Sair da conta" title="Sair">
+                <img src="images/icone-sair.png" alt="" aria-hidden="true">
+            </a>
+        </div>
+    </header>
+
+    <div class="decoracao circulo-verde" aria-hidden="true"></div>
+    <div class="decoracao circulo-amarelo" aria-hidden="true"></div>
+    <div class="decoracao circulo-azul" aria-hidden="true"></div>
+
+    <main class="pagina-produto">
+        <p id="status-produto" class="status-produto" aria-live="polite">Carregando produto...</p>
+
+        <article id="detalhe-produto" class="detalhe-produto" hidden>
+            <section class="area-imagem" aria-label="Imagem do produto">
+                <img id="imagem-produto" class="imagem-produto" alt="">
+                <span id="imagem-indisponivel" class="imagem-indisponivel" hidden>Imagem indisponível</span>
+            </section>
+
+            <section class="informacoes-produto" aria-labelledby="nome-produto">
+                <a class="link-voltar" href="produtos.html">← Voltar</a>
+                <p id="categoria-produto" class="categoria-produto"></p>
+                <h1 id="nome-produto"></h1>
+                <p id="descricao-produto" class="descricao-produto"></p>
+                <p id="preco-produto" class="preco-produto"></p>
+                <p id="estoque-produto" class="estoque-produto"></p>
+
+                <div class="seletor-quantidade" aria-label="Quantidade">
+                    <button type="button" id="diminuir-quantidade" aria-label="Diminuir quantidade">−</button>
+                    <output id="quantidade-produto" for="diminuir-quantidade aumentar-quantidade">1</output>
+                    <button type="button" id="aumentar-quantidade" aria-label="Aumentar quantidade">+</button>
+                </div>
+
+                <div class="acoes-produto">
+                    <button type="button" id="adicionar-carrinho" class="botao-carrinho">Adicionar ao carrinho</button>
+                    <button type="button" id="comprar-agora" class="botao-comprar">Comprar agora</button>
+                </div>
+                <p id="mensagem-carrinho" class="mensagem-carrinho" role="status"></p>
+            </section>
+        </article>
+    </main>
+
+    <script src="js/modal-acessibilidade.js"></script>
+    <script src="js/produto.js"></script>
+</body>
+</html>
