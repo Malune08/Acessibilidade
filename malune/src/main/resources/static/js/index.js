@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function carregarProdutoDestaque() {
     try {
-        const resposta = await fetch('http://localhost:8080/api/produtos/2');
+        const resposta = await fetch('http://localhost:8080/api/produtos/7');
 
         if (!resposta.ok) {
             throw new Error('Erro ao buscar produto em destaque');

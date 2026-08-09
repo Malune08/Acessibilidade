@@ -125,7 +125,7 @@ button:focus-visible, a:focus-visible {
     overflow: hidden;
     border: 2px solid var(--cor-azul-borda);
     border-radius: 10px;
-    background: var(--cor-cinza-imagem);
+    background: var(--cor-branco);
     color: var(--cor-branco);
     text-align: center;
     font-weight: 600;
