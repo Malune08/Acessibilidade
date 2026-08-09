@@ -174,6 +174,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const containerProdutos =
         document.getElementById('produtos-container');
 
+    async function carregarProdutoDestaque() {
+    try {
+        const resposta = await fetch('http://localhost:8080/api/produtos/2');
+
+        if (!resposta.ok) {
+            throw new Error('Erro ao buscar produto em destaque');
+        }
+
+        const produto = await resposta.json();
+        const heroDestaque = document.getElementById('hero-produto-destaque');
+
+        if (heroDestaque && produto.imagem) {
+            heroDestaque.innerHTML = `<img src="${produto.imagem}" alt="${produto.nome}">`;
+        }
+    } catch (error) {
+        console.error('Erro ao carregar produto em destaque:', error);
+    }
+}
+
     async function carregarProdutos() {
     try {
         const resposta = await fetch('http://localhost:8080/api/produtos');
@@ -225,7 +244,7 @@ function renderizarCards(produtos) {
 
         card.innerHTML = `
             <div class="product-image">
-                ${produto.imagem 
+                ${produto.imagem
                     ? `<img src="${produto.imagem}" alt="${produto.nome}">` 
                     : 'Foto de brinquedo'}
             </div>
@@ -253,4 +272,5 @@ function renderizarCards(produtos) {
 }
 
     carregarProdutos();
+    carregarProdutoDestaque();
 });

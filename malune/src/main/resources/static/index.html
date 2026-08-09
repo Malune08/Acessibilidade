@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="icon" type="image/png" href="images/icone.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
     <!-- CABEÇALHO FIXO -->
@@ -17,9 +19,9 @@
                 <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
             </a>
         </div>
-        
+
         <div class="header-centro"></div>
-        
+
         <div class="header-dir">
             <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
                 <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
@@ -35,19 +37,20 @@
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-container">
-        
+
         <!-- SEÇÃO DE DESTAQUE (HERO) - Sem o retângulo branco -->
         <section class="hero">
             <div class="hero-text">
                 <h1>Diversão que <span class="highlight-pink">colore</span> a infância</h1>
-                <p>Brinquedos selecionados para crianças curiosas, corajosas e criativas. Entrega para todo o Brasil.</p>
+                <p>Brinquedos selecionados para crianças curiosas, corajosas e criativas. Entrega para todo o Brasil.
+                </p>
                 <div class="hero-buttons">
                     <a href="cadastro.html" class="btn-outline-green">Criar conta</a>
                 </div>
             </div>
-            
+
             <div class="hero-image-container">
-                <div class="hero-image-placeholder">
+                <div class="hero-image-placeholder" id="hero-produto-destaque">
                     <span>Foto de brinquedo</span>
                 </div>
                 <div class="badge-novo">Novo</div>
@@ -56,7 +59,6 @@
 
         <!-- SEÇÃO DE PRODUTOS -->
         <section id="produtos-container" class="products-section">
-            <!-- Os cards serão injetados dinamicamente aqui -->
         </section>
     </main>
 
@@ -71,7 +73,7 @@
             <h3 id="modal-a11y-title">Acessibilidade</h3>
             <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
         </div>
-        
+
         <div class="modal-body">
             <div class="a11y-item">
                 <div class="a11y-info">
@@ -105,7 +107,7 @@
                     <span class="slider"></span>
                 </label>
             </div>
-            
+
             <div class="a11y-item">
                 <div class="a11y-info">
                     <strong>Sublinhar links</strong>
@@ -117,10 +119,13 @@
                 </label>
             </div>
         </div>
-        
+
         <div class="modal-footer">
             <button id="btn-restaurar" class="btn-restaurar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                </svg>
                 Restaurar padrão
             </button>
         </div>
@@ -128,4 +133,5 @@
 
     <script src="js/index.js"></script>
 </body>
+
 </html>
