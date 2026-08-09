@@ -8,6 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const campoComplemento = document.getElementById('complemento');
     const mensagemEndereco = document.getElementById('mensagem-endereco');
 
+    const idUsuario = localStorage.getItem('id_usuario');
+
     function formatarCep(valor) {
         return valor
             .replace(/\D/g, '')
@@ -114,33 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
             campoBairro.value = endereco.bairro || '';
 
             const siglasUfParaNome = {
-                AC: 'Acre',
-                AL: 'Alagoas',
-                AP: 'Amapá',
-                AM: 'Amazonas',
-                BA: 'Bahia',
-                CE: 'Ceará',
-                DF: 'Distrito Federal',
-                ES: 'Espírito Santo',
-                GO: 'Goiás',
-                MA: 'Maranhão',
-                MT: 'Mato Grosso',
-                MS: 'Mato Grosso do Sul',
-                MG: 'Minas Gerais',
-                PA: 'Pará',
-                PB: 'Paraíba',
-                PR: 'Paraná',
-                PE: 'Pernambuco',
-                PI: 'Piauí',
-                RJ: 'Rio de Janeiro',
-                RN: 'Rio Grande do Norte',
-                RS: 'Rio Grande do Sul',
-                RO: 'Rondônia',
-                RR: 'Roraima',
-                SC: 'Santa Catarina',
-                SP: 'São Paulo',
-                SE: 'Sergipe',
-                TO: 'Tocantins'
+                AC: 'Acre', AL: 'Alagoas', AP: 'Amapá', AM: 'Amazonas',
+                BA: 'Bahia', CE: 'Ceará', DF: 'Distrito Federal', ES: 'Espírito Santo',
+                GO: 'Goiás', MA: 'Maranhão', MT: 'Mato Grosso', MS: 'Mato Grosso do Sul',
+                MG: 'Minas Gerais', PA: 'Pará', PB: 'Paraíba', PR: 'Paraná',
+                PE: 'Pernambuco', PI: 'Piauí', RJ: 'Rio de Janeiro', RN: 'Rio Grande do Norte',
+                RS: 'Rio Grande do Sul', RO: 'Rondônia', RR: 'Roraima', SC: 'Santa Catarina',
+                SP: 'São Paulo', SE: 'Sergipe', TO: 'Tocantins'
             };
 
             const nomeEstado = siglasUfParaNome[endereco.uf];
@@ -157,6 +139,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function carregarEnderecoSalvo() {
+        if (!idUsuario) {
+            return;
+        }
+
+        try {
+            const resposta = await fetch(`http://localhost:8080/endereco/${idUsuario}`);
+
+            if (resposta.status === 204) {
+                return;
+            }
+
+            if (!resposta.ok) {
+                throw new Error('Não foi possível carregar o endereço salvo.');
+            }
+
+            const endereco = await resposta.json();
+
+            campoCep.value = formatarCep(endereco.cep || '');
+            campoRua.value = endereco.rua || '';
+            campoBairro.value = endereco.bairro || '';
+            campoNumero.value = endereco.numero || '';
+            campoComplemento.value = endereco.complemento || '';
+
+            if (endereco.estado && endereco.estado.estado) {
+                campoEstado.value = endereco.estado.estado;
+            }
+        } catch (erro) {
+            console.error('Erro ao carregar endereço:', erro);
+        }
+    }
+
+    carregarEnderecoSalvo();
+
     campoCep.addEventListener('input', () => {
         campoCep.value = formatarCep(campoCep.value);
         limparErros();
@@ -169,11 +185,16 @@ document.addEventListener('DOMContentLoaded', () => {
         limparErros();
     });
 
-    formEndereco.addEventListener('submit', (event) => {
+    formEndereco.addEventListener('submit', async (event) => {
         event.preventDefault();
         limparErros();
 
         if (!validarFormulario()) {
+            return;
+        }
+
+        if (!idUsuario) {
+            mostrarErro('Usuário não identificado. Faça login novamente.', []);
             return;
         }
 
@@ -186,11 +207,22 @@ document.addEventListener('DOMContentLoaded', () => {
             complemento: campoComplemento.value.trim()
         };
 
-        localStorage.setItem(
-            'endereco_dados',
-            JSON.stringify(endereco)
-        );
+        try {
+            const resposta = await fetch(`http://localhost:8080/endereco/${idUsuario}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(endereco)
+            });
 
-        window.location.href = 'pagamento.html';
+            if (!resposta.ok) {
+                throw new Error('Não foi possível salvar o endereço. Tente novamente.');
+            }
+
+            localStorage.setItem('endereco_dados', JSON.stringify(endereco));
+
+            window.location.href = 'pagamento.html';
+        } catch (erro) {
+            mostrarErro(erro.message, []);
+        }
     });
 });

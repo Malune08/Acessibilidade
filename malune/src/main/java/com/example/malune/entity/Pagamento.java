@@ -20,12 +20,12 @@ public class Pagamento {
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "id_forma_pagamento", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "forma_pagamento", nullable = false, length = 10)
     private FormaPagamento formaPagamento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 10)
     private StatusPagamento status;
 
     private LocalDate dataPagamento;

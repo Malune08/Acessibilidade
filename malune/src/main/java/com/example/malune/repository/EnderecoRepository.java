@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
+public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 
     List<Endereco> findByEstado(Estado estado);
 
