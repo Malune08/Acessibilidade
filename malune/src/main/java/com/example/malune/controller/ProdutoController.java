@@ -3,7 +3,13 @@ package com.example.malune.controller;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.malune.entity.Produto;
 import com.example.malune.service.ProdutoService;
@@ -23,10 +29,10 @@ public class ProdutoController {
         return produtoService.listarProdutos();
     }
 
-    // @GetMapping("/{id}")
-    // public Produto buscarPorId(@PathVariable Integer id) {
-    //     return produtoService.buscarPorId(id);
-    // }
+    @GetMapping("/{id}")
+    public Produto buscarPorId(@PathVariable Integer id) {
+        return produtoService.buscarPorId(id);
+    }
 
     @GetMapping("/buscar")
     public List<Produto> buscarPorNome(@RequestParam String nome) {
