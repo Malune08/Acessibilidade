@@ -1,5 +1,6 @@
 package com.example.malune.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +23,10 @@ public class ProdutoController {
         return produtoService.listarProdutos();
     }
 
-    @GetMapping("/{id}")
-    public Produto buscarPorId(@PathVariable Integer id) {
-        return produtoService.buscarPorId(id);
-    }
+    // @GetMapping("/{id}")
+    // public Produto buscarPorId(@PathVariable Integer id) {
+    //     return produtoService.buscarPorId(id);
+    // }
 
     @GetMapping("/buscar")
     public List<Produto> buscarPorNome(@RequestParam String nome) {
@@ -37,8 +38,18 @@ public class ProdutoController {
         return produtoService.salvar(produto);
     }
 
-    @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Integer id) {
-        produtoService.deletar(id);
+    // @DeleteMapping("/{id}")
+    // public void deletar(@PathVariable Integer id) {
+    //     produtoService.deletar(id);
+    // }
+    // @GetMapping("/preco")
+    // public List<Produto> buscarPorPrecoMaximo(@RequestParam BigDecimal max) {
+    //     return produtoService.buscarPorPrecoMaximo(max);
+    // }
+    @GetMapping("/filtro")
+    public List<Produto> filtrarProdutos(
+            @RequestParam(required = false) Integer categoria,
+            @RequestParam(required = false) BigDecimal precoMax) {
+        return produtoService.filtrarProdutos(categoria, precoMax);
     }
 }
