@@ -1,15 +1,25 @@
 package com.example.malune.dto;
 
+import com.example.malune.util.RegexPatterns;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class EnderecoDTO {
-    
-    @NotBlank(message = "O CEP é obrigatório.")
+
+    @NotBlank(message = "CEP obrigatório.")
+    @Pattern(
+            regexp = RegexPatterns.CEP,
+            message = "CEP inválido."
+    )
     private String cep;
 
     @NotBlank(message = "O estado é obrigatório.")
