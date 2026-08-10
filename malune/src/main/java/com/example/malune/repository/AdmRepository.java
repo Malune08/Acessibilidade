@@ -1,10 +1,11 @@
 package com.example.malune.repository;
 
-import com.example.malune.entity.Administrador;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.example.malune.entity.Administrador;
 
 @Repository
 public interface AdmRepository extends JpaRepository<Administrador, Long> {

@@ -211,7 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert(
                             'Verifique os dados digitados: email ou senha em formato inválido.'
                         );
-
                         return;
                     }
 
@@ -220,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (resultado === 'USUARIO') {
                         window.location.href =
-                            '/home.html';
+                            '/produtos.html';
                     } else if (
                         resultado === 'ADMINISTRADOR'
                     ) {
@@ -237,9 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         erro
                     );
 
-                    alert(
-                        'Não foi possível conectar ao servidor. Tente novamente.'
-                    );
+                    alert('Não foi possível conectar ao servidor. Tente novamente.');
                 }
             }
         );
