@@ -1,6 +1,6 @@
 package com.example.malune.service;
 
-import com.example.malune.entity.Adm;
+import com.example.malune.entity.Administrador;
 import com.example.malune.repository.AdmRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,7 @@ public class AdminAuthService {
 
         usernameOrEmail = usernameOrEmail.trim();
 
-        Optional<Adm> admOpt = admRepository.findByEmailIgnoreCase(usernameOrEmail);
+        Optional<Administrador> admOpt = admRepository.findByEmailIgnoreCase(usernameOrEmail);
         if (admOpt.isEmpty()) {
             admOpt = admRepository.findByNomeUsuarioIgnoreCase(usernameOrEmail);
         }
@@ -35,7 +35,7 @@ public class AdminAuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        Adm adm = admOpt.get();
+        Administrador adm = admOpt.get();
 
         if (!adm.getSenha().equals(senha)) {
             throw new RuntimeException("Invalid credentials");
@@ -88,7 +88,7 @@ public class AdminAuthService {
         activeTokens.remove(token);
     }
 
-    public Optional<Adm> findById(Long id) {
+    public Optional<Administrador> findById(Integer id) {
         return admRepository.findById(id);
     }
 

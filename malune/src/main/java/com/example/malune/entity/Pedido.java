@@ -1,12 +1,9 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import lombok.*;
 
 @Getter
 @Setter
@@ -18,19 +15,19 @@ public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_status", nullable = false)
-    private StatusPedido status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 10)
+    private StatusPedido status = StatusPedido.AGUARDANDO;
 
     @Column(nullable = false)
     private LocalDate dataPedido = LocalDate.now();
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal valorTotal;
 }

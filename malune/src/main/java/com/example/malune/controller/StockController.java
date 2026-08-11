@@ -27,7 +27,7 @@ public class StockController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getStockById(@PathVariable Long id) {
+    public ResponseEntity<?> getStockById(@PathVariable Integer id) {
         try {
             Produto produto = stockService.getStockById(id);
             return ResponseEntity.ok(toStockMap(produto));
@@ -37,7 +37,7 @@ public class StockController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateStock(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public ResponseEntity<?> updateStock(@PathVariable Integer id, @RequestBody Map<String, Object> body) {
         try {
             Integer qtdEstoque = body.get("qtdEstoque") != null 
                     ? Integer.valueOf(String.valueOf(body.get("qtdEstoque"))) 
@@ -53,7 +53,7 @@ public class StockController {
     }
 
     @PostMapping("/{id}/increment")
-    public ResponseEntity<?> incrementStock(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public ResponseEntity<?> incrementStock(@PathVariable Integer id, @RequestBody Map<String, Object> body) {
         try {
             Integer quantidade = body.get("quantidade") != null 
                     ? Integer.valueOf(String.valueOf(body.get("quantidade"))) 
@@ -69,7 +69,7 @@ public class StockController {
     }
 
     @PostMapping("/{id}/decrement")
-    public ResponseEntity<?> decrementStock(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public ResponseEntity<?> decrementStock(@PathVariable Integer id, @RequestBody Map<String, Object> body) {
         try {
             Integer quantidade = body.get("quantidade") != null 
                     ? Integer.valueOf(String.valueOf(body.get("quantidade"))) 

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Pagamento</title>
+    <link rel="stylesheet" href="css/pagamento.css">
+    <link rel="stylesheet" href="css/global-fluxo-pagamento.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    <link rel="icon" type="image/png" href="images/icone.png">
+</head>
+<body>
+
+    <header class="header-topo">
+        <div class="header-esq">
+            <a href="index.html" class="logo-link">
+                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+            </a>
+        </div>
+       
+        <div class="header-centro">
+            <h2>Pagamento</h2>
+        </div>
+       
+        <div class="header-dir">
+            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+                <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+            </button>
+        </div>
+    </header>
+
+    <div class="decor circle-yellow"></div>
+    <div class="decor circle-blue-top"></div>
+    <div class="decor circle-blue-bottom"></div>
+    <div class="decor circle-green"></div>
+
+    <main class="main-container">
+        <div class="progress-container">
+
+            <div class="progress-step">
+                <div class="progress-circle active">1</div>
+                <span class="progress-label">Endereço</span>
+            </div>
+
+            <div class="progress-line"></div>
+            
+            <div class="progress-step">
+                <div class="progress-circle active">2</div>
+                <span class="progress-label">Pagamento</span>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <div class="progress-circle">3</div>
+                <span class="progress-label">Revisar</span>
+            </div>
+        </div>
+
+        <section class="content-pagamento">
+            <h3 class="form-title">Forma de pagamento</h3>
+
+            <form id="form-pagamento" method="POST">
+
+                <div class="opcao-pagamento">
+                    <input type="radio" id="pix" name="forma_pagamento" value="1" required>
+                    <label for="pix" class="label-opcao">
+                        <span class="icon-radio"></span>
+                        <img src="images/pix-logo.png" alt="PIX" class="icon-pagamento">
+                        <span class="texto-pagamento">PIX</span>
+                    </label>
+                </div>
+
+                <div class="opcao-pagamento">
+                    <input type="radio" id="cartao" name="forma_pagamento" value="2">
+                    <label for="cartao" class="label-opcao">
+                        <span class="icon-radio"></span>
+                        <img src="images/cartao-logo.png" alt="Cartão" class="icon-pagamento">
+                        <span class="texto-pagamento">CARTÃO DE DÉBITO/CRÉDITO</span>
+                    </label>
+                </div>
+
+                <div class="opcao-pagamento">
+                    <input type="radio" id="boleto" name="forma_pagamento" value="3">
+                    <label for="boleto" class="label-opcao">
+                        <span class="icon-radio"></span>
+                        <img src="images/boleto-logo.png" alt="Boleto" class="icon-pagamento">
+                        <span class="texto-pagamento">BOLETO</span>
+                    </label>
+                </div>
+
+                <!-- Campos adicionais para PIX (escondidos por padrão) -->
+                <div id="campos-pix" class="campos-adicionais" style="display: none;">
+                    <div class="pix-qrcode-area">
+                        <div class="pix-qrcode">
+                            <img src="images/qrcode.png" alt="QR Code PIX" class="qrcode-img">
+                        </div>
+                        <p class="pix-instrucao">Escaneie o QR Code ou copie o código abaixo</p>
+                    </div>
+                    <div class="input-group">
+                        <label for="pix-codigo">Código PIX Copia e Cola</label>
+                        <div class="pix-copiar-area">
+                            <input type="text" id="pix-codigo" class="pix-codigo-input" value="00020126580014br.gov.bcb.pix0136a1b2c3d4-e5f6-7890-abcd-ef1234567890520400005303986540750.005802BR5913MALUNE LOJA6009SAO PAULO62070503***6304ABCD" readonly>
+                            <button type="button" id="btn-copiar-pix" class="btn-copiar">Copiar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Campos adicionais para cartão (escondidos por padrão) -->
+                <div id="campos-cartao" class="campos-adicionais" style="display: none;">
+                    
+                    <!-- Lista de cartões cadastrados -->
+                    <div id="lista-cartoes" class="lista-cartoes-area">
+                        <label class="campo-label">Seus cartões</label>
+                        <div id="container-cartoes" class="container-cartoes">
+                            <!-- Cartões serão inseridos aqui via JS -->
+                        </div>
+                        <button type="button" id="btn-adicionar-cartao" class="btn-adicionar-cartao">+ Adicionar novo cartão</button>
+                    </div>
+
+                    <!-- Formulário para novo cartão (oculto até clicar em "Adicionar novo") -->
+                    <div id="formulario-novo-cartao" class="formulario-novo-cartao" style="display: none;">
+                        <div class="input-group">
+                            <label for="numero-cartao">Número do cartão</label>
+                            <input type="text" id="numero-cartao" name="numero-cartao" placeholder="1234 5678 9012 3456" maxlength="19">
+                        </div>
+                        <div class="input-group">
+                            <label for="nome-titular">Nome do titular</label>
+                            <input type="text" id="nome-titular" name="nome-titular" placeholder="João Silva">
+                        </div>
+                        <div class="input-row">
+                            <div class="input-group">
+                                <label for="validade">Validade</label>
+                                <input type="text" id="validade" name="validade" placeholder="MM/AA" maxlength="5">
+                            </div>
+                            <div class="input-group">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label class="campo-label">Tipo do cartão</label>
+                            <div class="container-cartoes">
+                                <label class="radio-cartao">
+                                    <input type="radio" name="tipo-cartao-novo" value="DEBITO" checked>
+                                    <span class="radio-custom-cartao"></span>
+                                    <span class="cartao-titular">Débito</span>
+                                </label>
+                                <label class="radio-cartao">
+                                    <input type="radio" name="tipo-cartao-novo" value="CREDITO">
+                                    <span class="radio-custom-cartao"></span>
+                                    <span class="cartao-titular">Crédito</span>
+                                </label>
+                            </div>
+                        </div>
+                        <button type="button" id="btn-cancelar-novo-cartao" class="btn-cancelar-novo-cartao">Cancelar</button>
+                    </div>
+
+                </div>
+
+                <!-- Campos adicionais para Boleto (escondidos por padrão) -->
+                <div id="campos-boleto" class="campos-adicionais" style="display: none;">
+                    <div class="boleto-info">
+                        <div class="boleto-linha">
+                            <span class="boleto-label">Beneficiário:</span>
+                            <span class="boleto-valor">MALUNE LOJA LTDA</span>
+                        </div>
+                        <div class="boleto-linha">
+                            <span class="boleto-label">CNPJ:</span>
+                            <span class="boleto-valor">12.345.678/0001-90</span>
+                        </div>
+                        <div class="boleto-linha">
+                            <span class="boleto-label">Vencimento:</span>
+                            <span class="boleto-valor">15/02/2026</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="boleto-codigo">Código de Barras</label>
+                        <div class="pix-copiar-area">
+                            <input type="text" id="boleto-codigo" class="pix-codigo-input" value="23793.38128 60000.000003 00000.000404 1 89270000012345" readonly>
+                            <button type="button" id="btn-copiar-boleto" class="btn-copiar">Copiar</button>
+                        </div>
+                    </div>
+                    <p class="boleto-aviso">Após o pagamento, a confirmação pode levar até 3 dias úteis.</p>
+                </div>
+
+                <div class="total-section">
+                    <div class="total-label">Total</div>
+                    <div class="total-valor" id="total-valor">R$ 00,00</div>
+                </div>
+
+                <button type="submit" class="btn-prosseguir">Revisar pagamento</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/modal-acessibilidade.js"></script>
+    <script src="js/pagamento.js"></script>
+</body>
+</html>

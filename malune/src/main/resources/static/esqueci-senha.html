@@ -11,7 +11,7 @@
 
     <header class="header-topo">
         <div class="header-esq">
-            <a href="#" class="logo-link">
+            <a href="index.html" class="logo-link">
                 <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
             </a>
         </div>
@@ -35,30 +35,48 @@
     <main class="main-container">
         <section class="card-cadastro">
             <div class="card-header">
-                <a href="#" class="logo-link-card">
+                <a href="index.html" class="logo-link-card">
                     <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
                 </a>
+
                 <p>Esqueceu a senha</p>
-                <span class="subtitle">Informe seu e-mail para receber o link<br>de recuperação</span>
+
+                <span class="subtitle">
+                    Informe seu e-mail para receber o link<br>
+                    de recuperação
+                </span>
             </div>
 
             <form id="form-recuperar" action="#" method="POST">
-                
                 <div class="input-group">
                     <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="annasilva@gmail.com" required>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="annasilva@gmail.com"
+                        required
+                    >
                 </div>
 
-                <button type="submit" class="btn-continuar">Enviar link</button>
+                <button type="submit" class="btn-continuar">
+                    Enviar link
+                </button>
             </form>
         </section>
     </main>
 
-    <!-- Pop-up de Acessibilidade -->
     <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
         <div class="modal-header">
             <h3 id="modal-a11y-title">Acessibilidade</h3>
-            <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+
+            <button
+                id="btn-fechar-a11y"
+                aria-label="Fechar menu de acessibilidade"
+            >
+                X
+            </button>
         </div>
         
         <div class="modal-body">
@@ -67,6 +85,7 @@
                     <strong>Alto contraste</strong>
                     <span>Cores fortes para melhor leitura</span>
                 </div>
+
                 <label class="switch">
                     <input type="checkbox" id="toggle-contraste">
                     <span class="slider"></span>
@@ -78,6 +97,7 @@
                     <strong>Texto grande</strong>
                     <span>Aumenta o tamanho da fonte</span>
                 </div>
+
                 <label class="switch">
                     <input type="checkbox" id="toggle-texto">
                     <span class="slider"></span>
@@ -89,6 +109,7 @@
                     <strong>Fonte para dislexia</strong>
                     <span>Mais fácil de ler</span>
                 </div>
+
                 <label class="switch">
                     <input type="checkbox" id="toggle-dislexia">
                     <span class="slider"></span>
@@ -100,6 +121,7 @@
                     <strong>Sublinhar links</strong>
                     <span>Destaca todos os links</span>
                 </div>
+
                 <label class="switch">
                     <input type="checkbox" id="toggle-links">
                     <span class="slider"></span>
@@ -108,9 +130,12 @@
         </div>
         
         <div class="modal-footer">
-            <button id="btn-restaurar" class="btn-restaurar">Restaurar padrão</button>
+            <button id="btn-restaurar" class="btn-restaurar">
+                Restaurar padrão
+            </button>
         </div>
     </dialog>
+
     <script src="js/esqueci-senha.js"></script>
 </body>
 </html>

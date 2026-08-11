@@ -1,11 +1,8 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.time.LocalDate;
+import lombok.*;
 
 @Getter
 @Setter
@@ -17,18 +14,18 @@ public class Pagamento {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", nullable = false)
     private Pedido pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "id_forma_pagamento", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "forma_pagamento", nullable = false, length = 10)
     private FormaPagamento formaPagamento;
 
-    @ManyToOne
-    @JoinColumn(name = "id_status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false, length = 10)
     private StatusPagamento status;
 
     private LocalDate dataPagamento;

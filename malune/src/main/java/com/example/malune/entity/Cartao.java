@@ -1,11 +1,8 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.time.LocalDate;
+import lombok.*;
 
 @Getter
 @Setter
@@ -17,14 +14,14 @@ public class Cartao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name = "id_tipo_cartao", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_cartao", nullable = false, length = 10)
     private TipoCartao tipoCartao;
 
     @Column(length = 30, nullable = false)

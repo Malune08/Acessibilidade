@@ -1,10 +1,8 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import java.math.BigDecimal;
 
 @Getter
 @Setter
@@ -16,7 +14,7 @@ public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "id_pedido", nullable = false)
@@ -26,8 +24,8 @@ public class ItemPedido {
     @JoinColumn(name = "id_produto", nullable = false)
     private Produto produto;
 
-    @Column(nullable = false)
-    private float valorUnitario;
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal valorUnitario;
 
     @Column(nullable = false)
     private Integer quantidade;

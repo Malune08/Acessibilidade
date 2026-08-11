@@ -24,7 +24,7 @@ public class ProductAdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getById(@PathVariable Long id) {
+    public ResponseEntity<?> getById(@PathVariable Integer id) {
         try {
             Produto produto = productService.findById(id)
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
@@ -57,7 +57,7 @@ public class ProductAdminController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> update(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Map<String, Object> body) {
         try {
             String nome = body.containsKey("nome") ? (String) body.get("nome") : null;
             String descricao = body.containsKey("descricao") ? (String) body.get("descricao") : null;
@@ -81,7 +81,7 @@ public class ProductAdminController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Integer id) {
         try {
             productService.delete(id);
             return ResponseEntity.ok(Map.of("deleted", true));

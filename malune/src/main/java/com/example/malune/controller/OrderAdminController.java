@@ -27,7 +27,7 @@ public class OrderAdminController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrderById(@PathVariable Long id) {
+    public ResponseEntity<?> getOrderById(@PathVariable Integer id) {
         try {
             Pedido pedido = orderService.findById(id);
             return ResponseEntity.ok(mapPedidoToMap(pedido));
@@ -41,32 +41,26 @@ public class OrderAdminController {
         return orderService.getAllStatuses().stream()
                 .map(status -> {
                     Map<String, Object> result = new LinkedHashMap<>();
-                    result.put("id", status.getId());
-                    result.put("status", status.getStatus());
+                    result.put("id", status.name());
+                    result.put("status", status.name());
                     return result;
                 })
                 .collect(Collectors.toList());
     }
 
     @PutMapping("/{id}/status")
-    public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestBody Map<String, Object> body) {
+    public ResponseEntity<?> updateStatus(@PathVariable Integer id, @RequestBody Map<String, Object> body) {
         try {
-            Pedido pedido;
-
-            if (body.containsKey("statusId")) {
-                Long statusId = Long.valueOf(String.valueOf(body.get("statusId")));
-                pedido = orderService.updateStatus(id, statusId);
-            } else if (body.containsKey("status")) {
-                String statusName = String.valueOf(body.get("status"));
-                pedido = orderService.updateStatusByName(id, statusName);
-            } else {
+            if (!body.containsKey("status")) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(Map.of("error", "statusId or status is required"));
+                        .body(Map.of("error", "status is required"));
             }
+
+            Pedido pedido = orderService.updateStatus(id, String.valueOf(body.get("status")));
 
             return ResponseEntity.ok(Map.of(
                     "id", pedido.getId(),
-                    "status", pedido.getStatus() != null ? pedido.getStatus().getStatus() : null
+                    "status", pedido.getStatus() != null ? pedido.getStatus().name() : null
             ));
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", e.getMessage()));
@@ -79,7 +73,7 @@ public class OrderAdminController {
         result.put("usuarioId", p.getUsuario() != null ? p.getUsuario().getId() : null);
         result.put("dataPedido", p.getDataPedido());
         result.put("valorTotal", p.getValorTotal());
-        result.put("status", p.getStatus() != null ? p.getStatus().getStatus() : null);
+        result.put("status", p.getStatus() != null ? p.getStatus().name() : null);
         return result;
     }
 }

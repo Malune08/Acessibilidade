@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CartaoRepository extends JpaRepository<Cartao, Long> {
+public interface CartaoRepository extends JpaRepository<Cartao, Integer> {
 
     List<Cartao> findByUsuario(Usuario usuario);
 

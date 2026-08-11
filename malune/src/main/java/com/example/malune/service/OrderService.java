@@ -3,71 +3,72 @@ package com.example.malune.service;
 import com.example.malune.entity.Pedido;
 import com.example.malune.entity.StatusPedido;
 import com.example.malune.repository.PedidoRepository;
-import com.example.malune.repository.StatusPedidoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OrderService {
 
-    @Autowired
-    private PedidoRepository pedidoRepository;
+    private final PedidoRepository pedidoRepository;
 
-    @Autowired
-    private StatusPedidoRepository statusPedidoRepository;
+    public OrderService(PedidoRepository pedidoRepository) {
+        this.pedidoRepository = pedidoRepository;
+    }
 
     public List<Pedido> findAll() {
         return pedidoRepository.findAll();
     }
 
-    public Pedido findById(Long id) {
+    public Pedido findById(Integer id) {
         return pedidoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
     }
 
-    public Pedido updateStatus(Long pedidoId, Long statusId) {
-        Pedido pedido = pedidoRepository.findById(pedidoId)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
+    public Pedido updateStatus(Integer pedidoId, String statusName) {
+        Pedido pedido = findById(pedidoId);
+        StatusPedido novoStatus = parseStatus(statusName);
+        StatusPedido statusAtual = pedido.getStatus();
 
-        StatusPedido status = statusPedidoRepository.findById(statusId)
-                .orElseThrow(() -> new RuntimeException("Status não encontrado"));
-
-        pedido.setStatus(status);
-        return pedidoRepository.save(pedido);
-    }
-
-    public Pedido updateStatusByName(Long pedidoId, String statusName) {
-        Pedido pedido = pedidoRepository.findById(pedidoId)
-                .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
-
-        if (statusName == null || statusName.isBlank()) {
-            throw new IllegalArgumentException("Status é obrigatório");
+        if (!canTransitionStatus(statusAtual, novoStatus)) {
+            throw new IllegalArgumentException("Transição de status inválida");
         }
 
-        StatusPedido status = statusPedidoRepository.findByStatusIgnoreCase(statusName.trim())
-                .orElseThrow(() -> new RuntimeException("Status não encontrado: " + statusName));
-
-        pedido.setStatus(status);
+        pedido.setStatus(novoStatus);
         return pedidoRepository.save(pedido);
     }
 
     public List<StatusPedido> getAllStatuses() {
-        return statusPedidoRepository.findAll();
+        return Arrays.asList(StatusPedido.values());
     }
 
     public List<Pedido> findPendingOrders() {
-        StatusPedido pendingStatus = statusPedidoRepository.findByStatus("Pendente")
-                .orElseThrow(() -> new RuntimeException("Status Pendente não encontrado"));
-        return pedidoRepository.findByStatus(pendingStatus);
+        return pedidoRepository.findByStatus(StatusPedido.AGUARDANDO);
     }
 
-    public boolean canTransitionStatus(String currentStatus, String newStatus) {
-        // Simple state machine logic: define valid transitions
-        // You can expand this based on your business rules
-        return true; // For now, allow all transitions
+    private StatusPedido parseStatus(String statusName) {
+        if (statusName == null || statusName.isBlank()) {
+            throw new IllegalArgumentException("Status é obrigatório");
+        }
+
+        try {
+            return StatusPedido.valueOf(statusName.trim().toUpperCase());
+        } catch (IllegalArgumentException exception) {
+            throw new IllegalArgumentException("Status não encontrado: " + statusName);
+        }
+    }
+
+    private boolean canTransitionStatus(StatusPedido currentStatus, StatusPedido newStatus) {
+        if (currentStatus == null || currentStatus == newStatus) {
+            return currentStatus == newStatus;
+        }
+
+        return switch (currentStatus) {
+            case AGUARDANDO -> newStatus == StatusPedido.CONFIRMADO || newStatus == StatusPedido.CANCELADO;
+            case CONFIRMADO -> newStatus == StatusPedido.ENVIADO || newStatus == StatusPedido.CANCELADO;
+            case ENVIADO -> newStatus == StatusPedido.ENTREGUE;
+            case ENTREGUE, CANCELADO -> false;
+        };
     }
 }
-

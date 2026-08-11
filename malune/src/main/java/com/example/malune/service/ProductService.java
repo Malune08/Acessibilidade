@@ -24,7 +24,7 @@ public class ProductService {
         return produtoRepository.findAll();
     }
 
-    public Optional<Produto> findById(Long id) {
+    public Optional<Produto> findById(Integer id) {
         return produtoRepository.findById(id);
     }
 
@@ -45,7 +45,7 @@ public class ProductService {
         return produtoRepository.save(produto);
     }
 
-    public Produto update(Long id, String nome, String descricao, BigDecimal valorUnitario,
+    public Produto update(Integer id, String nome, String descricao, BigDecimal valorUnitario,
                          Integer categoriaId, Integer qtdEstoque) {
         Produto produto = produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
@@ -74,7 +74,7 @@ public class ProductService {
         return produtoRepository.save(produto);
     }
 
-    public void delete(Long id) {
+    public void delete(Integer id) {
         if (!produtoRepository.existsById(id)) {
             throw new RuntimeException("Produto não encontrado");
         }

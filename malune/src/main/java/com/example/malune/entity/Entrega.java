@@ -1,11 +1,8 @@
 package com.example.malune.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import java.time.LocalDate;
+import lombok.*;
 
 @Getter
 @Setter
@@ -17,7 +14,7 @@ public class Entrega {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "id_pedido", nullable = false, unique = true)

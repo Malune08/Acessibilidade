@@ -61,7 +61,7 @@ public class DashboardService {
         map.put("usuarioId", p.getUsuario() != null ? p.getUsuario().getId() : null);
         map.put("dataPedido", p.getDataPedido());
         map.put("valorTotal", p.getValorTotal());
-        map.put("status", p.getStatus() != null ? p.getStatus().getStatus() : null);
+        map.put("status", p.getStatus() != null ? p.getStatus().name() : null);
         return map;
     }
 }

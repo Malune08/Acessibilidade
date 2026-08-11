@@ -18,12 +18,12 @@ public class StockService {
         return produtoRepository.findAll();
     }
 
-    public Produto getStockById(Long id) {
+    public Produto getStockById(Integer id) {
         return produtoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
     }
 
-    public Produto updateStock(Long id, Integer novaQuantidade) {
+    public Produto updateStock(Integer id, Integer novaQuantidade) {
         if (novaQuantidade == null || novaQuantidade < 0) {
             throw new IllegalArgumentException("Quantidade de estoque inválida");
         }
@@ -35,7 +35,7 @@ public class StockService {
         return produtoRepository.save(produto);
     }
 
-    public Produto incrementStock(Long id, Integer quantidade) {
+    public Produto incrementStock(Integer id, Integer quantidade) {
         if (quantidade == null || quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser positiva");
         }
@@ -48,7 +48,7 @@ public class StockService {
         return produtoRepository.save(produto);
     }
 
-    public Produto decrementStock(Long id, Integer quantidade) {
+    public Produto decrementStock(Integer id, Integer quantidade) {
         if (quantidade == null || quantidade <= 0) {
             throw new IllegalArgumentException("Quantidade deve ser positiva");
         }

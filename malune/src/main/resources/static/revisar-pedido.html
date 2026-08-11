@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Revisão</title>
+    <link rel="stylesheet" href="css/revisar-pedido.css">
+    <link rel="stylesheet" href="css/global-fluxo-pagamento.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    <link rel="icon" type="image/png" href="images/icone.png">
+</head>
+<body>
+
+    <header class="header-topo">
+        <div class="header-esq">
+            <a href="index.html" class="logo-link">
+                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+            </a>
+        </div>
+       
+        <div class="header-centro">
+            <h2>Revisão</h2>
+        </div>
+       
+        <div class="header-dir">
+            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+                <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+            </button>
+        </div>
+    </header>
+
+    <div class="decor circle-yellow"></div>
+    <div class="decor circle-blue-top"></div>
+    <div class="decor circle-blue-bottom"></div>
+    <div class="decor circle-green"></div>
+
+    <main class="main-container">
+        <div class="progress-container">
+
+            <div class="progress-step">
+                <div class="progress-circle active">1</div>
+                <span class="progress-label">Endereço</span>
+            </div>
+
+            <div class="progress-line"></div>
+            
+            <div class="progress-step">
+                <div class="progress-circle active">2</div>
+                <span class="progress-label">Pagamento</span>
+            </div>
+
+            <div class="progress-line"></div>
+
+            <div class="progress-step">
+                <div class="progress-circle active">3</div>
+                <span class="progress-label">Revisar</span>
+            </div>
+        </div>
+
+        <section class="content-pagamento">
+            <h3 class="form-title">Revise seu pedido</h3>
+
+            <form id="form-revisao" method="POST">
+
+                <div class="revisao-container">
+                    <div class="revisao-campo">
+                        <label class="revisao-label">Rua</label>
+                        <input type="text" id="revisao-rua" class="revisao-input" readonly>
+                    </div>
+
+                    <div class="revisao-campo">
+                        <label class="revisao-label">Número</label>
+                        <input type="text" id="revisao-numero" class="revisao-input" readonly>
+                    </div>
+
+                    <div class="revisao-campo">
+                        <label class="revisao-label">Forma de pagamento</label>
+                        <div class="revisao-pagamento">
+                            <img id="revisao-pagamento-icon" src="" alt="Forma de pagamento" class="revisao-pagamento-icon" readonly>
+                            <span id="revisao-pagamento-texto"></span>
+                        </div>
+                    </div>
+
+                    <div class="revisao-campo">
+                        <label class="revisao-label">Valor total</label>
+                        <input type="text" id="revisao-total" class="revisao-input revisao-total" readonly>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-prosseguir">Confirmar pedido</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/modal-acessibilidade.js"></script>
+    <script src="js/revisar-pedido.js"></script>
+</body>
+</html>
