@@ -32,20 +32,22 @@
         <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
         <h1>Entre na sua conta de ADM</h1>
 
-        <form action="principal.html" method="GET">
+        <form id="form-login-adm" novalidate>
             <div class="input-group">
-                <label>E-mail</label>
-                <input type="email" placeholder="annasilva@gmail.com" required>
+                <label for="usernameOrEmail">E-mail ou usuário</label>
+                <input id="usernameOrEmail" name="usernameOrEmail" type="text" autocomplete="username" placeholder="Insira seu e-mail ou usuário..." required>
             </div>
 
             <div class="input-group">
-                <label>Senha</label>
-                <input type="password" placeholder="Algum regex ai" required>
+                <label for="senha">Senha</label>
+                <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="Insira sua senha aqui..." required>
             </div>
+
+            <p id="login-error" class="login-error" role="alert" hidden></p>
 
             <div class="actions-login">
                 <span>Esqueceu a senha? <a href="esqueci-senha.html">Clique aqui</a></span>
-                <button type="submit" class="btn-pink">Logar</button>
+                <button id="btn-login-adm" type="submit" class="btn-pink">Entrar</button>
             </div>
         </form>
     </div>

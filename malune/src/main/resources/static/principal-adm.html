@@ -13,52 +13,41 @@
 
 <header class="header-topo">
     <div class="header-esq">
-        <a href="#" class="logo-link">
-            <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
-        </a>
+        <a href="#" class="logo-link"><img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo"></a>
     </div>
-    <div class="header-centro">
-        <h2 id="header-title">Dashboard</h2>
-    </div>
+    <div class="header-centro"><h2 id="header-title">Dashboard</h2></div>
     <div class="header-dir">
-        <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+        <button id="btn-abrir-a11y" class="btn-a11y" type="button" aria-label="Abrir menu de acessibilidade">
             <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
         </button>
     </div>
 </header>
 
 <main class="main-content">
-
     <aside class="sidebar">
         <h2 id="sidebar-title">Dashboard</h2>
         <ul class="menu-list card-box" style="padding: 15px;">
-            <li><button class="active" data-target="dashboard">Dashboard</button></li>
-            <li><button data-target="produtos">Produtos</button></li>
-            <li><button data-target="estoque">Estoque</button></li>
-            <li><button data-target="pedidos">Pedidos</button></li>
-            <li><button class="btn-sair" onclick="window.location.href='login-adm.html'">Sair</button></li>
+            <li><button class="active" data-target="dashboard" type="button">Dashboard</button></li>
+            <li><button data-target="produtos" type="button">Produtos</button></li>
+            <li><button data-target="estoque" type="button">Estoque</button></li>
+            <li><button data-target="pedidos" type="button">Pedidos</button></li>
+            <li><button id="btn-sair" class="btn-sair" type="button">Sair</button></li>
         </ul>
     </aside>
 
     <div class="content-area">
-
+        <p id="admin-feedback" class="admin-feedback" role="status" aria-live="polite"></p>
         <section id="dashboard" class="view-section active">
             <div class="stats-grid">
-                <div class="stat-card"><h3>10</h3><p>Produtos</p></div>
-                <div class="stat-card"><h3>1</h3><p>Pedidos</p></div>
-                <div class="stat-card"><h3>2</h3><p>Usuários</p></div>
-                <div class="stat-card"><h3>R$ 139,80</h3><p>Receita</p></div>
+                <div class="stat-card"><h3 id="total-products">0</h3><p>Produtos</p></div>
+                <div class="stat-card"><h3 id="total-orders">0</h3><p>Pedidos</p></div>
+                <div class="stat-card"><h3 id="total-users">0</h3><p>Usuários</p></div>
+                <div class="stat-card"><h3 id="total-revenue">R$ 0,00</h3><p>Receita</p></div>
             </div>
-
             <div class="table-container">
-                <h2 class="section-title">Pedidos Recentes</h2>
-                <table class="grid-table" style="background: transparent;">
-                    <tbody>
-                    <tr>
-                        <td>#1 — 01/11/2025</td>
-                        <td style="text-align: right;">R$ 00,00 <span class="badge-green">Entregue</span></td>
-                    </tr>
-                    </tbody>
+                <h2 class="section-title">Pedidos recentes</h2>
+                <table class="grid-table">
+                    <tbody id="recent-orders-body"></tbody>
                 </table>
             </div>
         </section>
@@ -67,65 +56,25 @@
             <div class="table-container">
                 <h2 class="section-title">Catálogo</h2>
                 <div class="toolbar">
-                    <input type="text" class="search-input" placeholder="Buscar por nome...">
-                    <button class="btn-green">Adicionar produto</button>
+                    <input id="product-search" type="search" class="search-input" placeholder="Buscar por nome...">
+                    <button id="btn-add-product" class="btn-green" type="button">Adicionar produto</button>
                 </div>
-
                 <table class="grid-table">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Preço</th>
-                        <th>Categoria</th>
-                        <th>Idade</th>
-                        <th>Estoque</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <strong>Urso Fofinho</strong><br>
-                            <small style="color: #888;">Urso de pelúcia super macio</small>
-                        </td>
-                        <td>R$ 79,90</td>
-                        <td>🧸 Pelúcias</td>
-                        <td>3+</td>
-                        <td>15</td>
-                        <td style="text-align: right;">
-                            <button class="btn-small-outline">Editar</button>
-                            <button class="btn-small-red">Excluir</button>
-                        </td>
-                    </tr>
-                    </tbody>
+                    <thead><tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Estoque</th><th>Ações</th></tr></thead>
+                    <tbody id="products-body"></tbody>
                 </table>
             </div>
         </section>
 
         <section id="estoque" class="view-section">
             <div class="table-container">
-                <h2 class="section-title">Catálogo</h2>
+                <h2 class="section-title">Estoque</h2>
                 <div class="toolbar" style="justify-content: flex-start;">
-                    <input type="text" class="search-input" placeholder="Buscar por nome...">
+                    <input id="stock-search" type="search" class="search-input" placeholder="Buscar por nome...">
                 </div>
-
                 <table class="grid-table">
-                    <thead>
-                    <tr>
-                        <th style="width: 50%;">Produto</th>
-                        <th>Estoque</th>
-                        <th>Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>🧸 Urso Fofinho</td>
-                        <td>
-                            <input type="number" class="table-input" value="15" min="0">
-                        </td>
-                        <td><button class="btn-small-pink">Salvar</button></td>
-                    </tr>
-                    </tbody>
+                    <thead><tr><th style="width: 50%;">Produto</th><th>Estoque</th><th>Ações</th></tr></thead>
+                    <tbody id="stock-body"></tbody>
                 </table>
             </div>
         </section>
@@ -134,101 +83,57 @@
             <div class="table-container">
                 <h2 class="section-title">Pedidos</h2>
                 <div class="toolbar" style="justify-content: flex-start;">
-                    <input type="text" class="search-input" placeholder="Buscar pedido...">
+                    <input id="order-search" type="search" class="search-input" placeholder="Buscar pedido...">
                 </div>
-
                 <table class="grid-table">
-                    <thead>
-                    <tr>
-                        <th></th>
-                        <th>Data</th>
-                        <th>Total</th>
-                        <th>Status</th>
-                        <th>Ações</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td style="font-size: 20px;">#1</td>
-                        <td>01/11/2025</td>
-                        <td>R$ 139,80</td>
-                        <td>
-                            <select class="table-select">
-                                <option value="entregue">Entregue</option>
-                                <option value="pendente">Pendente</option>
-                            </select>
-                        </td>
-                        <td><button class="btn-small-pink">Salvar</button></td>
-                    </tr>
-                    </tbody>
+                    <thead><tr><th>Pedido</th><th>Data</th><th>Total</th><th>Status</th><th>Ações</th></tr></thead>
+                    <tbody id="orders-body"></tbody>
                 </table>
             </div>
         </section>
-
     </div>
 </main>
 
-<footer>
-    Malune - Brinquedos com carinho<br>
-    &copy;2026 Malune. Todos os direitos reservados
-</footer>
+<dialog id="product-dialog" aria-labelledby="product-dialog-title">
+    <form id="product-form" class="product-form">
+        <div class="modal-header">
+            <h3 id="product-dialog-title">Adicionar produto</h3>
+            <button id="btn-close-product" type="button" aria-label="Fechar cadastro de produto">X</button>
+        </div>
+        <div class="modal-body">
+            <input id="product-id" type="hidden">
+            <label for="product-name">Nome</label>
+            <input id="product-name" type="text" maxlength="100" required>
+            <label for="product-description">Descrição</label>
+            <textarea id="product-description" maxlength="255" required></textarea>
+            <label for="product-price">Valor unitário</label>
+            <input id="product-price" type="number" min="0" step="0.01" required>
+            <label for="product-category">ID da categoria (opcional)</label>
+            <input id="product-category" type="number" min="1">
+            <label for="product-stock">Estoque</label>
+            <input id="product-stock" type="number" min="0" step="1" required>
+        </div>
+        <div class="modal-footer">
+            <button id="btn-cancel-product" type="button" class="btn-small-outline">Cancelar</button>
+            <button type="submit" class="btn-small-pink">Salvar produto</button>
+        </div>
+    </form>
+</dialog>
 
-<!-- Pop-up de Acessibilidade -->
+<footer>Malune - Brinquedos com carinho<br>&copy;2026 Malune. Todos os direitos reservados</footer>
+
 <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
     <div class="modal-header">
         <h3 id="modal-a11y-title">Acessibilidade</h3>
-        <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+        <button id="btn-fechar-a11y" type="button" aria-label="Fechar menu de acessibilidade">X</button>
     </div>
-
     <div class="modal-body">
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Alto contraste</strong>
-                <span>Cores fortes para melhor leitura</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-contraste">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Texto grande</strong>
-                <span>Aumenta o tamanho da fonte</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-texto">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Fonte para dislexia</strong>
-                <span>Mais fácil de ler</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-dislexia">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Sublinhar links</strong>
-                <span>Destaca todos os links</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-links">
-                <span class="slider"></span>
-            </label>
-        </div>
+        <div class="a11y-item"><div class="a11y-info"><strong>Alto contraste</strong><span>Cores fortes para melhor leitura</span></div><label class="switch"><input type="checkbox" id="toggle-contraste"><span class="slider"></span></label></div>
+        <div class="a11y-item"><div class="a11y-info"><strong>Texto grande</strong><span>Aumenta o tamanho da fonte</span></div><label class="switch"><input type="checkbox" id="toggle-texto"><span class="slider"></span></label></div>
+        <div class="a11y-item"><div class="a11y-info"><strong>Fonte para dislexia</strong><span>Mais fácil de ler</span></div><label class="switch"><input type="checkbox" id="toggle-dislexia"><span class="slider"></span></label></div>
+        <div class="a11y-item"><div class="a11y-info"><strong>Sublinhar links</strong><span>Destaca todos os links</span></div><label class="switch"><input type="checkbox" id="toggle-links"><span class="slider"></span></label></div>
     </div>
-
-    <div class="modal-footer">
-        <button id="btn-restaurar" class="btn-restaurar">Restaurar padrão</button>
-    </div>
+    <div class="modal-footer"><button id="btn-restaurar" type="button" class="btn-restaurar">Restaurar padrão</button></div>
 </dialog>
 
 <script src="js/principal-adm.js"></script>

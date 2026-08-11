@@ -125,6 +125,7 @@ body {
     font-size: 15px;
     outline: none;
 }
+.login-error { margin: -8px 0 12px; color: #c62828; font-size: 14px; }
 .actions-login {
     display: flex;
     flex-direction: column;
@@ -146,6 +147,7 @@ body {
     text-decoration: none;
 }
 .btn-pink:hover { background-color: var(--cor-rosa-hover); }
+.btn-pink:disabled { opacity: 0.65; cursor: wait; }
 
 /* --- Modal / Pop-up de Acessibilidade --- */
 dialog {

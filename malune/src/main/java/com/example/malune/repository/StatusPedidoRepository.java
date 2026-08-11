@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface StatusPedidoRepository extends JpaRepository<StatusPedido, Long> {
 
     Optional<StatusPedido> findByStatus(String status);
+
+    Optional<StatusPedido> findByStatusIgnoreCase(String status);
 }

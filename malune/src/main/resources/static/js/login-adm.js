@@ -1,106 +1,113 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const modalA11y = document.getElementById('modal-a11y');
-    const btnAbrirA11y = document.getElementById('btn-abrir-a11y');
-    const btnFecharA11y = document.getElementById('btn-fechar-a11y');
-    const btnRestaurar = document.getElementById('btn-restaurar');
+    const TOKEN_KEY = 'malune_admin_token';
+    const ADMIN_KEY = 'malune_admin';
+    const form = document.getElementById('form-login-adm');
+    const usernameOrEmail = document.getElementById('usernameOrEmail');
+    const senha = document.getElementById('senha');
+    const button = document.getElementById('btn-login-adm');
+    const error = document.getElementById('login-error');
 
-    const toggleContraste = document.getElementById('toggle-contraste');
-    const toggleTexto = document.getElementById('toggle-texto');
-    const toggleDislexia = document.getElementById('toggle-dislexia');
-    const toggleLinks = document.getElementById('toggle-links');
+    function showError(message) {
+        if (!error) return;
+        error.textContent = message;
+        error.hidden = false;
+    }
 
-    // Abrir modal de acessibilidade
-    if (btnAbrirA11y && modalA11y) {
-        btnAbrirA11y.addEventListener('click', () => {
-            if (typeof modalA11y.showModal === 'function') {
-                modalA11y.showModal();
-            } else {
-                alert("Seu navegador não suporta recursos de diálogo.");
+    function clearError() {
+        if (!error) return;
+        error.textContent = '';
+        error.hidden = true;
+    }
+
+    if (form) {
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            clearError();
+
+            const identifier = usernameOrEmail.value.trim();
+            const password = senha.value;
+            if (!identifier || !password) {
+                showError('Informe o usuário/e-mail e a senha.');
+                return;
+            }
+
+            button.disabled = true;
+            button.textContent = 'Entrando...';
+
+            try {
+                const response = await fetch('/admin/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ usernameOrEmail: identifier, senha: password })
+                });
+                const data = await response.json().catch(() => ({}));
+
+                if (!response.ok || !data.token) {
+                    throw new Error(data.error || 'Usuário ou senha inválidos.');
+                }
+
+                sessionStorage.setItem(TOKEN_KEY, data.token);
+                sessionStorage.setItem(ADMIN_KEY, JSON.stringify({
+                    id: data.id,
+                    nomeUsuario: data.nomeUsuario,
+                    email: data.email
+                }));
+                window.location.assign('principal-adm.html');
+            } catch (requestError) {
+                showError(requestError.message || 'Não foi possível realizar o login.');
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Entrar';
             }
         });
     }
 
-    // Fechar modal pelo botão "X"
-    if (btnFecharA11y && modalA11y) {
-        btnFecharA11y.addEventListener('click', () => {
-            modalA11y.close();
-        });
-    }
+    const modalA11y = document.getElementById('modal-a11y');
+    const btnAbrirA11y = document.getElementById('btn-abrir-a11y');
+    const btnFecharA11y = document.getElementById('btn-fechar-a11y');
+    const btnRestaurar = document.getElementById('btn-restaurar');
+    const toggles = [
+        ['toggle-contraste', 'modo-alto-contraste', 'a11y_contraste'],
+        ['toggle-texto', 'modo-texto-grande', 'a11y_texto'],
+        ['toggle-dislexia', 'modo-dislexia', 'a11y_dislexia'],
+        ['toggle-links', 'modo-sublinhar', 'a11y_links']
+    ];
 
-    // Fechar modal ao clicar fora dele
+    if (btnAbrirA11y && modalA11y) {
+        btnAbrirA11y.addEventListener('click', () => modalA11y.showModal());
+    }
+    if (btnFecharA11y && modalA11y) {
+        btnFecharA11y.addEventListener('click', () => modalA11y.close());
+    }
     if (modalA11y) {
         modalA11y.addEventListener('click', (event) => {
             const rect = modalA11y.getBoundingClientRect();
-            if (
-                event.clientX < rect.left ||
-                event.clientY < rect.top ||
-                event.clientX > rect.right ||
-                event.clientY > rect.bottom
-            ) {
+            if (event.clientX < rect.left || event.clientY < rect.top ||
+                event.clientX > rect.right || event.clientY > rect.bottom) {
                 modalA11y.close();
             }
         });
     }
 
-    // Alto Contraste
-    if (toggleContraste) {
-        toggleContraste.addEventListener('change', () => {
-            document.body.classList.toggle('modo-alto-contraste', toggleContraste.checked);
-            localStorage.setItem('a11y_contraste', toggleContraste.checked);
+    toggles.forEach(([id, className, storageKey]) => {
+        const toggle = document.getElementById(id);
+        if (!toggle) return;
+        toggle.checked = localStorage.getItem(storageKey) === 'true';
+        document.body.classList.toggle(className, toggle.checked);
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle(className, toggle.checked);
+            localStorage.setItem(storageKey, String(toggle.checked));
         });
-    }
+    });
 
-    // Texto Grande
-    if (toggleTexto) {
-        toggleTexto.addEventListener('change', () => {
-            document.body.classList.toggle('modo-texto-grande', toggleTexto.checked);
-            localStorage.setItem('a11y_texto', toggleTexto.checked);
-        });
-    }
-
-    // Dislexia
-    if (toggleDislexia) {
-        toggleDislexia.addEventListener('change', () => {
-            document.body.classList.toggle('modo-dislexia', toggleDislexia.checked);
-            localStorage.setItem('a11y_dislexia', toggleDislexia.checked);
-        });
-    }
-
-    // Sublinhar Links
-    if (toggleLinks) {
-        toggleLinks.addEventListener('change', () => {
-            document.body.classList.toggle('modo-sublinhar', toggleLinks.checked);
-            localStorage.setItem('a11y_links', toggleLinks.checked);
-        });
-    }
-
-    // Restaurar Padrão
     if (btnRestaurar) {
         btnRestaurar.addEventListener('click', () => {
-            document.body.classList.remove('modo-alto-contraste', 'modo-texto-grande', 'modo-dislexia', 'modo-sublinhar');
-            if (toggleContraste) toggleContraste.checked = false;
-            if (toggleTexto) toggleTexto.checked = false;
-            if (toggleDislexia) toggleDislexia.checked = false;
-            if (toggleLinks) toggleLinks.checked = false;
-            localStorage.clear();
+            toggles.forEach(([id, className, storageKey]) => {
+                const toggle = document.getElementById(id);
+                if (toggle) toggle.checked = false;
+                document.body.classList.remove(className);
+                localStorage.removeItem(storageKey);
+            });
         });
-    }
-
-    // Carregar preferências salvas no localStorage ao iniciar a página
-    if (localStorage.getItem('a11y_contraste') === 'true' && toggleContraste) {
-        toggleContraste.checked = true;
-        document.body.classList.add('modo-alto-contraste');
-    }
-    if (localStorage.getItem('a11y_texto') === 'true' && toggleTexto) {
-        toggleTexto.checked = true;
-        document.body.classList.add('modo-texto-grande');
-    }
-    if (localStorage.getItem('a11y_dislexia') === 'true' && toggleDislexia) {
-        toggleDislexia.checked = true;
-        document.body.classList.add('modo-dislexia');
-    }
-    if (localStorage.getItem('a11y_links') === 'true' && toggleLinks) {
-        toggleLinks.checked = true;
-        document.body.classList.add('modo-sublinhar');
     }
 });
