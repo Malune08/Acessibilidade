@@ -2,16 +2,16 @@ package com.example.malune.dto;
 
 
 import com.example.malune.util.RegexPatterns;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 
 @Getter
 @Setter
 public class LoginDTO {
 
-    @NotBlank(message = "O email é obrigatório.")
-    @Email(message = "Digite um email válido.")
-    private String email;
+    @NotBlank(message = "O e-mail ou usuário é obrigatório.")
+    private String identificador;
 
     @NotBlank(message = "A senha é obrigatória.")
     @Pattern(

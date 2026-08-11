@@ -41,7 +41,7 @@ public class AdminAuthService {
             throw new RuntimeException("Invalid credentials");
         }
 
-        String token = generateSecureToken(adm.getId());
+        String token = createToken(adm.getId());
 
         Map<String, Object> response = new HashMap<>();
         response.put("id", adm.getId());
@@ -53,7 +53,7 @@ public class AdminAuthService {
         return response;
     }
 
-    private String generateSecureToken(long admId) {
+    public String createToken(long admId) {
         String token = UUID.randomUUID().toString() + "-" + System.nanoTime();
         long expirationTime = System.currentTimeMillis() + TOKEN_EXPIRATION_TIME;
         
