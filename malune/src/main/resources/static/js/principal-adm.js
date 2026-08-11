@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const token = sessionStorage.getItem(TOKEN_KEY);
 
     if (!token) {
-        window.location.replace('login-adm.html');
+        window.location.replace('login.html');
         return;
     }
 
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.status === 401) {
             sessionStorage.removeItem(TOKEN_KEY);
             sessionStorage.removeItem(ADMIN_KEY);
-            window.location.replace('login-adm.html');
+            window.location.replace('login.html');
             throw new Error('Sessão expirada. Faça login novamente.');
         }
         if (!response.ok) {
@@ -317,7 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } finally {
             sessionStorage.removeItem(TOKEN_KEY);
             sessionStorage.removeItem(ADMIN_KEY);
-            window.location.replace('login-adm.html');
+            window.location.replace('login.html');
         }
     });
 

@@ -173,6 +173,12 @@ input:focus { border-color: var(--cor-rosa); }
     text-decoration: underline;
 }
 
+.login-error {
+    color: #c62828;
+    font-size: 0.85rem;
+    margin: -8px 0 15px;
+}
+
 /* Botão Continuar */
 .btn-continuar {
     width: 100%;
