@@ -14,6 +14,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 
     List<Produto> findByCategoria(Categoria categoria);
     List<Produto> findByNomeContainingIgnoreCase(String nome);
+    List<Produto> findByQtdEstoqueLessThanEqual(Integer quantidade);
     List<Produto> findByQtdEstoqueGreaterThan(Integer quantidade);
     List<Produto> findByValorUnitarioLessThanEqual(BigDecimal max);
     List<Produto> findByCategoriaAndValorUnitarioLessThanEqual(Categoria categoria, BigDecimal max);

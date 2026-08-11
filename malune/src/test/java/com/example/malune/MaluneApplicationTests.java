@@ -3,7 +3,7 @@ package com.example.malune;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = MaluneApplication.class)
 class MaluneApplicationTests {
 
     @Test

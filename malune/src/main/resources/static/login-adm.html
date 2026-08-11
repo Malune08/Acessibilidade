@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Login Admin</title>
+    <link rel="stylesheet" href="css/login-adm.css">
+</head>
+<body>
+<div class="decor circle-green"></div>
+<div class="decor circle-yellow" style="top: -100px; right: -100px; bottom: auto;"></div>
+<div class="decor circle-blue-bottom"></div>
+
+<header class="header-topo">
+    <div class="header-esq">
+        <a href="#" class="logo-link">
+            <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+        </a>
+    </div>
+    <div class="header-centro">
+        <h2>Admin</h2>
+    </div>
+    <div class="header-dir">
+        <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+            <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+        </button>
+    </div>
+</header>
+
+<main class="main-content login-wrapper">
+    <div class="card-box login-form">
+        <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
+        <h1>Entre na sua conta de ADM</h1>
+
+        <form id="form-login-adm" novalidate>
+            <div class="input-group">
+                <label for="usernameOrEmail">E-mail ou usuário</label>
+                <input id="usernameOrEmail" name="usernameOrEmail" type="text" autocomplete="username" placeholder="Insira seu e-mail ou usuário..." required>
+            </div>
+
+            <div class="input-group">
+                <label for="senha">Senha</label>
+                <input id="senha" name="senha" type="password" autocomplete="current-password" placeholder="Insira sua senha aqui..." required>
+            </div>
+
+            <p id="login-error" class="login-error" role="alert" hidden></p>
+
+            <div class="actions-login">
+                <span>Esqueceu a senha? <a href="esqueci-senha.html">Clique aqui</a></span>
+                <button id="btn-login-adm" type="submit" class="btn-pink">Entrar</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- Pop-up de Acessibilidade -->
+<dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
+    <div class="modal-header">
+        <h3 id="modal-a11y-title">Acessibilidade</h3>
+        <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+    </div>
+
+    <div class="modal-body">
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Alto contraste</strong>
+                <span>Cores fortes para melhor leitura</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="toggle-contraste">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Texto grande</strong>
+                <span>Aumenta o tamanho da fonte</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="toggle-texto">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Fonte para dislexia</strong>
+                <span>Mais fácil de ler</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="toggle-dislexia">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Sublinhar links</strong>
+                <span>Destaca todos os links</span>
+            </div>
+            <label class="switch">
+                <input type="checkbox" id="toggle-links">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="btn-restaurar" class="btn-restaurar">Restaurar padrão</button>
+    </div>
+</dialog>
+
+<script src="js/login-adm.js"></script>
+</body>
+</html>
