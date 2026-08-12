@@ -179,64 +179,6 @@ input:focus { border-color: var(--cor-rosa); }
 }
 .btn-continuar:hover { background-color: var(--cor-rosa-hover); }
 
-/* --- Modal / Pop-up de Acessibilidade --- */
-dialog {
-    margin: auto;
-    border: none;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-    padding: 0;
-}
-dialog::backdrop { background-color: rgba(0, 0, 0, 0.5); }
-
-.modal-header {
-    background-color: var(--cor-azul-claro);
-    color: #1a1a1a; 
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.modal-header button {
-    background: transparent; border: none; color: #1a1a1a;
-    font-size: 1.2rem; font-weight: bold; cursor: pointer;
-}
-
-.modal-body { padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-.a11y-item {
-    display: flex; justify-content: space-between; align-items: center;
-    background-color: #f5f6f8; padding: 12px; border-radius: 8px;
-}
-.a11y-info { display: flex; flex-direction: column; }
-.a11y-info strong { font-size: 0.95rem; }
-.a11y-info span { font-size: 0.75rem; color: #777; }
-
-.modal-footer { padding: 15px 20px; background-color: #fff; text-align: center; }
-
-.btn-restaurar {
-    background-color: var(--cor-azul-claro); 
-    color: #1a1a1a;
-    border: none; padding: 10px 20px; border-radius: 8px;
-    cursor: pointer; font-size: 1rem; display: inline-flex; align-items: center; gap: 8px;
-    font-weight: bold;
-}
-
-/* Toggle Switch */
-.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider {
-    position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc; transition: .4s; border-radius: 24px;
-}
-.slider:before {
-    position: absolute; content: ""; height: 18px; width: 18px;
-    left: 3px; bottom: 3px; background-color: white;
-    transition: .4s; border-radius: 50%;
-}
-input:checked + .slider { background-color: var(--cor-azul-claro); }
-input:checked + .slider:before { transform: translateX(20px); }
 
 /* ========================================= */
 /* --- CLASSES DE ACESSIBILIDADE VIA JS ---  */
