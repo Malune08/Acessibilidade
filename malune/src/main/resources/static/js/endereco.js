@@ -219,6 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             localStorage.setItem('endereco_dados', JSON.stringify(endereco));
+            localStorage.setItem('endereco_pendente', 'false');
 
             window.location.href = 'pagamento.html';
         } catch (erro) {
