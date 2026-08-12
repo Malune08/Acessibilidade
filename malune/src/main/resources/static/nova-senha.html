@@ -9,143 +9,143 @@
 </head>
 <body>
 
-    <header class="header-topo">
-        <div class="header-esq">
-            <a href="index.html" class="logo-link">
-                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+<header class="header-topo">
+    <div class="header-esq">
+        <a href="index.html" class="logo-link">
+            <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+        </a>
+    </div>
+
+    <div class="header-centro">
+        <h2>Nova senha</h2>
+    </div>
+
+    <div class="header-dir">
+        <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+            <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+        </button>
+    </div>
+</header>
+
+<div class="decor circle-yellow"></div>
+<div class="decor circle-blue-top"></div>
+<div class="decor circle-blue-bottom"></div>
+<div class="decor circle-green"></div>
+
+<main class="main-container">
+    <section class="card-cadastro">
+        <div class="card-header">
+            <a href="index.html" class="logo-link-card">
+                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
             </a>
-        </div>
-        
-        <div class="header-centro">
-            <h2>Nova senha</h2>
-        </div>
-        
-        <div class="header-dir">
-            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
-                <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
-            </button>
-        </div>
-    </header>
 
-    <div class="decor circle-yellow"></div>
-    <div class="decor circle-blue-top"></div>
-    <div class="decor circle-blue-bottom"></div>
-    <div class="decor circle-green"></div>
+            <p>Atualize a senha</p>
+            <span class="subtitle">Coloque a sua nova senha</span>
+        </div>
 
-    <main class="main-container">
-        <section class="card-cadastro">
-            <div class="card-header">
-                <a href="index.html" class="logo-link-card">
-                    <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
-                </a>
+        <form id="formNovaSenha" action="#" method="POST">
+            <div class="input-group">
+                <label for="novaSenha">Senha nova</label>
 
-                <p>Atualize a senha</p>
-                <span class="subtitle">Coloque a sua nova senha</span>
+                <input
+                        type="password"
+                        id="novaSenha"
+                        name="novaSenha"
+                        placeholder="regex"
+                        required
+                >
             </div>
 
-            <form id="form-nova-senha" action="#" method="POST">
-                <div class="input-group">
-                    <label for="senha-nova">Senha nova</label>
+            <div class="input-group">
+                <label for="confirmarSenha">
+                    Confirmar a senha
+                </label>
 
-                    <input
+                <input
                         type="password"
-                        id="senha-nova"
-                        name="senha-nova"
+                        id="confirmarSenha"
+                        name="confirmarSenha"
                         placeholder="regex"
                         required
-                    >
-                </div>
+                >
+            </div>
 
-                <div class="input-group">
-                    <label for="confirmar-senha">
-                        Confirmar a senha
-                    </label>
+            <button type="submit" class="btn-continuar">
+                Atualizar a senha
+            </button>
+        </form>
+    </section>
+</main>
 
-                    <input
-                        type="password"
-                        id="confirmar-senha"
-                        name="confirmar-senha"
-                        placeholder="regex"
-                        required
-                    >
-                </div>
+<dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
+    <div class="modal-header">
+        <h3 id="modal-a11y-title">Acessibilidade</h3>
 
-                <button type="submit" class="btn-continuar">
-                    Atualizar a senha
-                </button>
-            </form>
-        </section>
-    </main>
-
-    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
-        <div class="modal-header">
-            <h3 id="modal-a11y-title">Acessibilidade</h3>
-
-            <button
+        <button
                 id="btn-fechar-a11y"
                 aria-label="Fechar menu de acessibilidade"
-            >
-                X
-            </button>
+        >
+            X
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Alto contraste</strong>
+                <span>Cores fortes para melhor leitura</span>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="toggle-contraste">
+                <span class="slider"></span>
+            </label>
         </div>
-        
-        <div class="modal-body">
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Alto contraste</strong>
-                    <span>Cores fortes para melhor leitura</span>
-                </div>
 
-                <label class="switch">
-                    <input type="checkbox" id="toggle-contraste">
-                    <span class="slider"></span>
-                </label>
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Texto grande</strong>
+                <span>Aumenta o tamanho da fonte</span>
             </div>
 
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Texto grande</strong>
-                    <span>Aumenta o tamanho da fonte</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-texto">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Fonte para dislexia</strong>
-                    <span>Mais fácil de ler</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-dislexia">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Sublinhar links</strong>
-                    <span>Destaca todos os links</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-links">
-                    <span class="slider"></span>
-                </label>
-            </div>
+            <label class="switch">
+                <input type="checkbox" id="toggle-texto">
+                <span class="slider"></span>
+            </label>
         </div>
-        
-        <div class="modal-footer">
-            <button id="btn-restaurar" class="btn-restaurar">
-                Restaurar padrão
-            </button>
-        </div>
-    </dialog>
 
-    <script src="js/nova-senha.js"></script>
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Fonte para dislexia</strong>
+                <span>Mais fácil de ler</span>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="toggle-dislexia">
+                <span class="slider"></span>
+            </label>
+        </div>
+
+        <div class="a11y-item">
+            <div class="a11y-info">
+                <strong>Sublinhar links</strong>
+                <span>Destaca todos os links</span>
+            </div>
+
+            <label class="switch">
+                <input type="checkbox" id="toggle-links">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="btn-restaurar" class="btn-restaurar">
+            Restaurar padrão
+        </button>
+    </div>
+</dialog>
+
+<script src="js/nova-senha.js"></script>
 </body>
 </html>
