@@ -15,18 +15,26 @@ public class LoginService {
 
     private final UsuarioRepository usuarioRepository;
     private final AdmRepository admRepository;
+    private final AdminAuthService adminAuthService;
 
     public LoginService(
             UsuarioRepository usuarioRepository,
-            AdmRepository admRepository
+            AdmRepository admRepository,
+            AdminAuthService adminAuthService
     ) {
         this.usuarioRepository = usuarioRepository;
         this.admRepository = admRepository;
+        this.adminAuthService = adminAuthService;
     }
 
     public LoginResponseDTO identificarLogin(LoginDTO loginDTO) {
 
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(loginDTO.getEmail());
+        String identificador = loginDTO.getIdentificador();
+
+        Optional<Usuario> usuario = usuarioRepository.findByEmailIgnoreCase(identificador);
+        if (usuario.isEmpty()) {
+            usuario = usuarioRepository.findByNomeUsuarioIgnoreCase(identificador);
+        }
 
         if (usuario.isPresent()
                 && usuario.get().getSenha().equals(loginDTO.getSenha())) {
@@ -37,14 +45,20 @@ public class LoginService {
             );
         }
 
-        Optional<Administrador> administrador = admRepository.findByEmail(loginDTO.getEmail());
+        Optional<Administrador> administrador = admRepository.findByEmailIgnoreCase(identificador);
+        if (administrador.isEmpty()) {
+            administrador = admRepository.findByNomeUsuarioIgnoreCase(identificador);
+        }
 
         if (administrador.isPresent()
                 && administrador.get().getSenha().equals(loginDTO.getSenha())) {
 
+            String token = adminAuthService.createToken(administrador.get().getId());
+
             return new LoginResponseDTO(
                     "ADMINISTRADOR",
-                    administrador.get().getId()
+                    administrador.get().getId(),
+                    token
             );
         }
 

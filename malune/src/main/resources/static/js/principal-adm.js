@@ -1,11 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const TOKEN_KEY = 'malune_admin_token';
-    const ADMIN_KEY = 'malune_admin';
-    const token = sessionStorage.getItem(TOKEN_KEY);
-
-    if (!token) {
-        window.location.replace('login.html');
+    // Proteção da rota: exige tipo ADMINISTRADOR e o token emitido no login
+    const tipoUsuario = localStorage.getItem('tipo_usuario');
+    const adminToken = sessionStorage.getItem('malune_admin_token');
+    if (tipoUsuario !== 'ADMINISTRADOR' || !adminToken) {
+        encerrarSessaoAdmin();
         return;
+    }
+
+    function encerrarSessaoAdmin() {
+        sessionStorage.removeItem('malune_admin_token');
+        sessionStorage.removeItem('malune_admin');
+        localStorage.removeItem('tipo_usuario');
+        localStorage.removeItem('id_usuario');
+        window.location.replace('login.html');
     }
 
     const state = { products: [], stock: [], orders: [], statuses: [] };
@@ -44,21 +51,23 @@ document.addEventListener('DOMContentLoaded', () => {
         return parts.length === 3 ? `${parts[2]}/${parts[1]}/${parts[0]}` : value;
     }
 
+    // Toda chamada ao painel envia o token de admin no header Authorization
     async function apiFetch(path, options = {}) {
         const headers = new Headers(options.headers || {});
-        headers.set('Authorization', `Bearer ${sessionStorage.getItem(TOKEN_KEY) || ''}`);
         if (options.body && !headers.has('Content-Type')) {
             headers.set('Content-Type', 'application/json');
         }
+        headers.set('Authorization', `Bearer ${adminToken}`);
 
         const response = await fetch(path, { ...options, headers });
-        const data = await response.json().catch(() => null);
+
         if (response.status === 401) {
-            sessionStorage.removeItem(TOKEN_KEY);
-            sessionStorage.removeItem(ADMIN_KEY);
-            window.location.replace('login.html');
+            encerrarSessaoAdmin();
             throw new Error('Sessão expirada. Faça login novamente.');
         }
+
+        const data = await response.json().catch(() => null);
+
         if (!response.ok) {
             throw new Error(data?.error || 'Não foi possível concluir a operação.');
         }
@@ -301,26 +310,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    byId('product-search').addEventListener('input', renderProducts);
-    byId('stock-search').addEventListener('input', renderStock);
-    byId('order-search').addEventListener('input', renderOrders);
-    byId('btn-add-product').addEventListener('click', () => openProductDialog());
-    byId('product-form').addEventListener('submit', saveProduct);
-    byId('btn-close-product').addEventListener('click', closeProductDialog);
-    byId('btn-cancel-product').addEventListener('click', closeProductDialog);
+    byId('product-search')?.addEventListener('input', renderProducts);
+    byId('stock-search')?.addEventListener('input', renderStock);
+    byId('order-search')?.addEventListener('input', renderOrders);
+    byId('btn-add-product')?.addEventListener('click', () => openProductDialog());
+    byId('product-form')?.addEventListener('submit', saveProduct);
+    byId('btn-close-product')?.addEventListener('click', closeProductDialog);
+    byId('btn-cancel-product')?.addEventListener('click', closeProductDialog);
 
-    byId('btn-sair').addEventListener('click', async () => {
-        try {
-            await apiFetch('/admin/api/auth/logout', { method: 'POST' });
-        } catch (error) {
-            console.warn('Não foi possível registrar o logout:', error.message);
-        } finally {
-            sessionStorage.removeItem(TOKEN_KEY);
-            sessionStorage.removeItem(ADMIN_KEY);
-            window.location.replace('login.html');
-        }
+    byId('btn-sair')?.addEventListener('click', () => {
+        localStorage.removeItem('id_usuario');
+        localStorage.removeItem('tipo_usuario');
+        window.location.replace('login.html');
     });
 
+    // Acessibilidade
     const modalA11y = byId('modal-a11y');
     const btnAbrirA11y = byId('btn-abrir-a11y');
     const btnFecharA11y = byId('btn-fechar-a11y');
@@ -335,20 +339,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnFecharA11y) btnFecharA11y.addEventListener('click', () => modalA11y.close());
     toggles.forEach(([id, className, storageKey]) => {
         const toggle = byId(id);
-        toggle.checked = localStorage.getItem(storageKey) === 'true';
-        document.body.classList.toggle(className, toggle.checked);
-        toggle.addEventListener('change', () => {
+        if (toggle) {
+            toggle.checked = localStorage.getItem(storageKey) === 'true';
             document.body.classList.toggle(className, toggle.checked);
-            localStorage.setItem(storageKey, String(toggle.checked));
-        });
+            toggle.addEventListener('change', () => {
+                document.body.classList.toggle(className, toggle.checked);
+                localStorage.setItem(storageKey, String(toggle.checked));
+            });
+        }
     });
-    btnRestaurar.addEventListener('click', () => {
-        toggles.forEach(([id, className, storageKey]) => {
-            byId(id).checked = false;
-            document.body.classList.remove(className);
-            localStorage.removeItem(storageKey);
+    if (btnRestaurar) {
+        btnRestaurar.addEventListener('click', () => {
+            toggles.forEach(([id, className, storageKey]) => {
+                const toggle = byId(id);
+                if (toggle) toggle.checked = false;
+                document.body.classList.remove(className);
+                localStorage.removeItem(storageKey);
+            });
         });
-    });
+    }
 
     loadSection('dashboard');
 });
