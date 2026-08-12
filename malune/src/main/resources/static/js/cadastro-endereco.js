@@ -162,8 +162,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("Cadastro realizado com sucesso!");
                 window.location.href = "login.html";
             } else {
-                const erro = await resposta.text();
-                alert(erro || "Verifique os dados informados.");
+                const texto = await resposta.text();
+                let mensagem = texto;
+
+                try {
+                    const corpo = JSON.parse(texto);
+                    mensagem = corpo.error || corpo.message || texto;
+                } catch (_) {
+                    // Mantém a resposta textual quando ela não for JSON.
+                }
+
+                alert(mensagem || "Verifique os dados informados.");
             }
         } catch (e) {
             console.error(e);

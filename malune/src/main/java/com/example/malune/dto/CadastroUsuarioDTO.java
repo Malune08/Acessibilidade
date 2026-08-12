@@ -19,6 +19,15 @@ public class CadastroUsuarioDTO {
     @Past(message = "A data de nascimento deve ser uma data no passado.")
     private LocalDate dataNascimento;
 
+    @AssertTrue(message = "O usuário deve possuir pelo menos 16 anos.")
+    public boolean isIdadeMinimaValida() {
+        if (dataNascimento == null) {
+            return true;
+        }
+
+        return !dataNascimento.isAfter(LocalDate.now().minusYears(16));
+    }
+
     @NotBlank(message = "O CPF é obrigatório.")
     @Pattern(
             regexp = RegexPatterns.CPF,
