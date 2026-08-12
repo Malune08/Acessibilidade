@@ -1,77 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-
-    // ==========================================
-    // MODAL DE ACESSIBILIDADE
-    // ==========================================
-
-    const modalA11y = document.getElementById('modal-a11y');
-    const btnAbrirA11y = document.getElementById('btn-abrir-a11y');
-    const btnFecharA11y = document.getElementById('btn-fechar-a11y');
-    const btnRestaurar = document.getElementById('btn-restaurar');
-
-    const toggleContraste = document.getElementById('toggle-contraste');
-    const toggleTexto = document.getElementById('toggle-texto');
-    const toggleDislexia = document.getElementById('toggle-dislexia');
-    const toggleLinks = document.getElementById('toggle-links');
-
-    if (btnAbrirA11y) {
-        btnAbrirA11y.addEventListener('click', () => modalA11y.showModal());
+    function mostrarPopup(mensagem, sucesso = false) {
+        const popup = document.createElement('div');
+        popup.className = `popup-cadastro ${sucesso ? 'sucesso' : 'erro'}`;
+        popup.textContent = mensagem;
+        document.body.appendChild(popup);
+        setTimeout(() => popup.remove(), 3500);
     }
-
-    if (btnFecharA11y) {
-        btnFecharA11y.addEventListener('click', () => modalA11y.close());
-    }
-
-    if (modalA11y) {
-        modalA11y.addEventListener('click', (event) => {
-            const rect = modalA11y.getBoundingClientRect();
-
-            if (
-                event.clientX < rect.left ||
-                event.clientX > rect.right ||
-                event.clientY < rect.top ||
-                event.clientY > rect.bottom
-            ) {
-                modalA11y.close();
-            }
-        });
-    }
-
-    function aplicarAcessibilidade(toggle, classe, storage) {
-
-        if (!toggle) return;
-
-        if (localStorage.getItem(storage) === 'true') {
-            toggle.checked = true;
-            document.body.classList.add(classe);
-        }
-
-        toggle.addEventListener('change', () => {
-            document.body.classList.toggle(classe, toggle.checked);
-            localStorage.setItem(storage, toggle.checked);
-        });
-    }
-
-    aplicarAcessibilidade(toggleContraste, 'modo-alto-contraste', 'a11y_contraste');
-    aplicarAcessibilidade(toggleTexto, 'modo-texto-grande', 'a11y_texto');
-    aplicarAcessibilidade(toggleDislexia, 'modo-dislexia', 'a11y_dislexia');
-    aplicarAcessibilidade(toggleLinks, 'modo-sublinhar', 'a11y_links');
-
-    btnRestaurar?.addEventListener('click', () => {
-        document.body.classList.remove(
-            'modo-alto-contraste',
-            'modo-texto-grande',
-            'modo-dislexia',
-            'modo-sublinhar'
-        );
-
-        toggleContraste.checked = false;
-        toggleTexto.checked = false;
-        toggleDislexia.checked = false;
-        toggleLinks.checked = false;
-
-        localStorage.clear();
-    });
 
     // ==========================================
     // CADASTRO (ETAPA 2 - ENDEREÇO)
@@ -139,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuario = JSON.parse(sessionStorage.getItem("usuarioCadastro"));
 
         if (!usuario) {
-            alert("Os dados do usuário não foram encontrados.");
+            mostrarPopup("Os dados do usuário não foram encontrados.");
             window.location.href = "cadastro.html";
             return null;
         }
@@ -159,9 +93,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (resposta.ok) {
                 sessionStorage.removeItem("usuarioCadastro");
-                alert("Cadastro realizado com sucesso!");
+                mostrarPopup("Cadastro realizado com sucesso!", true);
                 window.location.href = "login.html";
             } else {
+<<<<<<< HEAD
                 const texto = await resposta.text();
                 let mensagem = texto;
 
@@ -173,10 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 alert(mensagem || "Verifique os dados informados.");
+=======
+                const erro = await resposta.text();
+                mostrarPopup(erro || "Verifique os dados informados.");
+>>>>>>> caa4ca1bd9ddf01886cb82701d0448e3c74910c7
             }
         } catch (e) {
             console.error(e);
-            alert("Não foi possível conectar ao servidor. Tente novamente.");
+            mostrarPopup("Não foi possível conectar ao servidor. Tente novamente.");
         }
     }
 

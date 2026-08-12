@@ -1,239 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const modalA11y =
-        document.getElementById('modal-a11y');
+    function configurarAlternarSenha(idCampo, idBotao, texto) {
+        const campo = document.getElementById(idCampo);
+        const botao = document.getElementById(idBotao);
 
-    const btnAbrirA11y =
-        document.getElementById('btn-abrir-a11y');
+        if (!campo || !botao) {
+            return;
+        }
 
-    const btnFecharA11y =
-        document.getElementById('btn-fechar-a11y');
+        botao.addEventListener('click', () => {
+            const senhaVisivel = campo.type === 'text';
+            campo.type = senhaVisivel ? 'password' : 'text';
+            botao.setAttribute('aria-label', senhaVisivel ? `Mostrar ${texto}` : `Ocultar ${texto}`);
+            botao.setAttribute('aria-pressed', String(!senhaVisivel));
+        });
+    }
 
-    const btnRestaurar =
-        document.getElementById('btn-restaurar');
+    configurarAlternarSenha('novaSenha', 'mostrar-nova-senha', 'nova senha');
+    configurarAlternarSenha('confirmarSenha', 'mostrar-confirmar-senha', 'confirmação de senha');
 
-    const toggleContraste =
-        document.getElementById('toggle-contraste');
+    // lógica do baack
+    document
+        .getElementById('formNovaSenha')
+        .addEventListener('submit', async (event) => {
 
-    const toggleTexto =
-        document.getElementById('toggle-texto');
+            event.preventDefault();
 
-    const toggleDislexia =
-        document.getElementById('toggle-dislexia');
-
-    const toggleLinks =
-        document.getElementById('toggle-links');
-
-    // Abrir modal de acessibilidade
-    if (btnAbrirA11y && modalA11y) {
-        btnAbrirA11y.addEventListener('click', () => {
-            if (
-                typeof modalA11y.showModal ===
-                'function'
-            ) {
-                modalA11y.showModal();
-            } else {
-                alert(
-                    'Seu navegador não suporta recursos de diálogo.'
+            const email =
+                sessionStorage.getItem(
+                    'email_recuperacao'
                 );
-            }
-        });
-    }
 
-    // Fechar modal pelo botão X
-    if (btnFecharA11y && modalA11y) {
-        btnFecharA11y.addEventListener('click', () => {
-            modalA11y.close();
-        });
-    }
+            const token =
+                sessionStorage.getItem(
+                    'token_recuperacao'
+                );
 
-    // Fechar modal ao clicar fora
-    if (modalA11y) {
-        modalA11y.addEventListener(
-            'click',
-            (event) => {
-                const rect =
-                    modalA11y.getBoundingClientRect();
+            const novaSenha =
+                document.getElementById('novaSenha').value;
 
-                if (
-                    event.clientX < rect.left ||
-                    event.clientY < rect.top ||
-                    event.clientX > rect.right ||
-                    event.clientY > rect.bottom
-                ) {
-                    modalA11y.close();
+            const confirmarSenha =
+                document.getElementById('confirmarSenha').value;
+
+            const response = await fetch(
+                '/recuperacao-senha/alterar',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        token: token,
+                        novaSenha: novaSenha,
+                        confirmarSenha: confirmarSenha
+                    })
                 }
-            }
-        );
-    }
-
-    // Alto contraste
-    if (toggleContraste) {
-        toggleContraste.addEventListener(
-            'change',
-            () => {
-                document.body.classList.toggle(
-                    'modo-alto-contraste',
-                    toggleContraste.checked
-                );
-
-                localStorage.setItem(
-                    'a11y_contraste',
-                    toggleContraste.checked
-                );
-            }
-        );
-    }
-
-    // Texto grande
-    if (toggleTexto) {
-        toggleTexto.addEventListener(
-            'change',
-            () => {
-                document.body.classList.toggle(
-                    'modo-texto-grande',
-                    toggleTexto.checked
-                );
-
-                localStorage.setItem(
-                    'a11y_texto',
-                    toggleTexto.checked
-                );
-            }
-        );
-    }
-
-    // Fonte para dislexia
-    if (toggleDislexia) {
-        toggleDislexia.addEventListener(
-            'change',
-            () => {
-                document.body.classList.toggle(
-                    'modo-dislexia',
-                    toggleDislexia.checked
-                );
-
-                localStorage.setItem(
-                    'a11y_dislexia',
-                    toggleDislexia.checked
-                );
-            }
-        );
-    }
-
-    // Sublinhar links
-    if (toggleLinks) {
-        toggleLinks.addEventListener(
-            'change',
-            () => {
-                document.body.classList.toggle(
-                    'modo-sublinhar',
-                    toggleLinks.checked
-                );
-
-                localStorage.setItem(
-                    'a11y_links',
-                    toggleLinks.checked
-                );
-            }
-        );
-    }
-
-    // Restaurar padrão
-    if (btnRestaurar) {
-        btnRestaurar.addEventListener('click', () => {
-            document.body.classList.remove(
-                'modo-alto-contraste',
-                'modo-texto-grande',
-                'modo-dislexia',
-                'modo-sublinhar'
             );
 
-            if (toggleContraste) {
-                toggleContraste.checked = false;
+            const mensagem = await response.text();
+
+            if (!response.ok) {
+                alert(mensagem);
+                return;
             }
 
-            if (toggleTexto) {
-                toggleTexto.checked = false;
-            }
-
-            if (toggleDislexia) {
-                toggleDislexia.checked = false;
-            }
-
-            if (toggleLinks) {
-                toggleLinks.checked = false;
-            }
-
-            // Apaga somente as preferências
-            // de acessibilidade.
-            localStorage.removeItem(
-                'a11y_contraste'
+            sessionStorage.removeItem(
+                'email_recuperacao'
             );
 
-            localStorage.removeItem(
-                'a11y_texto'
+            sessionStorage.removeItem(
+                'token_recuperacao'
             );
 
-            localStorage.removeItem(
-                'a11y_dislexia'
-            );
+            alert('Senha alterada com sucesso.');
 
-            localStorage.removeItem(
-                'a11y_links'
-            );
+            window.location.href = '/login.html';
         });
-    }
-
-    // Carregar preferências salvas
-    if (
-        localStorage.getItem(
-            'a11y_contraste'
-        ) === 'true' &&
-        toggleContraste
-    ) {
-        toggleContraste.checked = true;
-
-        document.body.classList.add(
-            'modo-alto-contraste'
-        );
-    }
-
-    if (
-        localStorage.getItem(
-            'a11y_texto'
-        ) === 'true' &&
-        toggleTexto
-    ) {
-        toggleTexto.checked = true;
-
-        document.body.classList.add(
-            'modo-texto-grande'
-        );
-    }
-
-    if (
-        localStorage.getItem(
-            'a11y_dislexia'
-        ) === 'true' &&
-        toggleDislexia
-    ) {
-        toggleDislexia.checked = true;
-
-        document.body.classList.add(
-            'modo-dislexia'
-        );
-    }
-
-    if (
-        localStorage.getItem(
-            'a11y_links'
-        ) === 'true' &&
-        toggleLinks
-    ) {
-        toggleLinks.checked = true;
-
-        document.body.classList.add(
-            'modo-sublinhar'
-        );
-    }
 });

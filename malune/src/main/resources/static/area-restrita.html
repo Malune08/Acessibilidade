@@ -3,298 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malune - Admin Dashboard</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #fffdf0;
-            color: #333;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* --- Header --- */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 3%;
-            background-color: #ffffff;
-            border-bottom: 3px solid #89bdf2;
-            z-index: 10;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: #7b52ab;
-        }
-
-        .logo span {
-            color: #ff65a3;
-        }
-
-        .header-title {
-            font-size: 18px;
-            font-weight: 500;
-            color: #222;
-        }
-
-        .btn-acessibilidade {
-            background-color: #ff3385;
-            color: white;
-            border: none;
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        /* --- Layout Principal --- */
-        .container {
-            display: flex;
-            padding: 30px 4%;
-            gap: 30px;
-            flex: 1;
-            z-index: 2;
-        }
-
-        /* Menu Lateral Sidebar */
-        aside {
-            width: 220px;
-            background: #ffffff;
-            border: 2px solid #a3ccf8;
-            border-radius: 16px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            align-self: flex-start;
-        }
-
-        .sidebar-item {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-            font-size: 14px;
-            padding: 10px 14px;
-            border-radius: 20px;
-            transition: 0.2s;
-        }
-
-        .sidebar-item.active {
-            background-color: #a3ccf8;
-            color: #000;
-        }
-
-        .sidebar-item.sair {
-            color: #ff4d6d;
-            margin-top: 10px;
-        }
-
-        /* Conteúdo do Dashboard */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        main h1 {
-            font-size: 22px;
-            margin-bottom: 5px;
-            color: #111;
-        }
-
-        /* Cartões de Estatísticas (Metrics) */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 15px;
-        }
-
-        .card-metrica {
-            background: #ffffff;
-            border: 2px solid #a3ccf8;
-            border-radius: 12px;
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .card-metrica .valor {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ff65b3;
-            margin-bottom: 2px;
-        }
-
-        .card-metrica .rotulo {
-            font-size: 12px;
-            color: #777;
-        }
-
-        /* Seção de Pedidos Recentes */
-        .pedidos-box {
-            background: #ffffff;
-            border: 2px solid #a3ccf8;
-            border-radius: 12px;
-            padding: 20px;
-        }
-
-        .pedidos-box h2 {
-            font-size: 15px;
-            color: #111;
-            margin-bottom: 25px;
-        }
-
-        .item-pedido {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-
-        .pedido-info {
-            color: #333;
-        }
-
-        .pedido-detalhes {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .tag-entregue {
-            background-color: #9ee63c;
-            color: #000;
-            font-size: 10px;
-            font-weight: bold;
-            padding: 3px 8px;
-            border-radius: 10px;
-        }
-
-        /* --- Elementos Decorativos de Fundo (Bolinhas) --- */
-        .circulo-verde {
-            position: absolute;
-            top: 80px;
-            left: -60px;
-            width: 180px;
-            height: 180px;
-            background-color: #b2f053;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .circulo-azul {
-            position: absolute;
-            top: 60px;
-            right: -80px;
-            width: 200px;
-            height: 200px;
-            background-color: #a3ccf8;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        .circulo-amarelo {
-            position: absolute;
-            bottom: 30px;
-            right: -60px;
-            width: 180px;
-            height: 180px;
-            background-color: #ffd866;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        /* --- Rodapé --- */
-        footer {
-            background-color: #a3ccf8;
-            text-align: center;
-            padding: 12px;
-            font-size: 11px;
-            color: #333;
-            z-index: 10;
-        }
-    </style>
+    <title>Malune - Admin</title>
+    <link rel="stylesheet" href="css/principal-adm.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
+    <link rel="icon" type="image/png" href="images/icone.png">
 </head>
 <body>
+<div class="decor circle-green"></div>
+<div class="decor circle-blue"></div>
+<div class="decor circle-yellow"></div>
 
-<div class="circulo-verde"></div>
-<div class="circulo-azul"></div>
-<div class="circulo-amarelo"></div>
-
-<header>
-    <div class="logo">MaLu<span>ne</span></div>
-    <div class="header-title">Admin</div>
-    <button class="btn-acessibilidade">♿</button>
+<header class="header-topo">
+    <div class="header-esq">
+        <a href="#" class="logo-link"><img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo"></a>
+    </div>
+    <div class="header-centro"><h2 id="header-title">Dashboard</h2></div>
+    <div class="header-dir">
+        <button id="btn-abrir-a11y" class="btn-a11y" type="button" aria-label="Abrir menu de acessibilidade">
+            <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+        </button>
+    </div>
 </header>
 
-<div class="container">
-
-    <aside>
-        <a href="#" class="sidebar-item active">Dashboard</a>
-        <a href="#" class="sidebar-item">Produtos</a>
-        <a href="#" class="sidebar-item">Estoque</a>
-        <a href="#" class="sidebar-item">Pedidos</a>
-        <a href="#" class="sidebar-item sair">Sair</a>
+<main class="main-content">
+    <aside class="sidebar">
+        <h2 id="sidebar-title">Dashboard</h2>
+        <ul class="menu-list card-box" style="padding: 15px;">
+            <li><button class="active" data-target="dashboard" type="button">Dashboard</button></li>
+            <li><button data-target="produtos" type="button">Produtos</button></li>
+            <li><button data-target="estoque" type="button">Estoque</button></li>
+            <li><button data-target="pedidos" type="button">Pedidos</button></li>
+            <li><button id="btn-sair" class="btn-sair" type="button">Sair</button></li>
+        </ul>
     </aside>
 
-    <main>
-        <h1>Dashboard</h1>
+    <div class="content-area">
+        <p id="admin-feedback" class="admin-feedback" role="status" aria-live="polite"></p>
+        <section id="dashboard" class="view-section active">
+            <div class="stats-grid">
+                <div class="stat-card"><h3 id="total-products">0</h3><p>Produtos</p></div>
+                <div class="stat-card"><h3 id="total-orders">0</h3><p>Pedidos</p></div>
+                <div class="stat-card"><h3 id="total-users">0</h3><p>Usuários</p></div>
+                <div class="stat-card"><h3 id="total-revenue">R$ 0,00</h3><p>Receita</p></div>
+            </div>
+            <div class="table-container">
+                <h2 class="section-title">Pedidos recentes</h2>
+                <table class="grid-table">
+                    <tbody id="recent-orders-body"></tbody>
+                </table>
+            </div>
+        </section>
 
-        <div class="cards-grid">
-            <div class="card-metrica">
-                <span class="valor">10</span>
-                <span class="rotulo">Produtos</span>
-            </div>
-            <div class="card-metrica">
-                <span class="valor">1</span>
-                <span class="rotulo">Pedidos</span>
-            </div>
-            <div class="card-metrica">
-                <span class="valor">2</span>
-                <span class="rotulo">Usuários</span>
-            </div>
-            <div class="card-metrica">
-                <span class="valor">R$ 139,80</span>
-                <span class="rotulo">Receita</span>
-            </div>
-        </div>
-
-        <div class="pedidos-box">
-            <h2>Pedidos Recentes</h2>
-            <div class="item-pedido">
-                <span class="pedido-info">#1 — 01/11/2025</span>
-                <div class="pedido-detalhes">
-                    <span>R$ 00,00</span>
-                    <span class="tag-entregue">Entregue</span>
+        <section id="produtos" class="view-section">
+            <div class="table-container">
+                <h2 class="section-title">Catálogo</h2>
+                <div class="toolbar">
+                    <input id="product-search" type="search" class="search-input" placeholder="Buscar por nome...">
+                    <button id="btn-add-product" class="btn-green" type="button">Adicionar produto</button>
                 </div>
+                <table class="grid-table">
+                    <thead><tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Estoque</th><th>Ações</th></tr></thead>
+                    <tbody id="products-body"></tbody>
+                </table>
             </div>
+        </section>
+
+        <section id="estoque" class="view-section">
+            <div class="table-container">
+                <h2 class="section-title">Estoque</h2>
+                <div class="toolbar" style="justify-content: flex-start;">
+                    <input id="stock-search" type="search" class="search-input" placeholder="Buscar por nome...">
+                </div>
+                <table class="grid-table">
+                    <thead><tr><th style="width: 50%;">Produto</th><th>Estoque</th><th>Ações</th></tr></thead>
+                    <tbody id="stock-body"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="pedidos" class="view-section">
+            <div class="table-container">
+                <h2 class="section-title">Pedidos</h2>
+                <div class="toolbar" style="justify-content: flex-start;">
+                    <input id="order-search" type="search" class="search-input" placeholder="Buscar pedido...">
+                </div>
+                <table class="grid-table">
+                    <thead><tr><th>Pedido</th><th>Data</th><th>Total</th><th>Status</th><th>Ações</th></tr></thead>
+                    <tbody id="orders-body"></tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</main>
+
+<dialog id="product-dialog" aria-labelledby="product-dialog-title">
+    <form id="product-form" class="product-form">
+        <div class="modal-header">
+            <h3 id="product-dialog-title">Adicionar produto</h3>
+            <button id="btn-close-product" type="button" aria-label="Fechar cadastro de produto">X</button>
         </div>
-    </main>
+        <div class="modal-body">
+            <input id="product-id" type="hidden">
+            <label for="product-name">Nome</label>
+            <input id="product-name" type="text" maxlength="100" required>
+            <label for="product-description">Descrição</label>
+            <textarea id="product-description" maxlength="255" required></textarea>
+            <label for="product-price">Valor unitário</label>
+            <input id="product-price" type="number" min="0" step="0.01" required>
+            <label for="product-category">ID da categoria (opcional)</label>
+            <input id="product-category" type="number" min="1">
+            <label for="product-stock">Estoque</label>
+            <input id="product-stock" type="number" min="0" step="1" required>
+        </div>
+        <div class="modal-footer">
+            <button id="btn-cancel-product" type="button" class="btn-small-outline">Cancelar</button>
+            <button type="submit" class="btn-small-pink">Salvar produto</button>
+        </div>
+    </form>
+</dialog>
 
-</div>
+<footer>Malune - Brinquedos com carinho<br>&copy;2026 Malune. Todos os direitos reservados</footer>
 
-<footer>
-    Malune - Brinquedos com carinho<br>
-    &copy;2026 Malune. Todos os direitos reservados.
-</footer>
-
+<script src="js/modal-acessibilidade.js"></script>
+<script src="js/principal-adm.js"></script>
 </body>
 </html>

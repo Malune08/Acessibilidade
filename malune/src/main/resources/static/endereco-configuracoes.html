@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Malune - Endereço</title>
+    <link rel="icon" type="image/png" href="images/icone.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/area-cliente.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
+</head>
+<body>
+    <header class="cabecalho">
+        <a href="produtos.html" class="logo-link" aria-label="Ir para produtos">
+            <img src="images/logomalune.png" alt="Malune" class="logo">
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+            <a href="produtos.html" class="nav-link">Produtos</a>
+            <a href="pedidos.html" class="nav-link">Meus Pedidos</a>
+        </nav>
+        <div class="acoes-cabecalho">
+            <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade"><img src="images/iconacessibilidade.png" alt=""></button>
+            <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho"><img src="images/icone-carrinho.png" alt=""></a>
+            <a class="botao-icone" href="configuracoes.html" aria-label="Abrir configurações"><img src="images/icone-configuracoes.png" alt=""></a>
+            <a href="login.html" class="botao-icone" aria-label="Sair da conta"><img src="images/icone-sair.png" alt=""></a>
+        </div>
+    </header>
+
+    <div class="decoracao circulo-verde" aria-hidden="true"></div>
+    <div class="decoracao circulo-amarelo" aria-hidden="true"></div>
+    <div class="decoracao circulo-azul" aria-hidden="true"></div>
+
+    <main class="pagina-cliente">
+        <section class="painel" aria-labelledby="titulo-endereco">
+            <h1 id="titulo-endereco">Cadastrar/Editar endereço</h1>
+            <p class="painel-subtitulo">Este será o endereço usado nas suas entregas.</p>
+            <form id="form-endereco-configuracoes" class="form-perfil">
+                <div class="campo-perfil">
+                    <label for="cep">CEP</label>
+                    <input id="cep" name="cep" inputmode="numeric" maxlength="9" placeholder="00000-000" required>
+                </div>
+                <div class="campo-perfil">
+                    <label for="estado">Estado</label>
+                    <select id="estado" name="estado" required>
+                        <option value="">Selecione</option>
+                    </select>
+                </div>
+                <div class="campo-perfil">
+                    <label for="rua">Rua</label>
+                    <input id="rua" name="rua" maxlength="150" required>
+                </div>
+                <div class="campo-perfil">
+                    <label for="bairro">Bairro</label>
+                    <input id="bairro" name="bairro" maxlength="70" required>
+                </div>
+                <div class="campo-perfil">
+                    <label for="numero">Número</label>
+                    <input id="numero" name="numero" type="number" min="0" required>
+                </div>
+                <div class="campo-perfil">
+                    <label for="complemento">Complemento (opcional)</label>
+                    <input id="complemento" name="complemento" maxlength="50">
+                </div>
+                <div class="acoes-formulario">
+                    <button class="botao-primario" type="submit">Salvar endereço</button>
+                    <a class="botao-secundario" href="configuracoes.html">Configurações</a>
+                </div>
+                <p id="mensagem-endereco-configuracoes" class="mensagem-formulario" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="js/modal-acessibilidade.js"></script>
+    <script src="js/endereco-configuracoes.js"></script>
+</body>
+</html>

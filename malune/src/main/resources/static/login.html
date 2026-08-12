@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malune - Entrar na conta</title>
     <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
     <link rel="icon" type="image/png" href="images/icone.png">
 </head>
 <body>
@@ -73,14 +74,22 @@
 
                 <div class="input-group">
                     <label for="senha">Senha</label>
-
-                    <input
-                        type="password"
-                        id="senha"
-                        name="senha"
-                        placeholder="Insira sua senha"
-                        required
-                    >
+                    <div class="campo-senha">
+                        <input
+                                type="password"
+                                id="senha"
+                                name="senha"
+                                autocomplete="current-password"
+                                placeholder="Insira sua senha"
+                                required
+                        >
+                        <button id="alternar-senha" class="botao-olho" type="button" aria-label="Mostrar senha" aria-pressed="false">
+                            <svg aria-hidden="true" viewBox="0 0 24 24">
+                                <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path>
+                                <circle cx="12" cy="12" r="2.5"></circle>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="forgot-password">
@@ -97,75 +106,7 @@
         </section>
     </main>
 
-    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
-        <div class="modal-header">
-            <h3 id="modal-a11y-title">Acessibilidade</h3>
-
-            <button
-                id="btn-fechar-a11y"
-                aria-label="Fechar menu de acessibilidade"
-            >
-                X
-            </button>
-        </div>
-
-        <div class="modal-body">
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Alto contraste</strong>
-                    <span>Cores fortes para melhor leitura</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-contraste">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Texto grande</strong>
-                    <span>Aumenta o tamanho da fonte</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-texto">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Fonte para dislexia</strong>
-                    <span>Mais fácil de ler</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-dislexia">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Sublinhar links</strong>
-                    <span>Destaca todos os links</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-links">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-
-        <div class="modal-footer">
-            <button id="btn-restaurar" class="btn-restaurar">
-                Restaurar padrão
-            </button>
-        </div>
-    </dialog>
-
+    <script src="js/modal-acessibilidade.js"></script>
     <script src="js/login.js"></script>
 </body>
 </html>

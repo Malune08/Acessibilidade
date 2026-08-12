@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malune - Criar Conta</title>
     <link rel="stylesheet" href="css/cadastro.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
     <link rel="icon" type="image/png" href="images/icone.png">
 </head>
 <body>
 <header class="header-topo">
     <div class="header-esq">
         <!-- LINK PARA A IMAGEM DA LOGO NO TOPO -->
-        <a href="#" class="logo-link">
+        <a href="index.html" class="logo-link">
             <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
         </a>
     </div>
@@ -56,28 +57,28 @@
 
             <div class="input-group">
                 <label for="nome">Nome completo</label>
-                <input type="text" id="nome" name="nome" placeholder="Anna Silva" required>
+                <input type="text" id="nome" name="nome" placeholder="Guilherme Donatangelo" required>
             </div>
 
             <div class="input-group">
                 <label for="nome_usuario">Nome de usuário</label>
-                <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Aninha123" required>
+                <input type="text" id="nome_usuario" name="nome_usuario" placeholder="Dona" required>
             </div>
 
             <div class="input-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="annasilva@gmail.com" required>
+                <input type="email" id="email" name="email" placeholder="donatangelo@gmail.com" required>
             </div>
 
             <div class="input-group">
                 <label for="cpf">Cpf</label>
-                <input type="text" id="cpf" name="cpf" placeholder="993.338.800-20" required>
+                <input type="text" id="cpf" name="cpf" placeholder="500.656.738-40" required>
             </div>
 
             <div class="input-row">
                 <div class="input-group">
                     <label for="telefone">Telefone</label>
-                    <input type="tel" id="telefone" name="telefone" placeholder="11 99999-7777" required>
+                    <input type="tel" id="telefone" name="telefone" placeholder="11 91601-1533" required>
                 </div>
                 <div class="input-group">
                     <label for="data_nascimento">Data de nascimento</label>
@@ -101,66 +102,7 @@
     </section>
 </main>
 
-<!-- Pop-up de Acessibilidade -->
-<dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
-    <div class="modal-header">
-        <h3 id="modal-a11y-title">Acessibilidade</h3>
-        <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
-    </div>
-
-    <div class="modal-body">
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Alto contraste</strong>
-                <span>Cores fortes para melhor leitura</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-contraste">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Texto grande</strong>
-                <span>Aumenta o tamanho da fonte</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-texto">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Fonte para dislexia</strong>
-                <span>Mais fácil de ler</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-dislexia">
-                <span class="slider"></span>
-            </label>
-        </div>
-
-        <div class="a11y-item">
-            <div class="a11y-info">
-                <strong>Sublinhar links</strong>
-                <span>Destaca todos os links</span>
-            </div>
-            <label class="switch">
-                <input type="checkbox" id="toggle-links">
-                <span class="slider"></span>
-            </label>
-        </div>
-    </div>
-
-    <div class="modal-footer">
-        <button id="btn-restaurar" class="btn-restaurar">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
-            Restaurar padrão
-        </button>
-    </div>
-</dialog>
+<script src="js/modal-acessibilidade.js"></script>
 <script src="js/cadastro.js"></script>
 </body>
 </html>

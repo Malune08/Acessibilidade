@@ -5,138 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malune - Token</title>
     <link rel="stylesheet" href="css/token.css">
+    <link rel="stylesheet" href="css/modal-acessibilidade.css">
     <link rel="icon" type="image/png" href="images/icone.png">
 </head>
 <body>
 
-    <header class="header-topo">
-        <div class="header-esq">
-            <a href="index.html" class="logo-link">
-                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+<header class="header-topo">
+    <div class="header-esq">
+        <a href="index.html" class="logo-link">
+            <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo">
+        </a>
+    </div>
+
+    <div class="header-centro">
+        <h2>Token</h2>
+    </div>
+
+    <div class="header-dir">
+        <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+            <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
+        </button>
+    </div>
+</header>
+
+<div class="decor circle-yellow"></div>
+<div class="decor circle-blue-top"></div>
+<div class="decor circle-blue-bottom"></div>
+<div class="decor circle-green"></div>
+
+<main class="main-container">
+    <section class="card-cadastro">
+        <div class="card-header">
+            <a href="index.html" class="logo-link-card">
+                <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
             </a>
-        </div>
-        
-        <div class="header-centro">
-            <h2>Token</h2>
-        </div>
-        
-        <div class="header-dir">
-            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
-                <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
-            </button>
-        </div>
-    </header>
 
-    <div class="decor circle-yellow"></div>
-    <div class="decor circle-blue-top"></div>
-    <div class="decor circle-blue-bottom"></div>
-    <div class="decor circle-green"></div>
+            <p>Token</p>
 
-    <main class="main-container">
-        <section class="card-cadastro">
-            <div class="card-header">
-                <a href="index.html" class="logo-link-card">
-                    <img src="images/logomalune.png" alt="Logo Malune" class="img-logo-card">
-                </a>
-
-                <p>Token</p>
-
-                <span class="subtitle">
+            <span class="subtitle">
                     Informe o token enviado ao seu e-mail<br>
                     para mudar a senha
                 </span>
-            </div>
+        </div>
 
-            <form id="form-token" action="#" method="POST">
-                <div class="input-group">
-                    <label for="token">Token</label>
+        <form id="formCodigo" action="#" method="POST">
+            <div class="input-group">
+                <label for="token">Token</label>
 
-                    <input
+                <input
                         type="text"
                         id="token"
                         name="token"
                         placeholder="111111"
                         maxlength="6"
                         required
-                    >
-                </div>
+                >
+            </div>
 
-                <button type="submit" class="btn-continuar">
-                    Prosseguir
-                </button>
-            </form>
-        </section>
-    </main>
-
-    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
-        <div class="modal-header">
-            <h3 id="modal-a11y-title">Acessibilidade</h3>
-
-            <button
-                id="btn-fechar-a11y"
-                aria-label="Fechar menu de acessibilidade"
-            >
-                X
+            <button type="submit" class="btn-continuar">
+                Prosseguir
             </button>
-        </div>
-        
-        <div class="modal-body">
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Alto contraste</strong>
-                    <span>Cores fortes para melhor leitura</span>
-                </div>
+        </form>
+    </section>
+</main>
 
-                <label class="switch">
-                    <input type="checkbox" id="toggle-contraste">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Texto grande</strong>
-                    <span>Aumenta o tamanho da fonte</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-texto">
-                    <span class="slider"></span>
-                </label>
-            </div>
-
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Fonte para dislexia</strong>
-                    <span>Mais fácil de ler</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-dislexia">
-                    <span class="slider"></span>
-                </label>
-            </div>
-            
-            <div class="a11y-item">
-                <div class="a11y-info">
-                    <strong>Sublinhar links</strong>
-                    <span>Destaca todos os links</span>
-                </div>
-
-                <label class="switch">
-                    <input type="checkbox" id="toggle-links">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
-        
-        <div class="modal-footer">
-            <button id="btn-restaurar" class="btn-restaurar">
-                Restaurar padrão
-            </button>
-        </div>
-    </dialog>
-
-    <script src="js/token.js"></script>
+<script src="js/modal-acessibilidade.js"></script>
+<script src="js/token.js"></script>
 </body>
 </html>

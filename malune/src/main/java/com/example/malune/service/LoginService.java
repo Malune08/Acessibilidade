@@ -27,51 +27,41 @@ public class LoginService {
         this.adminAuthService = adminAuthService;
     }
 
-    public LoginResponseDTO autenticar(LoginDTO loginDTO) {
-        String identificador = loginDTO.getIdentificador().trim();
+    public LoginResponseDTO identificarLogin(LoginDTO loginDTO) {
 
-        Optional<Administrador> administrador = buscarAdministrador(identificador);
-        if (administrador.isPresent()) {
-            if (!administrador.get().getSenha().equals(loginDTO.getSenha())) {
-                throw new IllegalArgumentException("E-mail/usuário ou senha inválidos.");
-            }
+        String identificador = loginDTO.getIdentificador();
 
-            Administrador adm = administrador.get();
-            return new LoginResponseDTO(
-                    "ADMINISTRADOR",
-                    adm.getId(),
-                    adm.getNomeUsuario(),
-                    adm.getEmail(),
-                    adminAuthService.createToken(adm.getId())
-            );
+        Optional<Usuario> usuario = usuarioRepository.findByEmailIgnoreCase(identificador);
+        if (usuario.isEmpty()) {
+            usuario = usuarioRepository.findByNomeUsuarioIgnoreCase(identificador);
         }
 
-        Optional<Usuario> usuario = buscarUsuario(identificador);
-        if (usuario.isPresent() && usuario.get().getSenha().equals(loginDTO.getSenha())) {
-            Usuario user = usuario.get();
+        if (usuario.isPresent()
+                && usuario.get().getSenha().equals(loginDTO.getSenha())) {
+
             return new LoginResponseDTO(
                     "USUARIO",
-                    user.getId(),
-                    user.getNomeUsuario(),
-                    user.getEmail(),
-                    null
+                    usuario.get().getId()
             );
         }
 
-        throw new IllegalArgumentException("E-mail/usuário ou senha inválidos.");
-    }
+        Optional<Administrador> administrador = admRepository.findByEmailIgnoreCase(identificador);
+        if (administrador.isEmpty()) {
+            administrador = admRepository.findByNomeUsuarioIgnoreCase(identificador);
+        }
 
-    private Optional<Administrador> buscarAdministrador(String identificador) {
-        Optional<Administrador> porEmail = admRepository.findByEmailIgnoreCase(identificador);
-        return porEmail.isPresent()
-                ? porEmail
-                : admRepository.findByNomeUsuarioIgnoreCase(identificador);
-    }
+        if (administrador.isPresent()
+                && administrador.get().getSenha().equals(loginDTO.getSenha())) {
 
-    private Optional<Usuario> buscarUsuario(String identificador) {
-        Optional<Usuario> porEmail = usuarioRepository.findByEmailIgnoreCase(identificador);
-        return porEmail.isPresent()
-                ? porEmail
-                : usuarioRepository.findByNomeUsuarioIgnoreCase(identificador);
+            String token = adminAuthService.createToken(administrador.get().getId());
+
+            return new LoginResponseDTO(
+                    "ADMINISTRADOR",
+                    administrador.get().getId(),
+                    token
+            );
+        }
+
+        return new LoginResponseDTO("INVALIDO", null);
     }
 }
