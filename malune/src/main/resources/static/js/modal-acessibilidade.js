@@ -1,9 +1,9 @@
 const htmlModalA11y = `
 <!-- Pop-up de Acessibilidade -->
-<dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
+<dialog id="modal-a11y" aria-labelledby="modal-a11y-title" aria-modal="true">
     <div class="modal-header">
         <h3 id="modal-a11y-title">Acessibilidade</h3>
-        <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+        <button id="btn-fechar-a11y" type="button" aria-label="Fechar menu de acessibilidade">X</button>
     </div>
    
     <div class="modal-body">
@@ -13,7 +13,7 @@ const htmlModalA11y = `
                 <span>Cores fortes para melhor leitura</span>
             </div>
             <label class="switch">
-                <input type="checkbox" id="toggle-contraste">
+                <input type="checkbox" id="toggle-contraste" aria-label="Alto contraste">
                 <span class="slider"></span>
             </label>
         </div>
@@ -24,7 +24,7 @@ const htmlModalA11y = `
                 <span>Aumenta o tamanho da fonte</span>
             </div>
             <label class="switch">
-                <input type="checkbox" id="toggle-texto">
+                <input type="checkbox" id="toggle-texto" aria-label="Texto grande">
                 <span class="slider"></span>
             </label>
         </div>
@@ -35,7 +35,7 @@ const htmlModalA11y = `
                 <span>Mais fácil de ler</span>
             </div>
             <label class="switch">
-                <input type="checkbox" id="toggle-dislexia">
+                <input type="checkbox" id="toggle-dislexia" aria-label="Fonte para dislexia">
                 <span class="slider"></span>
             </label>
         </div>
@@ -46,7 +46,7 @@ const htmlModalA11y = `
                 <span>Destaca todos os links</span>
             </div>
             <label class="switch">
-                <input type="checkbox" id="toggle-links">
+                <input type="checkbox" id="toggle-links" aria-label="Sublinhar links">
                 <span class="slider"></span>
             </label>
         </div>
@@ -59,7 +59,9 @@ const htmlModalA11y = `
 `;
 
 function iniciarModalA11y() {
-    document.body.insertAdjacentHTML('beforeend', htmlModalA11y);
+    if (!document.getElementById('modal-a11y')) {
+        document.body.insertAdjacentHTML('beforeend', htmlModalA11y);
+    }
 
     // ===== MODAL DE ACESSIBILIDADE =====
     const modalA11y = document.getElementById('modal-a11y');
@@ -77,6 +79,7 @@ function iniciarModalA11y() {
         btnAbrirA11y.addEventListener('click', () => {
             if (typeof modalA11y.showModal === 'function') {
                 modalA11y.showModal();
+                btnAbrirA11y.setAttribute('aria-expanded', 'true');
             } else {
                 alert("Seu navegador não suporta recursos de diálogo.");
             }
@@ -87,6 +90,7 @@ function iniciarModalA11y() {
     if (btnFecharA11y && modalA11y) {
         btnFecharA11y.addEventListener('click', () => {
             modalA11y.close();
+            btnAbrirA11y?.setAttribute('aria-expanded', 'false');
         });
     }
 
@@ -101,7 +105,11 @@ function iniciarModalA11y() {
                 event.clientY > rect.bottom
             ) {
                 modalA11y.close();
+                btnAbrirA11y?.setAttribute('aria-expanded', 'false');
             }
+        });
+        modalA11y.addEventListener('close', () => {
+            btnAbrirA11y?.setAttribute('aria-expanded', 'false');
         });
     }
 

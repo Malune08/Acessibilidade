@@ -145,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
         body.innerHTML = products.map(product => `
             <tr>
                 <td>${escapeHtml(product.nome)}</td>
-                <td><input class="table-input js-stock-value" data-id="${product.id}" type="number" min="0" value="${escapeHtml(product.qtdEstoque ?? 0)}"></td>
-                <td><button class="btn-small-pink js-save-stock" data-id="${product.id}" type="button">Salvar</button></td>
+                <td><input id="stock-${product.id}" class="table-input js-stock-value" data-id="${product.id}" type="number" min="0" aria-label="Quantidade em estoque de ${escapeHtml(product.nome)}" value="${escapeHtml(product.qtdEstoque ?? 0)}"></td>
+                <td><button class="btn-small-pink js-save-stock" data-id="${product.id}" type="button" aria-label="Salvar estoque de ${escapeHtml(product.nome)}">Salvar</button></td>
             </tr>
         `).join('');
         body.querySelectorAll('.js-save-stock').forEach(button => {
@@ -182,8 +182,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td>#${escapeHtml(order.id)}</td>
                     <td>${escapeHtml(formatDate(order.dataPedido))}</td>
                     <td>${escapeHtml(formatCurrency(order.valorTotal))}</td>
-                    <td><select class="table-select js-order-status" data-id="${order.id}">${options}</select></td>
-                    <td><button class="btn-small-pink js-save-order" data-id="${order.id}" type="button">Salvar</button></td>
+                    <td><select id="status-${order.id}" class="table-select js-order-status" data-id="${order.id}" aria-label="Status do pedido ${order.id}">${options}</select></td>
+                    <td><button class="btn-small-pink js-save-order" data-id="${order.id}" type="button" aria-label="Salvar status do pedido ${order.id}">Salvar</button></td>
                 </tr>
             `;
         }).join('');
@@ -300,9 +300,15 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             const targetId = button.dataset.target;
             menuButtons.forEach(item => item.classList.remove('active'));
-            viewSections.forEach(section => section.classList.remove('active'));
+            menuButtons.forEach(item => item.removeAttribute('aria-current'));
+            viewSections.forEach(section => {
+                section.classList.remove('active');
+                section.hidden = true;
+            });
             button.classList.add('active');
+            button.setAttribute('aria-current', 'page');
             byId(targetId).classList.add('active');
+            byId(targetId).hidden = false;
             const title = targetId.charAt(0).toUpperCase() + targetId.slice(1);
             headerTitle.textContent = title;
             sideBarTitle.textContent = title;

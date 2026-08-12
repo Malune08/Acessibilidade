@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .querySelectorAll('.campo-invalido')
             .forEach((campo) => {
                 campo.classList.remove('campo-invalido');
+                campo.setAttribute('aria-invalid', 'false');
             });
     }
 
@@ -32,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         campos.forEach((campo) => {
             campo.classList.add('campo-invalido');
+            campo.setAttribute('aria-invalid', 'true');
         });
     }
 

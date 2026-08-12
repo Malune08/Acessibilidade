@@ -23,7 +23,7 @@
         </div>
        
         <div class="header-dir">
-            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+            <button id="btn-abrir-a11y" class="btn-a11y" type="button" aria-label="Abrir menu de acessibilidade" aria-controls="modal-a11y" aria-expanded="false">
                 <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
             </button>
         </div>
@@ -58,12 +58,12 @@
         </div>
 
         <section class="content-pagamento">
-            <h3 class="form-title">Forma de pagamento</h3>
+            <h3 id="titulo-forma-pagamento" class="form-title">Forma de pagamento</h3>
 
-            <form id="form-pagamento" method="POST">
+            <form id="form-pagamento" method="POST" aria-labelledby="titulo-forma-pagamento">
 
                 <div class="opcao-pagamento">
-                    <input type="radio" id="pix" name="forma_pagamento" value="1" required>
+                    <input type="radio" id="pix" name="forma_pagamento" value="1" aria-controls="campos-pix" required>
                     <label for="pix" class="label-opcao">
                         <span class="icon-radio"></span>
                         <img src="images/pix-logo.png" alt="PIX" class="icon-pagamento">
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="opcao-pagamento">
-                    <input type="radio" id="cartao" name="forma_pagamento" value="2">
+                    <input type="radio" id="cartao" name="forma_pagamento" value="2" aria-controls="campos-cartao">
                     <label for="cartao" class="label-opcao">
                         <span class="icon-radio"></span>
                         <img src="images/cartao-logo.png" alt="Cartão" class="icon-pagamento">
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="opcao-pagamento">
-                    <input type="radio" id="boleto" name="forma_pagamento" value="3">
+                    <input type="radio" id="boleto" name="forma_pagamento" value="3" aria-controls="campos-boleto">
                     <label for="boleto" class="label-opcao">
                         <span class="icon-radio"></span>
                         <img src="images/boleto-logo.png" alt="Boleto" class="icon-pagamento">
@@ -90,7 +90,7 @@
                 </div>
 
                 <!-- Campos adicionais para PIX (escondidos por padrão) -->
-                <div id="campos-pix" class="campos-adicionais" style="display: none;">
+                <div id="campos-pix" class="campos-adicionais" style="display: none;" aria-hidden="true">
                     <div class="pix-qrcode-area">
                         <div class="pix-qrcode">
                             <img src="images/qrcode.png" alt="QR Code PIX" class="qrcode-img">
@@ -107,10 +107,10 @@
                 </div>
 
                 <!-- Campos adicionais para cartão (escondidos por padrão) -->
-                <div id="campos-cartao" class="campos-adicionais" style="display: none;">
+                <div id="campos-cartao" class="campos-adicionais" style="display: none;" aria-hidden="true">
                     
                     <!-- Lista de cartões cadastrados -->
-                    <div id="lista-cartoes" class="lista-cartoes-area">
+                    <div id="lista-cartoes" class="lista-cartoes-area" aria-hidden="true">
                         <label class="campo-label">Seus cartões</label>
                         <div id="container-cartoes" class="container-cartoes">
                             <!-- Cartões serão inseridos aqui via JS -->
@@ -119,7 +119,7 @@
                     </div>
 
                     <!-- Formulário para novo cartão (oculto até clicar em "Adicionar novo") -->
-                    <div id="formulario-novo-cartao" class="formulario-novo-cartao" style="display: none;">
+                    <div id="formulario-novo-cartao" class="formulario-novo-cartao" style="display: none;" aria-hidden="true">
                         <div class="input-group">
                             <label for="numero-cartao">Número do cartão</label>
                             <input type="text" id="numero-cartao" name="numero-cartao" placeholder="1234 5678 9012 3456" maxlength="19">
@@ -159,7 +159,7 @@
                 </div>
 
                 <!-- Campos adicionais para Boleto (escondidos por padrão) -->
-                <div id="campos-boleto" class="campos-adicionais" style="display: none;">
+                <div id="campos-boleto" class="campos-adicionais" style="display: none;" aria-hidden="true">
                     <div class="boleto-info">
                         <div class="boleto-linha">
                             <span class="boleto-label">Beneficiário:</span>
