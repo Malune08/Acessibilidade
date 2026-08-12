@@ -33,6 +33,34 @@ document.addEventListener("DOMContentLoaded", () => {
         SENHA: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%&_\-!+=?.,:;/|"'()\[\]{}^~])[a-zA-Z0-9@#$%&_\-!+=?.,:;/|"'()\[\]{}^~]{8,16}$/
     };
 
+    const IDADE_MINIMA = 16;
+
+    function idadeMinimaValida(valor) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(valor)) {
+            return false;
+        }
+
+        const [ano, mes, dia] = valor.split('-').map(Number);
+        const nascimento = new Date(ano, mes - 1, dia);
+
+        if (
+            nascimento.getFullYear() !== ano ||
+            nascimento.getMonth() !== mes - 1 ||
+            nascimento.getDate() !== dia
+        ) {
+            return false;
+        }
+
+        const hoje = new Date();
+        const dataLimite = new Date(
+            hoje.getFullYear() - IDADE_MINIMA,
+            hoje.getMonth(),
+            hoje.getDate()
+        );
+
+        return nascimento <= dataLimite;
+    }
+
     const campoNome = document.getElementById("nome");
     const campoNomeUsuario = document.getElementById("nome_usuario");
     const campoEmail = document.getElementById("email");
@@ -87,9 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         campoDataNascimento.setCustomValidity(
-            campoDataNascimento.value && new Date(campoDataNascimento.value) < new Date()
+            idadeMinimaValida(campoDataNascimento.value)
                 ? ""
-                : "A data de nascimento deve ser uma data no passado."
+                : `É necessário ter pelo menos ${IDADE_MINIMA} anos para se cadastrar.`
         );
 
         campoConfirmarSenha.setCustomValidity(

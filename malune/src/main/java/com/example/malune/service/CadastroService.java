@@ -58,9 +58,12 @@ public class CadastroService {
             throw new IllegalArgumentException("Nome de usuário já cadastrado.");
         }
 
-        LocalDate idadeMinima = LocalDate.now().minusYears(16);
+        if (dto.getDataNascimento() == null) {
+            throw new IllegalArgumentException("A data de nascimento é obrigatória.");
+        }
 
-        if (dto.getDataNascimento().isAfter(idadeMinima)) {
+        LocalDate dataLimite = LocalDate.now().minusYears(16);
+        if (dto.getDataNascimento().isAfter(dataLimite)) {
             throw new IllegalArgumentException(
                     "O usuário deve possuir pelo menos 16 anos."
             );

@@ -96,8 +96,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 mostrarPopup("Cadastro realizado com sucesso!", true);
                 window.location.href = "login.html";
             } else {
+<<<<<<< HEAD
+                const texto = await resposta.text();
+                let mensagem = texto;
+
+                try {
+                    const corpo = JSON.parse(texto);
+                    mensagem = corpo.error || corpo.message || texto;
+                } catch (_) {
+                    // Mantém a resposta textual quando ela não for JSON.
+                }
+
+                alert(mensagem || "Verifique os dados informados.");
+=======
                 const erro = await resposta.text();
                 mostrarPopup(erro || "Verifique os dados informados.");
+>>>>>>> caa4ca1bd9ddf01886cb82701d0448e3c74910c7
             }
         } catch (e) {
             console.error(e);
