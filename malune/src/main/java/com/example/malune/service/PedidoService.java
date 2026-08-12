@@ -4,6 +4,7 @@ import com.example.malune.dto.CartaoDTO;
 import com.example.malune.dto.ItemPedidoDTO;
 import com.example.malune.dto.PedidoDTO;
 import com.example.malune.dto.PedidoResponseDTO;
+import com.example.malune.dto.PedidoResumoDTO;
 import com.example.malune.entity.*;
 import com.example.malune.repository.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Random;
+import java.util.List;
 
 @AllArgsConstructor
 @Service
@@ -27,6 +29,25 @@ public class PedidoService {
     private final EntregaRepository entregaRepository;
     private final CartaoRepository cartaoRepository;
     private final PagamentoRepository pagamentoRepository;
+    private final CarrinhoService carrinhoService;
+
+    @Transactional(readOnly = true)
+    public List<PedidoResumoDTO> listarPedidosDoUsuario(Integer idUsuario) {
+        Usuario usuario = usuarioRepository.findById(idUsuario)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado."));
+
+        return pedidoRepository.findByUsuarioOrderByDataPedidoDesc(usuario).stream()
+                .map(pedido -> new PedidoResumoDTO(
+                        pedido.getId(),
+                        pedido.getDataPedido(),
+                        pedido.getStatus().name(),
+                        pedido.getValorTotal(),
+                        itemPedidoRepository.findByPedido(pedido).stream()
+                                .map(item -> item.getProduto().getNome())
+                                .toList()
+                ))
+                .toList();
+    }
 
     @Transactional
     public PedidoResponseDTO confirmarPedido(Integer idUsuario, PedidoDTO dto) {
@@ -98,6 +119,10 @@ public class PedidoService {
         // 7. Atualiza o status do pedido: confirmado se aprovou, continua aguardando se recusou
         pedido.setStatus(aprovado ? StatusPedido.CONFIRMADO : StatusPedido.AGUARDANDO);
         pedidoRepository.save(pedido);
+
+        if (aprovado) {
+            carrinhoService.limparCarrinho(idUsuario);
+        }
 
         return new PedidoResponseDTO(pedido.getId(), pagamento.getId(), pagamento.getStatus().name());
     }

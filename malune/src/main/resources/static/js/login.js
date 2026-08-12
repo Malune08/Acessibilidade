@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const campoSenha = document.getElementById('senha');
+    const botaoAlternarSenha = document.getElementById('alternar-senha');
+
     // ==========================================
     // 1. GERENCIAMENTO DE ACESSIBILIDADE (MODAL)
     // ==========================================
@@ -11,6 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleTexto = document.getElementById('toggle-texto');
     const toggleDislexia = document.getElementById('toggle-dislexia');
     const toggleLinks = document.getElementById('toggle-links');
+
+    if (campoSenha && botaoAlternarSenha) {
+        botaoAlternarSenha.addEventListener('click', () => {
+            const senhaVisivel = campoSenha.type === 'text';
+            campoSenha.type = senhaVisivel ? 'password' : 'text';
+            botaoAlternarSenha.setAttribute('aria-label', senhaVisivel ? 'Mostrar senha' : 'Ocultar senha');
+            botaoAlternarSenha.setAttribute('aria-pressed', String(!senhaVisivel));
+        });
+    }
 
     if (btnAbrirA11y && modalA11y) {
         btnAbrirA11y.addEventListener('click', () => {
@@ -168,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Redirecionamento por Perfil
                 if (resultado.tipo === 'ADMINISTRADOR') {
                     sessionStorage.setItem('malune_admin_token', resultado.token);
-                    window.location.href = 'principal-adm.html';
+                    window.location.href = 'area-restrita.html';
                 } else if (resultado.tipo === 'USUARIO') {
                     sessionStorage.removeItem('malune_admin_token');
                     window.location.href = 'produtos.html';

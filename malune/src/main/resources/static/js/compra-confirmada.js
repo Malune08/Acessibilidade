@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnVerPedido) {
         btnVerPedido.addEventListener('click', () => {
-            window.location.href = 'revisar-pedido.html';
+            window.location.href = 'pedidos.html';
         });
     }
 
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.removeItem('total_pedido');
             localStorage.removeItem('id_pagamento');
 
-            window.location.href = 'home.html#produtos';
+            window.location.href = 'produtos.html';
         });
     }
 });

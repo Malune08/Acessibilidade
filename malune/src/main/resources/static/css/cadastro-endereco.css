@@ -30,7 +30,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 70px;
+    min-height: 77px;
     display: grid;
     grid-template-columns: 1fr auto 1fr; 
     align-items: center;
@@ -127,6 +127,8 @@ input {
     width: 100%;
 }
 input:focus { border-color: var(--cor-rosa); }
+select { width: 100%; padding: 12px 42px 12px 12px; border: 2px solid var(--cor-azul-claro); border-radius: 12px; font-size: 1rem; color: var(--cor-texto); background: #fff; appearance: none; cursor: pointer; background-image: linear-gradient(45deg, transparent 50%, var(--cor-rosa) 50%), linear-gradient(135deg, var(--cor-rosa) 50%, transparent 50%); background-position: calc(100% - 20px) 50%, calc(100% - 14px) 50%; background-size: 6px 6px, 6px 6px; background-repeat: no-repeat; }
+select:focus { outline: none; border-color: var(--cor-rosa); box-shadow: 0 0 0 3px rgba(255, 94, 181, .16); }
 
 /* --- Botões de Ação Lado a Lado --- */
 .botoes-acao {
@@ -252,3 +254,31 @@ body.modo-texto-grande h2, body.modo-texto-grande .card-header p { font-size: 1.
 
 body.modo-dislexia { font-family: 'Comic Sans MS', 'OpenDyslexic', cursive, sans-serif !important; }
 body.modo-sublinhar a { text-decoration: underline !important; font-weight: bold; }
+.popup-cadastro { position: fixed; z-index: 3000; top: 88px; left: 50%; transform: translateX(-50%); width: min(420px, calc(100% - 32px)); padding: 14px 18px; border-radius: 12px; color: #fff; text-align: center; font-weight: 700; box-shadow: 0 8px 22px rgba(0,0,0,.2); }
+.popup-cadastro.sucesso { background: #6fbd35; }
+.popup-cadastro.erro { background: #ff5eb5; }
+
+/* Campo de estado no mesmo acabamento dos demais campos do cadastro. */
+.card-cadastro .input-group select {
+    height: 56px !important;
+    min-height: 56px !important;
+    max-height: 56px !important;
+    box-sizing: border-box !important;
+    width: 100%;
+    padding: 0 44px 0 14px !important;
+    border: 2px solid var(--cor-azul-claro) !important;
+    border-radius: 12px !important;
+    color: #555;
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1;
+    background-color: #fff !important;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--cor-rosa) 50%), linear-gradient(135deg, var(--cor-rosa) 50%, transparent 50%) !important;
+    background-position: calc(100% - 22px) 24px, calc(100% - 16px) 24px !important;
+    background-size: 7px 7px, 7px 7px !important;
+    background-repeat: no-repeat !important;
+}
+.card-cadastro .input-group input { height: 56px; box-sizing: border-box; }
+.card-cadastro .input-group select:focus { border-color: var(--cor-rosa) !important; outline: 0; box-shadow: 0 0 0 3px rgba(255, 94, 181, .16); }

@@ -212,13 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (
-        localStorage.getItem(
-            'a11y_dislexia'
-        ) === 'true' &&
-        toggleDislexia
-    ) {
+        localStorage.getItem('a11y_dislexia') === 'true' & toggleDislexia) {
         toggleDislexia.checked = true;
-
         document.body.classList.add(
             'modo-dislexia'
         );

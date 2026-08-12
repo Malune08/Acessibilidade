@@ -1,4 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('input[type="password"]').forEach((campo) => {
+        const envoltorio = document.createElement('div');
+        envoltorio.className = 'campo-senha';
+        envoltorio.style.cssText = 'position:relative;width:100%;display:block;';
+        campo.parentNode.insertBefore(envoltorio, campo);
+        envoltorio.appendChild(campo);
+        const botao = document.createElement('button');
+        botao.type = 'button';
+        botao.className = 'botao-olho';
+        botao.style.cssText = 'position:absolute;right:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;padding:0;border:0;background:transparent;display:grid;place-items:center;cursor:pointer;color:#777;z-index:2;';
+        botao.setAttribute('aria-label', 'Mostrar senha');
+        botao.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.8"/></svg>';
+        botao.addEventListener('click', () => {
+            const visivel = campo.type === 'text';
+            campo.type = visivel ? 'password' : 'text';
+            botao.setAttribute('aria-label', visivel ? 'Mostrar senha' : 'Ocultar senha');
+        });
+        envoltorio.appendChild(botao);
+    });
 
     // ==========================================
     // 1. LÓGICA DO MODAL DE ACESSIBILIDADE
