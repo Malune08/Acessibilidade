@@ -332,34 +332,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const modalA11y = byId('modal-a11y');
-    const btnAbrirA11y = byId('btn-abrir-a11y');
-    const btnFecharA11y = byId('btn-fechar-a11y');
-    const btnRestaurar = byId('btn-restaurar');
-    const toggles = [
-        ['toggle-contraste', 'modo-alto-contraste', 'a11y_contraste'],
-        ['toggle-texto', 'modo-texto-grande', 'a11y_texto'],
-        ['toggle-dislexia', 'modo-dislexia', 'a11y_dislexia'],
-        ['toggle-links', 'modo-sublinhar', 'a11y_links']
-    ];
-    if (btnAbrirA11y) btnAbrirA11y.addEventListener('click', () => modalA11y.showModal());
-    if (btnFecharA11y) btnFecharA11y.addEventListener('click', () => modalA11y.close());
-    toggles.forEach(([id, className, storageKey]) => {
-        const toggle = byId(id);
-        toggle.checked = localStorage.getItem(storageKey) === 'true';
-        document.body.classList.toggle(className, toggle.checked);
-        toggle.addEventListener('change', () => {
-            document.body.classList.toggle(className, toggle.checked);
-            localStorage.setItem(storageKey, String(toggle.checked));
-        });
-    });
-    btnRestaurar.addEventListener('click', () => {
-        toggles.forEach(([id, className, storageKey]) => {
-            byId(id).checked = false;
-            document.body.classList.remove(className);
-            localStorage.removeItem(storageKey);
-        });
-    });
-
     loadSection('dashboard');
 });
