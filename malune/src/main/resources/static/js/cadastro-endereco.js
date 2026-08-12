@@ -1,4 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
+    function mostrarPopup(mensagem, sucesso = false) {
+        const popup = document.createElement('div');
+        popup.className = `popup-cadastro ${sucesso ? 'sucesso' : 'erro'}`;
+        popup.textContent = mensagem;
+        document.body.appendChild(popup);
+        setTimeout(() => popup.remove(), 3500);
+    }
 
     // ==========================================
     // MODAL DE ACESSIBILIDADE
@@ -139,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuario = JSON.parse(sessionStorage.getItem("usuarioCadastro"));
 
         if (!usuario) {
-            alert("Os dados do usuário não foram encontrados.");
+            mostrarPopup("Os dados do usuário não foram encontrados.");
             window.location.href = "cadastro.html";
             return null;
         }
@@ -159,15 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (resposta.ok) {
                 sessionStorage.removeItem("usuarioCadastro");
-                alert("Cadastro realizado com sucesso!");
+                mostrarPopup("Cadastro realizado com sucesso!", true);
                 window.location.href = "login.html";
             } else {
                 const erro = await resposta.text();
-                alert(erro || "Verifique os dados informados.");
+                mostrarPopup(erro || "Verifique os dados informados.");
             }
         } catch (e) {
             console.error(e);
-            alert("Não foi possível conectar ao servidor. Tente novamente.");
+            mostrarPopup("Não foi possível conectar ao servidor. Tente novamente.");
         }
     }
 

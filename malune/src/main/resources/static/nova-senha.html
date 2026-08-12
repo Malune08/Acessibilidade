@@ -47,13 +47,18 @@
             <div class="input-group">
                 <label for="novaSenha">Senha nova</label>
 
-                <input
-                        type="password"
-                        id="novaSenha"
-                        name="novaSenha"
-                        placeholder="regex"
-                        required
-                >
+                <div class="campo-senha">
+                    <input
+                            type="password"
+                            id="novaSenha"
+                            name="novaSenha"
+                            placeholder="Insira a sua senha"
+                            required
+                    >
+                    <button id="mostrar-nova-senha" class="botao-olho" type="button" aria-label="Mostrar nova senha" aria-pressed="false">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                    </button>
+                </div>
             </div>
 
             <div class="input-group">
@@ -61,13 +66,18 @@
                     Confirmar a senha
                 </label>
 
-                <input
-                        type="password"
-                        id="confirmarSenha"
-                        name="confirmarSenha"
-                        placeholder="regex"
-                        required
-                >
+                <div class="campo-senha">
+                    <input
+                            type="password"
+                            id="confirmarSenha"
+                            name="confirmarSenha"
+                            placeholder="Insira a sua senha"
+                            required
+                    >
+                    <button id="mostrar-confirmar-senha" class="botao-olho" type="button" aria-label="Mostrar confirmação de senha" aria-pressed="false">
+                        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"></path><circle cx="12" cy="12" r="2.5"></circle></svg>
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="btn-continuar">

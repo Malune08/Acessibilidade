@@ -1,74 +1,110 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const ENDPOINT_PRODUTOS = '/api/produtos';
     const listaCarrinho = document.getElementById('lista-carrinho');
     const subtotalCarrinho = document.getElementById('subtotal-carrinho');
     const totalCarrinho = document.getElementById('total-carrinho');
     const prosseguirCompra = document.getElementById('prosseguir-compra');
+    const idUsuario = localStorage.getItem('id_usuario');
+    let carrinhoAtual = { itens: [], total: 0 };
 
     function formatarPreco(valor) {
         return Number(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     }
 
-    function lerCarrinho() {
-        return JSON.parse(sessionStorage.getItem('carrinho') ?? '[]');
+    function atualizarResumo() {
+        subtotalCarrinho.textContent = formatarPreco(carrinhoAtual.total);
+        totalCarrinho.textContent = formatarPreco(carrinhoAtual.total);
+        prosseguirCompra.disabled = carrinhoAtual.itens.length === 0;
     }
 
-    function salvarCarrinho(carrinho) {
-        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+    function mostrarEstadoVazio(mensagem) {
+        listaCarrinho.innerHTML = `<p class="estado-vazio">${mensagem}</p>`;
+        carrinhoAtual = { itens: [], total: 0 };
+        atualizarResumo();
     }
 
-    function atualizarResumo(itens) {
-        const subtotal = itens.reduce((total, item) => total + Number(item.produto.valorUnitario) * item.quantidade, 0);
-        subtotalCarrinho.textContent = formatarPreco(subtotal);
-        totalCarrinho.textContent = formatarPreco(subtotal);
-        prosseguirCompra.disabled = itens.length === 0;
-    }
-
-    function renderizarCarrinho(produtos) {
-        const carrinho = lerCarrinho();
-        const itens = carrinho.map((item) => ({ ...item, produto: produtos.find((produto) => produto.id === item.id) })).filter((item) => item.produto);
-
+    function renderizarCarrinho(carrinho) {
+        carrinhoAtual = carrinho;
         listaCarrinho.innerHTML = '';
 
-        if (itens.length === 0) {
-            listaCarrinho.innerHTML = '<p class="estado-vazio">Seu carrinho está vazio.</p>';
-            atualizarResumo([]);
+        if (carrinho.itens.length === 0) {
+            mostrarEstadoVazio('Seu carrinho está vazio.');
             return;
         }
 
-        itens.forEach((item) => {
+        carrinho.itens.forEach((item) => {
             const elemento = document.createElement('article');
             elemento.className = 'item-carrinho';
-            const imagem = item.produto.imagem ? `<img src="${item.produto.imagem}" alt="">` : 'Imagem indisponível';
-            elemento.innerHTML = `<div class="imagem-carrinho">${imagem}</div><div><h2>${item.produto.nome}</h2><p>Quantidade: ${item.quantidade}</p><strong>${formatarPreco(item.produto.valorUnitario)}</strong></div><button class="remover-item" type="button">Remover</button>`;
-            elemento.querySelector('.remover-item').addEventListener('click', () => {
-                salvarCarrinho(lerCarrinho().filter((produto) => produto.id !== item.id));
-                renderizarCarrinho(produtos);
-            });
+            const imagem = item.imagem ? `<img src="${item.imagem}" alt="">` : 'Imagem indisponível';
+            elemento.innerHTML = `<div class="imagem-carrinho">${imagem}</div><div><h2>${item.nome}</h2><p>Quantidade: ${item.quantidade}</p><strong>${formatarPreco(item.subtotal)}</strong></div><button class="remover-item" type="button" aria-label="Remover ${item.nome}" title="Remover produto"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12ZM8 9h8v10H8V9Zm7.5-5-1-1h-5l-1 1H5v2h14V4h-3.5Z"/></svg></button>`;
+            elemento.querySelector('.remover-item').addEventListener('click', () => removerItem(item.idProduto));
             listaCarrinho.appendChild(elemento);
         });
 
-        atualizarResumo(itens);
+        atualizarResumo();
+    }
+
+    async function migrarCarrinhoTemporario() {
+        const itensTemporarios = JSON.parse(sessionStorage.getItem('carrinho') ?? '[]');
+        if (!idUsuario || itensTemporarios.length === 0) {
+            return;
+        }
+
+        for (const item of itensTemporarios) {
+            const resposta = await fetch(`/carrinho/${idUsuario}/itens`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ idProduto: item.id, quantidade: item.quantidade })
+            });
+            if (!resposta.ok) {
+                throw new Error('Não foi possível migrar os itens do carrinho.');
+            }
+        }
+        sessionStorage.removeItem('carrinho');
     }
 
     async function carregarCarrinho() {
-        const carrinho = lerCarrinho();
-        if (carrinho.length === 0) {
-            atualizarResumo([]);
+        if (!idUsuario) {
+            mostrarEstadoVazio('Faça login novamente para acessar seu carrinho.');
             return;
         }
 
         try {
-            const resposta = await fetch(ENDPOINT_PRODUTOS, { headers: { Accept: 'application/json' }, credentials: 'same-origin' });
-            if (!resposta.ok) throw new Error('Falha ao carregar produtos');
+            await migrarCarrinhoTemporario();
+            const resposta = await fetch(`/carrinho/${idUsuario}`);
+            if (!resposta.ok) {
+                throw new Error('Não foi possível carregar seu carrinho.');
+            }
             renderizarCarrinho(await resposta.json());
         } catch (erro) {
-            console.error('Erro ao carregar carrinho:', erro);
-            listaCarrinho.innerHTML = '<p class="estado-vazio">Não foi possível carregar seu carrinho.</p>';
-            atualizarResumo([]);
+            mostrarEstadoVazio(erro.message);
         }
     }
 
-    prosseguirCompra.addEventListener('click', () => { window.location.href = 'endereco.html'; });
+    async function removerItem(idProduto) {
+        try {
+            const resposta = await fetch(`/carrinho/${idUsuario}/itens/${idProduto}`, { method: 'DELETE' });
+            if (!resposta.ok) {
+                throw new Error('Não foi possível remover o produto.');
+            }
+            await carregarCarrinho();
+        } catch (erro) {
+            mostrarEstadoVazio(erro.message);
+        }
+    }
+
+    prosseguirCompra.addEventListener('click', () => {
+        if (carrinhoAtual.itens.length === 0) {
+            return;
+        }
+
+        const itensPedido = carrinhoAtual.itens.map((item) => ({
+            idProduto: item.idProduto,
+            quantidade: item.quantidade
+        }));
+        localStorage.setItem('itens_pedido', JSON.stringify(itensPedido));
+        localStorage.setItem('total_pedido', String(carrinhoAtual.total));
+        window.location.href = 'endereco.html';
+    });
+
     carregarCarrinho();
 });

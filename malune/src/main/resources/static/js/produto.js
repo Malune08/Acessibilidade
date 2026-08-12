@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const adicionarCarrinho = document.getElementById('adicionar-carrinho');
     const comprarAgora = document.getElementById('comprar-agora');
     const mensagemCarrinho = document.getElementById('mensagem-carrinho');
+    const idUsuario = localStorage.getItem('id_usuario');
 
     let produtoSelecionado;
     let quantidade = 1;
@@ -102,17 +103,21 @@ document.addEventListener('DOMContentLoaded', () => {
         statusProduto.hidden = false;
     }
 
-    function salvarNoCarrinho() {
-        const carrinho = JSON.parse(sessionStorage.getItem('carrinho') ?? '[]');
-        const itemExistente = carrinho.find((item) => item.id === produtoSelecionado.id);
-
-        if (itemExistente) {
-            itemExistente.quantidade += quantidade;
-        } else {
-            carrinho.push({ id: produtoSelecionado.id, quantidade });
+    async function salvarNoCarrinho() {
+        if (!idUsuario) {
+            throw new Error('Faça login para adicionar produtos ao carrinho.');
         }
 
-        sessionStorage.setItem('carrinho', JSON.stringify(carrinho));
+        const resposta = await fetch(`/carrinho/${idUsuario}/itens`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ idProduto: produtoSelecionado.id, quantidade })
+        });
+
+        if (!resposta.ok) {
+            const mensagem = await resposta.text();
+            throw new Error(mensagem || 'Não foi possível adicionar o produto ao carrinho.');
+        }
     }
 
     diminuirQuantidade.addEventListener('click', () => {
@@ -131,14 +136,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    adicionarCarrinho.addEventListener('click', () => {
-        salvarNoCarrinho();
-        mensagemCarrinho.textContent = 'Produto adicionado ao carrinho.';
+    adicionarCarrinho.addEventListener('click', async () => {
+        try {
+            await salvarNoCarrinho();
+            mensagemCarrinho.textContent = 'Produto adicionado ao carrinho.';
+        } catch (erro) {
+            mensagemCarrinho.textContent = erro.message;
+        }
     });
 
-    comprarAgora.addEventListener('click', () => {
-        salvarNoCarrinho();
-        window.location.href = 'endereco.html';
+    comprarAgora.addEventListener('click', async () => {
+        try {
+            await salvarNoCarrinho();
+            window.location.href = 'endereco.html';
+        } catch (erro) {
+            mensagemCarrinho.textContent = erro.message;
+        }
     });
 
     async function carregarProduto() {

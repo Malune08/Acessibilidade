@@ -1,6 +1,7 @@
 package com.example.malune.service;
 
 import com.example.malune.entity.Pedido;
+import com.example.malune.repository.ItemPedidoRepository;
 import com.example.malune.repository.PedidoRepository;
 import com.example.malune.repository.ProdutoRepository;
 import com.example.malune.repository.UsuarioRepository;
@@ -23,6 +24,9 @@ public class DashboardService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+
+    @Autowired
+    private ItemPedidoRepository itemPedidoRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -59,6 +63,12 @@ public class DashboardService {
         Map<String, Object> map = new HashMap<>();
         map.put("id", p.getId());
         map.put("usuarioId", p.getUsuario() != null ? p.getUsuario().getId() : null);
+        String nomeProduto = itemPedidoRepository.findByPedido(p).stream()
+                .map(item -> item.getProduto().getNome())
+                .filter(nome -> nome != null && !nome.isBlank())
+                .findFirst()
+                .orElse("Produto não informado");
+        map.put("nomeProduto", nomeProduto);
         map.put("dataPedido", p.getDataPedido());
         map.put("valorTotal", p.getValorTotal());
         map.put("status", p.getStatus() != null ? p.getStatus().name() : null);

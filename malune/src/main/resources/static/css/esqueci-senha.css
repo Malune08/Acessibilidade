@@ -30,7 +30,7 @@ body {
     top: 0;
     left: 0;
     width: 100%;
-    min-height: 70px;
+    min-height: 77px;
     display: grid;
     grid-template-columns: 1fr auto 1fr; 
     align-items: center;

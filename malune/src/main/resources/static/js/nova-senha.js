@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
+    function configurarAlternarSenha(idCampo, idBotao, texto) {
+        const campo = document.getElementById(idCampo);
+        const botao = document.getElementById(idBotao);
+
+        if (!campo || !botao) {
+            return;
+        }
+
+        botao.addEventListener('click', () => {
+            const senhaVisivel = campo.type === 'text';
+            campo.type = senhaVisivel ? 'password' : 'text';
+            botao.setAttribute('aria-label', senhaVisivel ? `Mostrar ${texto}` : `Ocultar ${texto}`);
+            botao.setAttribute('aria-pressed', String(!senhaVisivel));
+        });
+    }
+
+    configurarAlternarSenha('novaSenha', 'mostrar-nova-senha', 'nova senha');
+    configurarAlternarSenha('confirmarSenha', 'mostrar-confirmar-senha', 'confirmação de senha');
+
     const modalA11y =
         document.getElementById('modal-a11y');
 
