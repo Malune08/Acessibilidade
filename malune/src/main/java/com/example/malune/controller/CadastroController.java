@@ -1,6 +1,7 @@
 package com.example.malune.controller;
 
 import com.example.malune.dto.CadastroCompletoDTO;
+import com.example.malune.dto.LoginResponseDTO;
 import com.example.malune.service.CadastroService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,8 @@ public class CadastroController {
     @PostMapping
     public ResponseEntity<?> cadastrar(@Valid @RequestBody CadastroCompletoDTO dto) {
         try {
-            cadastroService.cadastrar(dto);
-            return ResponseEntity.ok("CADASTRO_CONCLUIDO");
+            Integer idUsuario = cadastroService.cadastrar(dto).getId();
+            return ResponseEntity.ok(new LoginResponseDTO("USUARIO", idUsuario));
         } catch (IllegalArgumentException exception) {
             return ResponseEntity.badRequest()
                     .body(Map.of("error", exception.getMessage()));

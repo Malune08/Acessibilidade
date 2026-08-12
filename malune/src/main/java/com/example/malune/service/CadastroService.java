@@ -24,7 +24,7 @@ public class CadastroService {
     private final EstadoRepository estadoRepository;
 
     @Transactional
-    public void cadastrar(CadastroCompletoDTO dto) {
+    public Usuario cadastrar(CadastroCompletoDTO dto) {
 
         Usuario usuario = validaCadastroUsuario(dto.getUsuario());
 
@@ -39,7 +39,7 @@ public class CadastroService {
             usuario.setEndereco(endereco);
         }
 
-        usuarioRepository.save(usuario);
+        return usuarioRepository.save(usuario);
     }
 
 
