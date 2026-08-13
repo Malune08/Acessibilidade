@@ -23,7 +23,7 @@
         </div>
        
         <div class="header-dir">
-            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+            <button id="btn-abrir-a11y" class="btn-a11y" type="button" aria-label="Abrir menu de acessibilidade" aria-controls="modal-a11y" aria-expanded="false">
                 <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
             </button>
         </div>
@@ -57,14 +57,14 @@
             </div>
         </div>
 
-        <section class="endereco-card">
+        <section class="endereco-card" aria-label="Confirmação do endereço">
             <img src="images/logomalune.png" alt="Logo Malune" class="logo-endereco">
 
             <h1>Confirme o seu endereço</h1>
 
             <p class="descricao-endereco"> Confirme seu endereço correto para<br> não termos problemas com a entrega</p>
 
-            <form id="form-endereco">
+            <form id="form-endereco" aria-describedby="mensagem-endereco">
                 <div class="endereco-form-grid">
                     <div class="endereco-campo">
                         <label for="cep">Cep</label>
@@ -126,7 +126,7 @@
                     </div>
                 </div>
 
-                <p id="mensagem-endereco" class="mensagem-endereco"></p>
+                <p id="mensagem-endereco" class="mensagem-endereco" role="alert" aria-live="assertive"></p>
 
                 <button type="submit" class="btn-prosseguir">
                     Continuar

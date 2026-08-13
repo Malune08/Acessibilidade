@@ -49,8 +49,7 @@ public class ProductAdminController {
                     ? Integer.valueOf(String.valueOf(body.get("qtdEstoque"))) 
                     : 0;
 
-            Produto produto = productService.cr
-            eate(nome, descricao, valorUnitario, categoriaId, qtdEstoque);
+            Produto produto = productService.create(nome, descricao, valorUnitario, categoriaId, qtdEstoque);
             return ResponseEntity.status(HttpStatus.CREATED).body(produto);
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of("error", ex.getMessage()));

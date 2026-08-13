@@ -36,12 +36,17 @@ document.addEventListener('DOMContentLoaded', () => {
         camposCartao.style.display = 'none';
         camposPix.style.display = 'none';
         camposBoleto.style.display = 'none';
+        camposCartao.setAttribute('aria-hidden', 'true');
+        camposPix.setAttribute('aria-hidden', 'true');
+        camposBoleto.setAttribute('aria-hidden', 'true');
     }
 
     // Esconder formulário de novo cartão
     function esconderFormularioNovoCartao() {
         formularioNovoCartao.style.display = 'none';
+        formularioNovoCartao.setAttribute('aria-hidden', 'true');
         listaCartoes.style.display = 'block';
+        listaCartoes.setAttribute('aria-hidden', 'false');
         cartaoSelecionado = null;
         // Limpar campos
         document.getElementById('numero-cartao').value = '';
@@ -118,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
     btnAdicionarCartao.addEventListener('click', () => {
         listaCartoes.style.display = 'none';
         formularioNovoCartao.style.display = 'block';
+        listaCartoes.setAttribute('aria-hidden', 'true');
+        formularioNovoCartao.setAttribute('aria-hidden', 'false');
     });
 
     // Botão "Cancelar"
@@ -137,10 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (document.getElementById('cartao').checked) {
                 camposCartao.style.display = 'block';
+                camposCartao.setAttribute('aria-hidden', 'false');
             } else if (document.getElementById('pix').checked) {
                 camposPix.style.display = 'block';
+                camposPix.setAttribute('aria-hidden', 'false');
             } else if (document.getElementById('boleto').checked) {
                 camposBoleto.style.display = 'block';
+                camposBoleto.setAttribute('aria-hidden', 'false');
             }
         });
     });
@@ -182,10 +192,13 @@ document.addEventListener('DOMContentLoaded', () => {
             esconderFormularioNovoCartao();
             if (radioSelecionado.id === 'cartao') {
                 camposCartao.style.display = 'block';
+                camposCartao.setAttribute('aria-hidden', 'false');
             } else if (radioSelecionado.id === 'pix') {
                 camposPix.style.display = 'block';
+                camposPix.setAttribute('aria-hidden', 'false');
             } else if (radioSelecionado.id === 'boleto') {
                 camposBoleto.style.display = 'block';
+                camposBoleto.setAttribute('aria-hidden', 'false');
             }
         }
     }

@@ -24,7 +24,7 @@
         <div class="header-centro"></div>
 
         <div class="header-dir">
-            <button id="btn-abrir-a11y" class="btn-a11y" aria-label="Abrir menu de acessibilidade">
+            <button id="btn-abrir-a11y" class="btn-a11y" type="button" aria-label="Abrir menu de acessibilidade" aria-controls="modal-a11y" aria-expanded="false">
                 <img src="images/iconacessibilidade.png" alt="Acessibilidade" class="img-a11y">
             </button>
             <a href="login.html" class="btn-entrar">Entrar</a>
@@ -58,7 +58,8 @@
         </section>
 
         <!-- SEÇÃO DE PRODUTOS -->
-        <section id="produtos-container" class="products-section">
+        <section id="produtos-container" class="products-section" aria-labelledby="titulo-produtos">
+            <h2 id="titulo-produtos" class="somente-leitor">Produtos em destaque</h2>
         </section>
     </main>
 
@@ -68,10 +69,10 @@
     </footer>
 
     <!-- POP-UP DE ACESSIBILIDADE -->
-    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title">
+    <dialog id="modal-a11y" aria-labelledby="modal-a11y-title" aria-modal="true">
         <div class="modal-header">
             <h3 id="modal-a11y-title">Acessibilidade</h3>
-            <button id="btn-fechar-a11y" aria-label="Fechar menu de acessibilidade">X</button>
+            <button id="btn-fechar-a11y" type="button" aria-label="Fechar menu de acessibilidade">X</button>
         </div>
 
         <div class="modal-body">
@@ -81,7 +82,7 @@
                     <span>Cores fortes para melhor leitura</span>
                 </div>
                 <label class="switch">
-                    <input type="checkbox" id="toggle-contraste">
+                    <input type="checkbox" id="toggle-contraste" aria-label="Alto contraste">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -92,7 +93,7 @@
                     <span>Aumenta o tamanho da fonte</span>
                 </div>
                 <label class="switch">
-                    <input type="checkbox" id="toggle-texto">
+                    <input type="checkbox" id="toggle-texto" aria-label="Texto grande">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -103,7 +104,7 @@
                     <span>Mais fácil de ler</span>
                 </div>
                 <label class="switch">
-                    <input type="checkbox" id="toggle-dislexia">
+                    <input type="checkbox" id="toggle-dislexia" aria-label="Fonte para dislexia">
                     <span class="slider"></span>
                 </label>
             </div>
@@ -114,14 +115,14 @@
                     <span>Destaca todos os links</span>
                 </div>
                 <label class="switch">
-                    <input type="checkbox" id="toggle-links">
+                    <input type="checkbox" id="toggle-links" aria-label="Sublinhar links">
                     <span class="slider"></span>
                 </label>
             </div>
         </div>
 
         <div class="modal-footer">
-            <button id="btn-restaurar" class="btn-restaurar">
+            <button id="btn-restaurar" type="button" class="btn-restaurar">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                     <path d="M3 3v5h5"></path>

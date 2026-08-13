@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function mostrarPopup(mensagem, sucesso = false) {
         const popup = document.createElement('div');
         popup.className = `popup-cadastro ${sucesso ? 'sucesso' : 'erro'}`;
+        popup.setAttribute('role', sucesso ? 'status' : 'alert');
+        popup.setAttribute('aria-live', sucesso ? 'polite' : 'assertive');
         popup.textContent = mensagem;
         document.body.appendChild(popup);
         setTimeout(() => popup.remove(), 3500);
@@ -18,8 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     [campoCep, campoRua, campoBairro, campoNumero, campoEstado].forEach((campo) => {
         if (campo) {
-            campo.addEventListener('input', () => campo.setCustomValidity(''));
-            campo.addEventListener('change', () => campo.setCustomValidity(''));
+            campo.addEventListener('input', () => {
+                campo.setCustomValidity('');
+                campo.setAttribute('aria-invalid', String(!campo.checkValidity()));
+            });
+            campo.addEventListener('change', () => {
+                campo.setCustomValidity('');
+                campo.setAttribute('aria-invalid', String(!campo.checkValidity()));
+            });
         }
     });
 
@@ -41,6 +49,10 @@ document.addEventListener('DOMContentLoaded', () => {
         campoEstado.setCustomValidity(
             campoEstado.value.trim() !== '' ? '' : 'O estado e obrigatorio.'
         );
+
+        [campoCep, campoRua, campoBairro, campoNumero, campoEstado].forEach((campo) => {
+            campo.setAttribute('aria-invalid', String(!campo.checkValidity()));
+        });
 
         return form.reportValidity();
     }

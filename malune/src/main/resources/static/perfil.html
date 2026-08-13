@@ -27,7 +27,7 @@
                 </a>
             </nav>
             <div class="acoes-cabecalho">
-                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade">
+                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade" aria-controls="modal-a11y" aria-expanded="false">
                     <img src="images/iconacessibilidade.png" alt="">
                 </button>
                 <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho">
@@ -55,7 +55,7 @@
                 <p class="painel-subtitulo">
                     Atualize seus dados pessoais.
                 </p>
-                <form id="form-perfil" class="form-perfil">
+                <form id="form-perfil" class="form-perfil" aria-describedby="mensagem-perfil">
                     <div class="campo-perfil">
                         <label for="nome">
                             Nome completo
@@ -88,7 +88,7 @@
                             Configurações
                         </a>
                     </div>
-                    <p id="mensagem-perfil" class="mensagem-formulario" role="status">
+                    <p id="mensagem-perfil" class="mensagem-formulario" role="status" aria-live="polite">
                     </p>
                 </form>
             </section>

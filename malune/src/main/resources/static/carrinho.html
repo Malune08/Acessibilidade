@@ -27,7 +27,7 @@
                 </a>
             </nav>
             <div class="acoes-cabecalho">
-                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade">
+                <button type="button" id="btn-abrir-a11y" class="botao-icone botao-acessibilidade" aria-label="Abrir menu de acessibilidade" aria-controls="modal-a11y" aria-expanded="false">
                     <img src="images/iconacessibilidade.png" alt="">
                 </button>
                 <a class="botao-icone" href="carrinho.html" aria-label="Abrir carrinho">
@@ -53,7 +53,7 @@
                     <h1 id="titulo-carrinho">
                         Seu carrinho
                     </h1>
-                    <div id="lista-carrinho" class="lista-carrinho">
+                    <div id="lista-carrinho" class="lista-carrinho" aria-live="polite" aria-atomic="false">
                         <p class="estado-vazio">
                             Seu carrinho está vazio.
                         </p>

@@ -75,7 +75,10 @@ document.addEventListener("DOMContentLoaded", () => {
     [campoNome, campoNomeUsuario, campoEmail, campoCpf, campoTelefone,
         campoDataNascimento, campoSenha, campoConfirmarSenha].forEach((campo) => {
         if (campo) {
-            campo.addEventListener("input", () => campo.setCustomValidity(""));
+            campo.addEventListener("input", () => {
+                campo.setCustomValidity("");
+                campo.setAttribute('aria-invalid', String(!campo.checkValidity()));
+            });
         }
     });
 
@@ -125,6 +128,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 ? ""
                 : "As senhas não coincidem."
         );
+
+        [campoNome, campoNomeUsuario, campoEmail, campoCpf, campoTelefone,
+            campoDataNascimento, campoSenha, campoConfirmarSenha].forEach((campo) => {
+            campo.setAttribute('aria-invalid', String(!campo.checkValidity()));
+        });
 
         // Mostra o balão nativo no primeiro campo inválido (mesmo estilo do "campo obrigatório")
         return formCadastro.reportValidity();
