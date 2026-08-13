@@ -282,9 +282,21 @@ document.addEventListener('DOMContentLoaded', () => {
      * Cria o card de um produto.
      */
     function criarCardProduto(produto) {
-        const card = document.createElement('article');
+        const card = document.createElement('a');
         card.className = 'card-produto';
         card.dataset.id = produto.id;
+        card.href = `produto.html?id=${encodeURIComponent(produto.id)}`;
+        card.setAttribute(
+            'aria-label',
+            `Ver detalhes de ${produto.nome}`
+        );
+
+        card.addEventListener('click', () => {
+            sessionStorage.setItem(
+                'produto_selecionado',
+                String(produto.id)
+            );
+        });
 
         const areaImagem = document.createElement('div');
         areaImagem.className = 'foto-produto';
@@ -343,40 +355,12 @@ document.addEventListener('DOMContentLoaded', () => {
         preco.className = 'preco-produto';
         preco.textContent = formatarPreco(produto.preco);
 
-        const botaoVer = document.createElement('button');
-        botaoVer.type = 'button';
+        const botaoVer = document.createElement('span');
         botaoVer.className = 'btn-ver-produto';
         botaoVer.textContent = 'Ver';
 
-        botaoVer.setAttribute(
-            'aria-label',
-            `Ver detalhes de ${produto.nome}`
-        );
-
-        /*
-         * Não consulta nem altera o banco.
-         *
-         * Apenas guarda o ID selecionado para que
-         * a ligação com produto.html seja feita depois.
-         */
-        botaoVer.addEventListener('click', () => {
-            sessionStorage.setItem(
-                'produto_selecionado',
-                String(produto.id)
-            );
-
-            window.location.href =
-                `produto.html?id=${encodeURIComponent(produto.id)}`;
-        });
-
         if (produto.qtdEstoque <= 0) {
-            botaoVer.disabled = true;
             botaoVer.textContent = 'Esgotado';
-
-            botaoVer.setAttribute(
-                'aria-label',
-                `${produto.nome} está esgotado`
-            );
         }
 
         rodapeCard.appendChild(preco);

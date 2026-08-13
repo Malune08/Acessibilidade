@@ -230,8 +230,20 @@ function renderizarCards(produtos) {
     containerProdutos.innerHTML = '';
 
     produtos.forEach((produto) => {
-        const card = document.createElement('div');
+        const card = document.createElement('a');
         card.classList.add('product-card');
+        card.href = `produto.html?id=${encodeURIComponent(produto.id)}`;
+        card.setAttribute(
+            'aria-label',
+            `Ver detalhes de ${produto.nome}`
+        );
+
+        card.addEventListener('click', () => {
+            sessionStorage.setItem(
+                'produto_selecionado',
+                String(produto.id)
+            );
+        });
 
         const precoFormatado =
             Number(produto.valorUnitario).toLocaleString(
@@ -258,11 +270,9 @@ function renderizarCards(produtos) {
                         ${precoFormatado}
                     </span>
 
-                    <a href="produto.html?id=${produto.id}"
-                        class="btn-ver"
-                    >
+                    <span class="btn-ver" aria-hidden="true">
                         Ver
-                    </a>
+                    </span>
                 </div>
             </div>
         `;

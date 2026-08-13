@@ -351,6 +351,10 @@ body {
     height: 340px;
     padding: 10px;
 
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+
     background-color: #ffffff;
     border: 2px solid #a3d5ff;
     border-radius: 12px;
@@ -361,6 +365,11 @@ body {
     transition:
         transform 0.2s ease,
         box-shadow 0.2s ease;
+}
+
+.product-card:focus-visible {
+    outline: 3px solid #000000;
+    outline-offset: 3px;
 }
 
 .product-card:hover {
