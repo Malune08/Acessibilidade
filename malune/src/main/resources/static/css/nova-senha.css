@@ -174,3 +174,112 @@ body.modo-texto-grande h2, body.modo-texto-grande .card-header p { font-size: 1.
 
 body.modo-dislexia { font-family: 'Comic Sans MS', 'OpenDyslexic', cursive, sans-serif !important; }
 body.modo-sublinhar a { text-decoration: underline !important; font-weight: bold; }
+
+/* ========================================= */
+/* POPUP DE SUCESSO                          */
+/* ========================================= */
+
+.popup-sucesso {
+    width: 90%;
+    max-width: 360px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 16px;
+
+    background-color: transparent;
+
+    overflow: visible;
+}
+
+.popup-sucesso::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+}
+
+.popup-conteudo {
+    width: 100%;
+
+    padding: 32px 28px 26px;
+
+    background-color: #ffffff;
+
+    border: 2px solid #91c6f4;
+    border-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.popup-icone {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 16px;
+
+    background-color: #9be83f;
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.popup-conteudo h2 {
+    margin-bottom: 8px;
+
+    color: #222222;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.popup-conteudo p {
+    margin-bottom: 22px;
+
+    color: #666666;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.btn-popup {
+    min-width: 150px;
+
+    padding: 10px 22px;
+
+    background-color: #ff4fa2;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+            background-color 0.2s ease,
+            transform 0.2s ease;
+}
+
+.btn-popup:hover {
+    background-color: #e43d8c;
+    transform: translateY(-1px);
+}
+
+.btn-popup:focus-visible {
+    outline: 3px solid #1e78c8;
+    outline-offset: 3px;
+}

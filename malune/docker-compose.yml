@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17
+    container_name: malune-db
+    restart: always
+    environment:
+      POSTGRES_DB: MaLune
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - malune_pgdata:/var/lib/postgresql/data
+
+volumes:
+  malune_pgdata:
