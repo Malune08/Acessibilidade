@@ -2,6 +2,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const campoSenha = document.getElementById('senha');
     const botaoAlternarSenha = document.getElementById('alternar-senha');
 
+    // Mostrar / ocultar senha
+    if (campoSenha && botaoAlternarSenha) {
+        botaoAlternarSenha.addEventListener('click', () => {
+            const senhaVisivel = campoSenha.type === 'text';
+
+            campoSenha.type = senhaVisivel
+                ? 'password'
+                : 'text';
+
+            botaoAlternarSenha.setAttribute(
+                'aria-label',
+                senhaVisivel
+                    ? 'Mostrar senha'
+                    : 'Ocultar senha'
+            );
+
+            botaoAlternarSenha.setAttribute(
+                'aria-pressed',
+                String(!senhaVisivel)
+            );
+        });
+    }
+
     // ==========================================
     // 2. LÓGICA DE LOGIN
     // ==========================================

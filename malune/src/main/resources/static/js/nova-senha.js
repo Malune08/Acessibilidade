@@ -18,62 +18,80 @@ document.addEventListener('DOMContentLoaded', () => {
     configurarAlternarSenha('novaSenha', 'mostrar-nova-senha', 'nova senha');
     configurarAlternarSenha('confirmarSenha', 'mostrar-confirmar-senha', 'confirmação de senha');
 
-    // lógica do baack
-    document
-        .getElementById('formNovaSenha')
-        .addEventListener('submit', async (event) => {
+    // =====================================
+    // POPUP DE SUCESSO
+    // =====================================
+
+    const popupSucesso = document.getElementById('popup-sucesso');
+    const btnPopupLogin = document.getElementById('btn-popup-login');
+
+
+    if (btnPopupLogin) {
+        btnPopupLogin.addEventListener('click', () => {
+            if (popupSucesso) {
+                popupSucesso.close();
+            }
+            window.location.href = '/login.html';
+        });
+    }
+
+
+    // =====================================
+    // ALTERAÇÃO DE SENHA
+    // =====================================
+
+    const formNovaSenha = document.getElementById('formNovaSenha');
+
+    if (!formNovaSenha) {
+        return;
+    }
+
+    formNovaSenha.addEventListener('submit', async (event) => {
 
             event.preventDefault();
 
-            const email =
-                sessionStorage.getItem(
-                    'email_recuperacao'
+            const email = sessionStorage.getItem('email_recuperacao');
+            const token = sessionStorage.getItem('token_recuperacao');
+            const novaSenha = document.getElementById('novaSenha').value;
+            const confirmarSenha = document.getElementById('confirmarSenha').value;
+
+            try {
+                const response = await fetch(
+                    '/recuperacao-senha/alterar',
+                    {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            email: email,
+                            token: token,
+                            novaSenha: novaSenha,
+                            confirmarSenha:
+                            confirmarSenha
+                        })
+                    }
                 );
 
-            const token =
-                sessionStorage.getItem(
-                    'token_recuperacao'
-                );
+                const mensagem = await response.text();
 
-            const novaSenha =
-                document.getElementById('novaSenha').value;
-
-            const confirmarSenha =
-                document.getElementById('confirmarSenha').value;
-
-            const response = await fetch(
-                '/recuperacao-senha/alterar',
-                {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        email: email,
-                        token: token,
-                        novaSenha: novaSenha,
-                        confirmarSenha: confirmarSenha
-                    })
+                // ERRO
+                if (!response.ok) {
+                    alert(mensagem);
+                    return;
                 }
-            );
 
-            const mensagem = await response.text();
+                // SUCESSO
+                sessionStorage.removeItem('email_recuperacao');
+                sessionStorage.removeItem('token_recuperacao');
 
-            if (!response.ok) {
-                alert(mensagem);
-                return;
+
+                // Abre o popup personalizado
+                if (popupSucesso) {
+                    popupSucesso.showModal();
+                }
+            } catch (erro) {
+                console.error('Erro ao alterar senha:', erro);
+                alert('Não foi possível alterar a senha. Tente novamente.');
             }
-
-            sessionStorage.removeItem(
-                'email_recuperacao'
-            );
-
-            sessionStorage.removeItem(
-                'token_recuperacao'
-            );
-
-            alert('Senha alterada com sucesso.');
-
-            window.location.href = '/login.html';
-        });
+        }
+    );
 });
