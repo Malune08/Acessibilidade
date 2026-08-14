@@ -236,3 +236,103 @@ body.modo-texto-grande h2, body.modo-texto-grande .card-header p { font-size: 1.
 
 body.modo-dislexia { font-family: 'Comic Sans MS', 'OpenDyslexic', cursive, sans-serif !important; }
 body.modo-sublinhar a { text-decoration: underline !important; font-weight: bold; }
+
+/* ========================================= */
+/* AÇÕES DO CABEÇALHO                        */
+/* ========================================= */
+
+.header-dir {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 8px;
+}
+
+
+/* ========================================= */
+/* BOTÃO SAIR                                */
+/* ========================================= */
+
+.btn-sair-header {
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    background-color: #9be83f;
+
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        background-color 0.18s ease,
+        box-shadow 0.18s ease;
+}
+
+
+/* Ícone */
+
+.btn-sair-header img {
+    width: 22px;
+    height: 22px;
+
+    object-fit: contain;
+}
+
+
+/* Hover */
+
+.btn-sair-header:hover {
+    background-color: #8bd52f;
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 4px 10px
+        rgba(121, 201, 31, 0.25);
+}
+
+
+/* Clique */
+
+.btn-sair-header:active {
+    transform: translateY(0);
+}
+
+
+/* Teclado */
+
+.btn-sair-header:focus-visible {
+    outline: 3px solid #1e78c8;
+    outline-offset: 3px;
+}
+
+
+/* ========================================= */
+/* RESPONSIVO                                */
+/* ========================================= */
+
+@media (max-width: 500px) {
+
+    .header-dir {
+        gap: 6px;
+    }
+
+    .btn-sair-header {
+        width: 35px;
+        height: 35px;
+    }
+
+    .btn-sair-header img {
+        width: 20px;
+        height: 20px;
+    }
+}

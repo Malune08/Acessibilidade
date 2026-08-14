@@ -1,130 +1,562 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Malune - Admin</title>
-    <link rel="stylesheet" href="css/principal-adm.css">
-    <link rel="stylesheet" href="css/modal-acessibilidade.css">
-    <link rel="icon" type="image/png" href="images/icone.png">
+
+    <link
+        rel="stylesheet"
+        href="css/principal-adm.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="css/modal-acessibilidade.css"
+    >
+
+    <link
+        rel="icon"
+        type="image/png"
+        href="images/icone.png"
+    >
 </head>
+
 <body>
-<div class="decor circle-green"></div>
-<div class="decor circle-blue"></div>
-<div class="decor circle-yellow"></div>
 
-<header class="header-topo">
-    <div class="header-esq">
-        <a href="area-restrita.html" class="logo-link" aria-label="Ir para o painel administrativo"><img src="images/logomalune.png" alt="Logo Malune" class="img-logo-topo"></a>
-    </div>
-    <div class="header-centro"><h2 id="header-title">Dashboard</h2></div>
-    <div class="header-dir">
-        <button id="btn-abrir-a11y" class="btn-a11y" type="button" aria-label="Abrir menu de acessibilidade">
-            <img src="images/iconacessibilidade.png" alt="" aria-hidden="true" class="img-a11y">
-        </button>
-    </div>
-</header>
+    <div class="decor circle-green"></div>
+    <div class="decor circle-blue"></div>
+    <div class="decor circle-yellow"></div>
 
-<main class="main-content">
-    <aside class="sidebar" aria-labelledby="sidebar-title">
-        <h2 id="sidebar-title">Dashboard</h2>
-        <ul class="menu-list card-box" style="padding: 15px;">
-            <li><button class="active" data-target="dashboard" type="button" aria-current="page">Dashboard</button></li>
-            <li><button data-target="produtos" type="button">Produtos</button></li>
-            <li><button data-target="estoque" type="button">Estoque</button></li>
-            <li><button data-target="pedidos" type="button">Pedidos</button></li>
-            <li><button id="btn-sair" class="btn-sair" type="button">Sair</button></li>
-        </ul>
-    </aside>
 
-    <div class="content-area">
-        <p id="admin-feedback" class="admin-feedback" role="status" aria-live="polite"></p>
-        <section id="dashboard" class="view-section active" aria-labelledby="titulo-dashboard">
-            <div class="stats-grid">
-                <div class="stat-card"><h3 id="total-products">0</h3><p>Produtos</p></div>
-                <div class="stat-card"><h3 id="total-orders">0</h3><p>Pedidos</p></div>
-                <div class="stat-card"><h3 id="total-users">0</h3><p>Usuários</p></div>
-                <div class="stat-card"><h3 id="total-revenue">R$ 0,00</h3><p>Receita</p></div>
-            </div>
-            <div class="table-container">
-                <h2 id="titulo-dashboard" class="section-title">Pedidos recentes</h2>
-                <table class="grid-table">
-                    <tbody id="recent-orders-body"></tbody>
-                </table>
-            </div>
-        </section>
+    <header class="header-topo">
 
-        <section id="produtos" class="view-section" aria-label="Catálogo de produtos" hidden>
-            <div class="table-container">
-                <h2 class="section-title">Catálogo</h2>
-                <div class="toolbar">
-                    <input id="product-search" type="search" class="search-input" aria-label="Buscar produto por nome" placeholder="Buscar por nome...">
-                    <button id="btn-add-product" class="btn-green" type="button">Adicionar produto</button>
-                </div>
-                <table class="grid-table">
-                    <thead><tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Estoque</th><th>Ações</th></tr></thead>
-                    <tbody id="products-body"></tbody>
-                </table>
-            </div>
-        </section>
+        <div class="header-esq">
 
-        <section id="estoque" class="view-section" aria-label="Estoque" hidden>
-            <div class="table-container">
-                <h2 class="section-title">Estoque</h2>
-                <div class="toolbar" style="justify-content: flex-start;">
-                    <input id="stock-search" type="search" class="search-input" aria-label="Buscar produto no estoque por nome" placeholder="Buscar por nome...">
-                </div>
-                <table class="grid-table">
-                    <thead><tr><th style="width: 50%;">Produto</th><th>Estoque</th><th>Ações</th></tr></thead>
-                    <tbody id="stock-body"></tbody>
-                </table>
-            </div>
-        </section>
+            <a
+                href="area-restrita.html"
+                class="logo-link"
+                aria-label="Ir para o painel administrativo"
+            >
+                <img
+                    src="images/logomalune.png"
+                    alt="Logo Malune"
+                    class="img-logo-topo"
+                >
+            </a>
 
-        <section id="pedidos" class="view-section" aria-label="Pedidos" hidden>
-            <div class="table-container">
-                <h2 class="section-title">Pedidos</h2>
-                <div class="toolbar" style="justify-content: flex-start;">
-                    <input id="order-search" type="search" class="search-input" aria-label="Buscar pedido por número ou status" placeholder="Buscar pedido...">
-                </div>
-                <table class="grid-table">
-                    <thead><tr><th>Pedido</th><th>Data</th><th>Total</th><th>Status</th><th>Ações</th></tr></thead>
-                    <tbody id="orders-body"></tbody>
-                </table>
-            </div>
-        </section>
-    </div>
-</main>
-
-<dialog id="product-dialog" aria-labelledby="product-dialog-title" aria-modal="true">
-    <form id="product-form" class="product-form">
-        <div class="modal-header">
-            <h3 id="product-dialog-title">Adicionar produto</h3>
-            <button id="btn-close-product" type="button" aria-label="Fechar cadastro de produto">X</button>
         </div>
-        <div class="modal-body">
-            <input id="product-id" type="hidden">
-            <label for="product-name">Nome</label>
-            <input id="product-name" type="text" maxlength="100" required>
-            <label for="product-description">Descrição</label>
-            <textarea id="product-description" maxlength="255" required></textarea>
-            <label for="product-price">Valor unitário</label>
-            <input id="product-price" type="number" min="0" step="0.01" required>
-            <label for="product-category">ID da categoria (opcional)</label>
-            <input id="product-category" type="number" min="1">
-            <label for="product-stock">Estoque</label>
-            <input id="product-stock" type="number" min="0" step="1" required>
-        </div>
-        <div class="modal-footer">
-            <button id="btn-cancel-product" type="button" class="btn-small-outline">Cancelar</button>
-            <button type="submit" class="btn-small-pink">Salvar produto</button>
-        </div>
-    </form>
-</dialog>
 
-<footer>Malune - Brinquedos com carinho<br>&copy;2026 Malune. Todos os direitos reservados</footer>
 
-<script src="js/modal-acessibilidade.js"></script>
-<script src="js/principal-adm.js"></script>
+        <div class="header-centro">
+
+            <h2 id="header-title">
+                Dashboard
+            </h2>
+
+        </div>
+
+
+        <div class="header-dir">
+
+            <button
+                id="btn-abrir-a11y"
+                class="btn-a11y"
+                type="button"
+                aria-label="Abrir menu de acessibilidade"
+            >
+                <img
+                    src="images/iconacessibilidade.png"
+                    alt=""
+                    aria-hidden="true"
+                    class="img-a11y"
+                >
+            </button>
+
+
+            <!-- SAIR -->
+
+            <button
+                id="btn-sair"
+                class="btn-sair-header"
+                type="button"
+                aria-label="Sair da conta"
+                title="Sair"
+            >
+                <img
+                    src="images/icone-sair.png"
+                    alt=""
+                    aria-hidden="true"
+                >
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <main class="main-content">
+
+        <aside
+            class="sidebar"
+            aria-labelledby="sidebar-title"
+        >
+
+            <h2 id="sidebar-title">
+                Dashboard
+            </h2>
+
+            <ul
+                class="menu-list card-box"
+                style="padding: 15px;"
+            >
+
+                <li>
+                    <button
+                        class="active"
+                        data-target="dashboard"
+                        type="button"
+                        aria-current="page"
+                    >
+                        Dashboard
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        data-target="produtos"
+                        type="button"
+                    >
+                        Produtos
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        data-target="estoque"
+                        type="button"
+                    >
+                        Estoque
+                    </button>
+                </li>
+
+                <li>
+                    <button
+                        data-target="pedidos"
+                        type="button"
+                    >
+                        Pedidos
+                    </button>
+                </li>
+
+            </ul>
+
+        </aside>
+
+
+        <div class="content-area">
+
+            <p
+                id="admin-feedback"
+                class="admin-feedback"
+                role="status"
+                aria-live="polite"
+            ></p>
+
+
+            <section
+                id="dashboard"
+                class="view-section active"
+                aria-labelledby="titulo-dashboard"
+            >
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <h3 id="total-products">
+                            0
+                        </h3>
+
+                        <p>
+                            Produtos
+                        </p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <h3 id="total-orders">
+                            0
+                        </h3>
+
+                        <p>
+                            Pedidos
+                        </p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <h3 id="total-users">
+                            0
+                        </h3>
+
+                        <p>
+                            Usuários
+                        </p>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <h3 id="total-revenue">
+                            R$ 0,00
+                        </h3>
+
+                        <p>
+                            Receita
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="table-container">
+
+                    <h2
+                        id="titulo-dashboard"
+                        class="section-title"
+                    >
+                        Pedidos recentes
+                    </h2>
+
+                    <table class="grid-table">
+
+                        <tbody id="recent-orders-body"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <section
+                id="produtos"
+                class="view-section"
+                aria-label="Catálogo de produtos"
+                hidden
+            >
+
+                <div class="table-container">
+
+                    <h2 class="section-title">
+                        Catálogo
+                    </h2>
+
+
+                    <div class="toolbar">
+
+                        <input
+                            id="product-search"
+                            type="search"
+                            class="search-input"
+                            aria-label="Buscar produto por nome"
+                            placeholder="Buscar por nome..."
+                        >
+
+
+                        <button
+                            id="btn-add-product"
+                            class="btn-green"
+                            type="button"
+                        >
+                            Adicionar produto
+                        </button>
+
+                    </div>
+
+
+                    <table class="grid-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Nome</th>
+                                <th>Preço</th>
+                                <th>Categoria</th>
+                                <th>Estoque</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="products-body"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <section
+                id="estoque"
+                class="view-section"
+                aria-label="Estoque"
+                hidden
+            >
+
+                <div class="table-container">
+
+                    <h2 class="section-title">
+                        Estoque
+                    </h2>
+
+
+                    <div
+                        class="toolbar"
+                        style="justify-content: flex-start;"
+                    >
+
+                        <input
+                            id="stock-search"
+                            type="search"
+                            class="search-input"
+                            aria-label="Buscar produto no estoque por nome"
+                            placeholder="Buscar por nome..."
+                        >
+
+                    </div>
+
+
+                    <table class="grid-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th style="width: 50%;">
+                                    Produto
+                                </th>
+
+                                <th>
+                                    Estoque
+                                </th>
+
+                                <th>
+                                    Ações
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="stock-body"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+
+            <section
+                id="pedidos"
+                class="view-section"
+                aria-label="Pedidos"
+                hidden
+            >
+
+                <div class="table-container">
+
+                    <h2 class="section-title">
+                        Pedidos
+                    </h2>
+
+
+                    <div
+                        class="toolbar"
+                        style="justify-content: flex-start;"
+                    >
+
+                        <input
+                            id="order-search"
+                            type="search"
+                            class="search-input"
+                            aria-label="Buscar pedido por número ou status"
+                            placeholder="Buscar pedido..."
+                        >
+
+                    </div>
+
+
+                    <table class="grid-table">
+
+                        <thead>
+
+                            <tr>
+                                <th>Pedido</th>
+                                <th>Data</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Ações</th>
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="orders-body"></tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <dialog
+        id="product-dialog"
+        aria-labelledby="product-dialog-title"
+        aria-modal="true"
+    >
+
+        <form
+            id="product-form"
+            class="product-form"
+        >
+
+            <div class="modal-header">
+
+                <h3 id="product-dialog-title">
+                    Adicionar produto
+                </h3>
+
+                <button
+                    id="btn-close-product"
+                    type="button"
+                    aria-label="Fechar cadastro de produto"
+                >
+                    X
+                </button>
+
+            </div>
+
+
+            <div class="modal-body">
+
+                <input
+                    id="product-id"
+                    type="hidden"
+                >
+
+
+                <label for="product-name">
+                    Nome
+                </label>
+
+                <input
+                    id="product-name"
+                    type="text"
+                    maxlength="100"
+                    required
+                >
+
+
+                <label for="product-description">
+                    Descrição
+                </label>
+
+                <textarea
+                    id="product-description"
+                    maxlength="255"
+                    required
+                ></textarea>
+
+
+                <label for="product-price">
+                    Valor unitário
+                </label>
+
+                <input
+                    id="product-price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                >
+
+
+                <label for="product-category">
+                    ID da categoria (opcional)
+                </label>
+
+                <input
+                    id="product-category"
+                    type="number"
+                    min="1"
+                >
+
+
+                <label for="product-stock">
+                    Estoque
+                </label>
+
+                <input
+                    id="product-stock"
+                    type="number"
+                    min="0"
+                    step="1"
+                    required
+                >
+
+            </div>
+
+
+            <div class="modal-footer">
+
+                <button
+                    id="btn-cancel-product"
+                    type="button"
+                    class="btn-small-outline"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="submit"
+                    class="btn-small-pink"
+                >
+                    Salvar produto
+                </button>
+
+            </div>
+
+        </form>
+
+    </dialog>
+
+
+    <footer>
+        Malune - Brinquedos com carinho
+        <br>
+        &copy;2026 Malune. Todos os direitos reservados
+    </footer>
+
+
+    <script src="js/modal-acessibilidade.js"></script>
+    <script src="js/principal-adm.js"></script>
+
 </body>
+
 </html>
