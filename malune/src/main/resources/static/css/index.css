@@ -43,24 +43,24 @@ body {
 }
 
 .circle-yellow {
-    width: 180px;
-    height: 180px;
+    width: 320px;
+    height: 320px;
     top: 90px;
     left: -100px;
     background-color: var(--cor-amarelo);
 }
 
 .circle-blue {
-    width: 170px;
-    height: 170px;
+    width: 310px;
+    height: 310px;
     bottom: 150px;
     left: -95px;
     background-color: var(--cor-azul-claro);
 }
 
 .circle-green {
-    width: 190px;
-    height: 190px;
+    width: 340px;
+    height: 340px;
     right: -105px;
     bottom: 80px;
     background-color: var(--cor-verde);
@@ -132,8 +132,8 @@ body {
 
     cursor: pointer;
     transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
+            background-color 0.2s ease,
+            transform 0.2s ease;
 }
 
 .btn-a11y:hover {
@@ -166,8 +166,8 @@ body {
     font-weight: 600;
 
     transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
+            background-color 0.2s ease,
+            transform 0.2s ease;
 }
 
 .btn-entrar:hover {
@@ -256,8 +256,8 @@ body {
     font-weight: 600;
 
     transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
+            background-color 0.2s ease,
+            transform 0.2s ease;
 }
 
 .btn-outline-green:hover {
@@ -348,7 +348,7 @@ body {
 
 .product-card {
     width: 220px;
-    height: 340px;
+    height: 370px;
     padding: 10px;
 
     color: inherit;
@@ -363,8 +363,8 @@ body {
     flex-direction: column;
 
     transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
 }
 
 .product-card:focus-visible {
@@ -430,7 +430,7 @@ body {
     margin-top: auto;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     gap: 8px;
 }
@@ -454,8 +454,8 @@ body {
     font-weight: 600;
 
     transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
+            background-color 0.2s ease,
+            transform 0.2s ease;
 }
 
 .btn-ver:hover {
@@ -709,7 +709,7 @@ body.modo-sublinhar a {
         font-size: 12px;
     }
 
-    
+
 
     dialog {
         width: calc(100% - 30px);
