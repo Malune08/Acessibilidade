@@ -175,90 +175,90 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('produtos-container');
 
     async function carregarProdutoDestaque() {
-    try {
-        const resposta = await fetch('http://localhost:8080/api/produtos/7');
+        try {
+            const resposta = await fetch('http://localhost:8080/api/produtos/7');
 
-        if (!resposta.ok) {
-            throw new Error('Erro ao buscar produto em destaque');
+            if (!resposta.ok) {
+                throw new Error('Erro ao buscar produto em destaque');
+            }
+
+            const produto = await resposta.json();
+            const heroDestaque = document.getElementById('hero-produto-destaque');
+
+            if (heroDestaque && produto.imagem) {
+                heroDestaque.innerHTML = `<img src="${produto.imagem}" alt="${produto.nome}">`;
+            }
+        } catch (error) {
+            console.error('Erro ao carregar produto em destaque:', error);
         }
-
-        const produto = await resposta.json();
-        const heroDestaque = document.getElementById('hero-produto-destaque');
-
-        if (heroDestaque && produto.imagem) {
-            heroDestaque.innerHTML = `<img src="${produto.imagem}" alt="${produto.nome}">`;
-        }
-    } catch (error) {
-        console.error('Erro ao carregar produto em destaque:', error);
     }
-}
 
     async function carregarProdutos() {
-    try {
-        const resposta = await fetch('http://localhost:8080/api/produtos');
+        try {
+            const resposta = await fetch('http://localhost:8080/api/produtos');
 
-        if (!resposta.ok) {
-            throw new Error('Erro ao buscar produtos');
-        }
+            if (!resposta.ok) {
+                throw new Error('Erro ao buscar produtos');
+            }
 
-        const produtos = await resposta.json();
+            const produtos = await resposta.json();
 
-        const idsDestaque = [3, 4, 5, 6];
-        const produtosDestaque = produtos.filter((produto) =>
-            idsDestaque.includes(produto.id)
-        );
-
-        renderizarCards(produtosDestaque);
-    } catch (error) {
-        console.error(
-            'Erro na comunicação com a API de produtos:',
-            error
-        );
-
-        if (containerProdutos) {
-            containerProdutos.innerHTML =
-                '<p>Não foi possível carregar os produtos no momento.</p>';
-        }
-    }
-}
-
-function renderizarCards(produtos) {
-    if (!containerProdutos) {
-        return;
-    }
-
-    containerProdutos.innerHTML = '';
-
-    produtos.forEach((produto) => {
-        const card = document.createElement('a');
-        card.classList.add('product-card');
-        card.href = `produto.html?id=${encodeURIComponent(produto.id)}`;
-        card.setAttribute(
-            'aria-label',
-            `Ver detalhes de ${produto.nome}`
-        );
-
-        card.addEventListener('click', () => {
-            sessionStorage.setItem(
-                'produto_selecionado',
-                String(produto.id)
-            );
-        });
-
-        const precoFormatado =
-            Number(produto.valorUnitario).toLocaleString(
-                'pt-BR',
-                {
-                    style: 'currency',
-                    currency: 'BRL'
-                }
+            const idsDestaque = [3, 4, 5, 6];
+            const produtosDestaque = produtos.filter((produto) =>
+                idsDestaque.includes(produto.id)
             );
 
-        card.innerHTML = `
+            renderizarCards(produtosDestaque);
+        } catch (error) {
+            console.error(
+                'Erro na comunicação com a API de produtos:',
+                error
+            );
+
+            if (containerProdutos) {
+                containerProdutos.innerHTML =
+                    '<p>Não foi possível carregar os produtos no momento.</p>';
+            }
+        }
+    }
+
+    function renderizarCards(produtos) {
+        if (!containerProdutos) {
+            return;
+        }
+
+        containerProdutos.innerHTML = '';
+
+        produtos.forEach((produto) => {
+            const card = document.createElement('a');
+            card.classList.add('product-card');
+            card.href = `produto.html?id=${encodeURIComponent(produto.id)}`;
+            card.setAttribute(
+                'aria-label',
+                `Ver detalhes de ${produto.nome}`
+            );
+
+            card.addEventListener('click', () => {
+                sessionStorage.setItem(
+                    'produto_selecionado',
+                    String(produto.id)
+                );
+            });
+
+            const precoFormatado =
+                Number(produto.valorUnitario).toLocaleString(
+                    'pt-BR',
+                    {
+                        style: 'currency',
+                        currency: 'BRL'
+                    }
+                );
+
+            card.innerHTML = `
             <div class="product-image">
                 ${produto.imagem
-                    ? `<img src="${produto.imagem}" alt="${produto.nome}">` 
-                    : 'Foto de brinquedo'}
+                ? `<img src="${produto.imagem}" alt="${produto.nome}">`
+                : 'Foto de brinquedo'}
             </div>
 
             <div class="product-info">
@@ -269,17 +269,13 @@ function renderizarCards(produtos) {
                     <span class="price">
                         ${precoFormatado}
                     </span>
-
-                    <span class="btn-ver" aria-hidden="true">
-                        Ver
-                    </span>
                 </div>
             </div>
         `;
 
-        containerProdutos.appendChild(card);
-    });
-}
+            containerProdutos.appendChild(card);
+        });
+    }
 
     carregarProdutos();
     carregarProdutoDestaque();
